@@ -36,8 +36,10 @@ class Controller:
         for key, value in dictionary.items():
             if isinstance(dictionary[key], dict):
                 if any(key in leaf for leaf in self._leafs) and key != 'lom':
+                    # ERROR
                     self._mapped_data[key], self._object_dict[key] = LOMModel.determine_lompad_leaf(dictionary[key], str(key),
                                                                             is_lompad_exported)
+
                 self.map_recursively(dictionary[key], is_lompad_exported)
 
     def get_mapped_manifest(self, object_name):

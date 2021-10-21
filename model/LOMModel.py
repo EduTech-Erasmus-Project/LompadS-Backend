@@ -780,6 +780,7 @@ class LOM:
 
 
 def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False):
+    print(dictionary)
     """
     Determine which lompad leaf should be mapped.
 
@@ -795,8 +796,15 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False):
         # Search the key inside dispatch dict.
         for key1 in dispatch.keys():
             if key in key1:
-                metodo = dispatch[key1]
-                return metodo(dictionary, is_lompad_exported)
+                try:
+                    metodo = dispatch[key1]
+                    ejemplo =  metodo(dictionary, is_lompad_exported)
+                    return ejemplo
+                except:
+                    oLom = LOM().MetaMetaData
+                    oLom.__setattr__(key, None)
+                    return oLom.__getattribute__(key)
+                    print("No existe valor para la key: ",key)
     except KeyError as ke:
         logging.error(f' Unexpected key {key}, ignoring key, error {ke}')
     except Exception as ex:
@@ -943,11 +951,11 @@ def meta_metadata_leaf(data: dict, is_lom):
         """
     meta_metadata_object = map_attributes(data, LOM.MetaMetadata(), is_lom)
     meta_metadata_object.identifier = map_attributes(data.get('lom:identifier') if data.get('lom:identifier')
-                                                     is not None else data.get('identifier'),
+                                                     is not None else data,
                                                      LOM.MetaMetadata.Identifier(), is_lom)
     meta_metadata_object.contribute = map_attributes(data.get('lom:contribute')
                                                      if data.get('lom:contribute') is not None
-                                                     else data.get('contribute'), LOM.MetaMetadata.Contribute(), is_lom)
+                                                     else data, LOM.MetaMetadata.Contribute(), is_lom)
 
     return meta_metadata_object.__dict__(), meta_metadata_object
 
