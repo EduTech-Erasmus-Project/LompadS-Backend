@@ -88,6 +88,7 @@ async def upload_file(file: UploadFile = File(...)):
                     fileFound=filePath
                     print(filePath)
                     print(childTag)
+                    booleanLomLomes=True
                     break
                 if(childTag == "lomes:lom"):
                     fileFound=filePath

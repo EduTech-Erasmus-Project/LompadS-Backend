@@ -39,7 +39,6 @@ class Controller:
 
         :return: None
         """
-
         if booleanLomLomes==True:
             for key, value in dictionary.items():
                 if isinstance(dictionary[key], dict):
@@ -83,9 +82,11 @@ class Controller:
                 
         else:
             lom_object =LOMESModel.LOM()
-            
             for key, value in self._object_dict.items():
-                key = key.split(':')[1]
+                print("=================================================")
+                print(key)
+                if "lomes:" in key:
+                    key = key.split(':')[1]
                 key = 'keywordd' if key == 'keyword' else key
                 lom_object.__setattr__(key, value)
 

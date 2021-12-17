@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <lom xmlns="http://ltsc.ieee.org/xsd/LOM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ltsc.ieee.org/xsd/LOM http://ltsc.ieee.org/xsd/lomv1.0/lom.xsd">
+            <general>
+                <identifier>
+                <catalog>['Mi catálogo']</catalog>
+                <entry>['3e97e97a-d935-4773-a297-9fcb5206fa93']</entry>
+                </identifier>
+                <title>
+                <string language="['es']">['Gestionar citas de diversas fuentes por medio de Zotero.']</string>
+                </title>
+                
+                <language>['es']</language>
+                <description>
+                <string language="['es']">['Los contenidos de este objeto de aprendizaje buscan presentar una visión general de la importancia de la gestión automatizada de las referencias y o fuentes de información y el uso de la herramienta Zotero']</string>
+                </description>
+                
+                
+                
+                <aggregationLevel>
+                <source>['LOM-ESv1.0']</source>
+                <value>['2']</value>
+                </aggregationLevel>
+            </general>
+            <lifeCycle>
+                <contribute>
+                <role>
+                <source>['LOM-ESv1.0']</source>
+                <value>['author']</value>
+                </role>
+                <entity>['BEGIN:VCARD VERSION:3.0 FN:Milton Cerda EMAIL;TYPE=INTERNET: ORG: END:VCARD']</entity>
+                <date>
+                <dateTime>['2018-03-25T23:26:08.00-05:00']</dateTime>
+                <description>
+                <string>['Fecha de creación de los metadatos']</string>
+                </description>
+                </date>
+                </contribute>
+            </lifeCycle>
+            <metaMetadata>
+            
+            <metadataSchema>['LOM-ESv1.0']</metadataSchema>
+            <language>['es']</language>
+            </metaMetadata>
+            
+            <educational>
+            <learningResourceType >
+                                <source >['LOM-ESv1.0']</source>
+                                <value >['guided reading']</value>
+                            </learningResourceType>
+            <intendedEndUserRole >
+                                <source >['LOM-ESv1.0']</source>
+                                <value >['learner']</value>
+                            </intendedEndUserRole>
+            <context >
+                                <source >['LOM-ESv1.0']</source>
+                                <value >['classroom']</value>
+                            </context>
+            <description>
+                <string  language="None"></description>
+                </description>
+            <language >['es']</language>
+            </educational>
+            <rights>
+            <copyrightAndOtherRestrictions >
+                                <source >['LOM-ESv1.0']</source>
+                                <value >['creative commons: attribution - share alike']</value>
+                            </copyrightAndOtherRestrictions>
+            <accessType >
+                    <source >['LOM-ESv1.0']</source>
+                    <value >['universal']</value>
+                </accessType>
+                <description >
+                    <string >['Preestablecido']</string>
+                </description>
+            </rights>
+            
+            
+            
+            
+        </lom>

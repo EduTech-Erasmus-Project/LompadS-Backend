@@ -149,7 +149,9 @@ def read_manifest(ims_manifest_path):
     """
     try:
         with open(ims_manifest_path, encoding="utf8") as file:
-            return ''.join(file.readlines())
+            read=file.readlines()
+            file.close()
+            return ''.join(read)
     except Exception as e:
         print(e)
         return -1
@@ -219,6 +221,7 @@ def update_model(hashed_code, leaf, model, data, booleanLomLomes):
 
     with open('temp_files/' + hashed_code + '_exported.xml', 'w') as file:
         file.write(model.to_xml().strip())
+        file.close()
     return model.__dict__()
 
 
@@ -228,10 +231,11 @@ def write_data(data, folder):
     if path.exists(f'./temp_files/{folder}/imslrm.xml'):
         with open(f'./temp_files/{folder}/imslrm.xml', 'w') as file:
             file.write(data)
+            file.close()
     elif path.exists(f'./temp_files/{folder}/imsmanifest.xml'):
         with open(f'./temp_files/{folder}/imsmanifest.xml', 'w') as file:
             file.write(data)
-
+            file.close()
     with ZipFile(f'./temp_files/{folder}.zip', 'w') as zipObj:
         for folderName, subfolders, filenames in os.walk(f'./temp_files/{folder}/'):
             for filename in filenames:

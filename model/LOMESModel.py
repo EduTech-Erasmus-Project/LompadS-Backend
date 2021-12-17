@@ -1142,7 +1142,7 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False):
         logging.error(f' Unexpected key {key}, ignoring key, error {ke}')
     except Exception as ex:
         logging.error(f' Error: {ex}')
-        print(traceback.format_exc())
+        # print(traceback.format_exc())
 
 
 def get_keywords(object_data: list):
@@ -1184,7 +1184,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
     if data is not None and not isinstance(data, list):
         attributes = object_instance.__dir__()
         
-        print("===============================================================")
+        # print("===============================================================")
         # print(attributes)
         # print(object_instance)
         hijo=None
@@ -1279,7 +1279,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                                     values_labels_dict.get(val2).append(containerOfChildren[val2])
                                                 values_labels.append(containerOfChildren[val2])
                 # print(values_labels)
-                print(values_labels_dict)
+                # print(values_labels_dict)
                 children_label=object_instance.__getattribute__(key_mapping_Upper)()
                 children_label.addValues(values_labels_dict)
                 # children_label.getValues()

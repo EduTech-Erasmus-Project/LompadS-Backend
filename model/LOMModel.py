@@ -26,6 +26,7 @@ class LOM:
     class General:
         identifier = None
         title = None
+        catalogentry = None
         language = None
         description = None
         keywordd = None
@@ -33,10 +34,11 @@ class LOM:
         structure = None
         aggregation_level = None
 
-        def __init__(self, identifier=None, title='', language='', description='', keywordd=None, coverage='',
+        def __init__(self, identifier=None, title='',catalogentry='',language='', description='', keywordd=None, coverage='',
                      structure='', aggregation_level=''):
             self.identifier = identifier
             self.title = title
+            self.catalogentry = catalogentry
             self.language = language
             self.description = description
             self.keywordd = keywordd
@@ -93,6 +95,27 @@ class LOM:
 
             def __dict__(self):
                 return {'Languaje': self.language, 'Tittle': self.title}
+        
+        class Catalogentry:
+            catalog=[]
+
+            def __init__(self, catalog=[], title=[]):
+                self.catalog = catalog
+                self.title = title
+            
+            def addValues(self,atributes):
+                self.catalog=atributes.get("catalog")
+                    
+            def getValues(self):
+                print("Catalog: ", self.catalog)
+
+            def to_xml(self):
+                return f"""<catalogentry>
+                <langstring>{self.catalog}</string>
+                </catalogentry>"""
+
+            def __dict__(self):
+                return {'Catalog': self.catalog}
         
         class Language:
             language=[]
@@ -265,6 +288,7 @@ class LOM:
             return f"""<general>
                 {'' if isinstance(self.identifier, str) else self.identifier.to_xml() if self.identifier is not None else ''}
                 {'' if isinstance(self.title, str) else self.title.to_xml() if self.title is not None else ''}
+                {'' if isinstance(self.catalogentry, str) else self.catalogentry.to_xml() if self.catalogentry is not None else ''}
                 {'' if isinstance(self.language, str) else self.language.to_xml() if self.language is not None else ''}
                 {'' if isinstance(self.description, str) else self.description.to_xml() if self.description is not None else ''}
                 {'' if isinstance(self.keywordd, str) else self.keywordd.to_xml() if self.keywordd is not None else ''}
@@ -461,8 +485,8 @@ class LOM:
         other_platform_requirements = None
         duration = None
 
-        def __init__(self, technical_format='', size='', location='', requirement=None, installationRemarks='',
-                     other_platform_requirements='', duration=''):
+        def __init__(self, technical_format='', size='', location=None, requirement=None, installationRemarks=None,
+                     other_platform_requirements=None, duration=''):
             self.format = technical_format
             self.size = size,
             self.location = location
@@ -574,9 +598,9 @@ class LOM:
         description = None
         language = None
 
-        def __init__(self, interactivity_type='', learningResourceType='', interactivity_level='',
-                     semantic_density='', intendedEndUserRole='', context='', typical_age_range='', difficulty='',
-                     typical_learning_time='', description='', language=''):
+        def __init__(self, interactivity_type=None, learningResourceType=None, interactivity_level=None,
+                     semantic_density=None, intendedEndUserRole=None, context=None, typical_age_range=None, difficulty=None,
+                     typical_learning_time=None, description=None, language=None):
             self.interactivity_type = interactivity_type
             self.learningResourceType = learningResourceType
             self.interactivity_level = interactivity_level
@@ -711,7 +735,7 @@ class LOM:
         description = None
         access =  None
 
-        def __init__(self, cost='', copyright_and_other_restrictions='', description='', access=None):
+        def __init__(self, cost=None, copyright_and_other_restrictions=None, description=None, access=None):
             self.cost = cost
             self.copyrightAndOtherRestrictions = copyright_and_other_restrictions
             self.description = description
@@ -1137,7 +1161,9 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False):
                     metodo = dispatch[key1]
                     ejemplo =  metodo(dict(dictionary), is_lompad_exported)
                     return ejemplo
-                except:
+                except Exception as e:
+                    print("======>")
+                    print(e)
                     oLom = LOM().MetaMetadata
                     oLom.__setattr__(key, None)
                     return oLom.__getattribute__(key)
@@ -1186,46 +1212,44 @@ def map_attributes(data_original: dict, object_instance, is_lom):
     """
     values_labels_dict={}
 
-    if data is not None and not isinstance(data, list):
-        attributes = object_instance.__dir__()
-        
-        print("===============================================================")
-        # print(attributes)
-        # print(object_instance)
-        hijo=None
-        values_labels=[]
-        values_labels_dict={}
-        # print(data)
-        
-        for key in data:
-            print("padre: ", key)
-            key_mapping=key.replace('lomes:', '')
-            # print(key_mapping)
-            if key_mapping == "keyword":
-                key_mapping="keywordd"
-            key_mapping_Upper=key_mapping.capitalize()
-            if isinstance(data[key], str):
-                print("hijo1: ", data[key])
-                values_labels_dict[key]=[data[key]]
-            else:
-                for childrens in data[key]:
-                    dataKey=data[key]
-                    if isinstance(dataKey, str):
-                        print("HijoString: ",dataKey)
-                    else:
+    try:
+        if data is not None and not isinstance(data, list):
+            attributes = object_instance.__dir__()
+            
+            # print("===============================================================")
+            # print(attributes)
+            # print(object_instance)
+            hijo=None
+            values_labels=[]
+            values_labels_dict={}
+            # print(data)
+            
+            for key in data:
+                # print("padre: ", key)
+                key_mapping=key.replace('lomes:', '')
+                # print(key_mapping)
+                if key_mapping == "keyword":
+                    key_mapping="keywordd"
+                key_mapping_Upper=key_mapping.capitalize()
+                if isinstance(data[key], str):
+                    # print("hijo1: ", data[key])
+                    values_labels_dict[key]=[data[key]]
+                else:
+                    for childrens in data[key]:
+                        dataKey=data[key]
                         for valDataKey in dataKey:
                             if isinstance(valDataKey, str):
                                 contentDataKey = dataKey[valDataKey]
                                 if isinstance(contentDataKey, str):
-                                    print(valDataKey)
-                                    print("HijoCollections: ", contentDataKey)
+                                    # print(valDataKey)
+                                    # print("HijoCollections: ", contentDataKey)
                                     values_labels_dict[valDataKey]=[contentDataKey]
                                 else:
                                     aux=True
                                     auxKey=""
                                     for valContentDataKEy in contentDataKey:
                                         if isinstance(contentDataKey[valContentDataKEy], str):
-                                            print("HijoCollectionsFor: ",contentDataKey[valContentDataKEy])
+                                            # print("HijoCollectionsFor: ",contentDataKey[valContentDataKEy])
                                             if aux:
                                                 auxKey=contentDataKey[valContentDataKEy]
                                                 values_labels_dict[contentDataKey[valContentDataKEy]]=list()
@@ -1237,7 +1261,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                             aux=True
                                             contentContentDataKey = contentDataKey[valContentDataKEy]
                                             for valueContentContetnDatakey in contentContentDataKey:
-                                                print("HijoCollectionsFor2: ",contentContentDataKey[valueContentContetnDatakey])
+                                                # print("HijoCollectionsFor2: ",contentContentDataKey[valueContentContetnDatakey])
                                                 if isinstance(contentContentDataKey[valueContentContetnDatakey], str):
                                                     if aux:
                                                         auxKey=contentContentDataKey[valueContentContetnDatakey]
@@ -1258,57 +1282,55 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                                             aux=True
                             else:
                                 contentDataKey = valDataKey
-                                if isinstance(contentDataKey, str):
-                                    print("HijoCollections2: ", contentDataKey)
-                                else:
-                                    aux=True
-                                    auxKey=""
-                                    for valContentDataKEy in contentDataKey:
-                                        if isinstance(contentDataKey[valContentDataKEy], str):
-                                            print("HijoCollectionsFor2: ",contentDataKey[valContentDataKEy])
-                                            if aux:
-                                                auxKey=contentDataKey[valContentDataKEy]
-                                                values_labels_dict[contentDataKey[valContentDataKEy]]=list()
-                                                aux=False
-                                            else:
-                                                values_labels_dict.get(auxKey).append(contentDataKey[valContentDataKEy])
-                                                aux=True
+                                aux=True
+                                auxKey=""
+                                for valContentDataKEy in contentDataKey:
+                                    if isinstance(contentDataKey[valContentDataKEy], str):
+                                        # print("HijoCollectionsFor2: ",contentDataKey[valContentDataKEy])
+                                        if aux:
+                                            auxKey=contentDataKey[valContentDataKEy]
+                                            values_labels_dict[contentDataKey[valContentDataKEy]]=list()
+                                            aux=False
                                         else:
+                                            values_labels_dict.get(auxKey).append(contentDataKey[valContentDataKEy])
                                             aux=True
-                                            contentContentDataKey = contentDataKey[valContentDataKEy]
-                                            for valueContentContetnDatakey in contentContentDataKey:
-                                                print("HijoCollectionsFor22: ",contentContentDataKey[valueContentContetnDatakey])
-                                                if isinstance(contentContentDataKey[valueContentContetnDatakey], str):
+                                    else:
+                                        aux=True
+                                        contentContentDataKey = contentDataKey[valContentDataKEy]
+                                        for valueContentContetnDatakey in contentContentDataKey:
+                                            # print("HijoCollectionsFor22: ",contentContentDataKey[valueContentContetnDatakey])
+                                            if isinstance(contentContentDataKey[valueContentContetnDatakey], str):
+                                                if aux:
+                                                    auxKey=contentContentDataKey[valueContentContetnDatakey]
+                                                    values_labels_dict[contentContentDataKey[valueContentContetnDatakey]]=list()
+                                                    aux=False
+                                                else:
+                                                    values_labels_dict.get(auxKey).append(contentContentDataKey[valueContentContetnDatakey])
+                                                    aux=True
+                                            else:
+                                                auxcontentContentDataKey=contentContentDataKey[valueContentContetnDatakey]
+                                                for valAuxcontentContentDataKey in auxcontentContentDataKey:
                                                     if aux:
-                                                        auxKey=contentContentDataKey[valueContentContetnDatakey]
-                                                        values_labels_dict[contentContentDataKey[valueContentContetnDatakey]]=list()
+                                                        auxKey=auxcontentContentDataKey[valAuxcontentContentDataKey]
+                                                        values_labels_dict[auxcontentContentDataKey[valAuxcontentContentDataKey]]=list()
                                                         aux=False
                                                     else:
-                                                        values_labels_dict.get(auxKey).append(contentContentDataKey[valueContentContetnDatakey])
+                                                        values_labels_dict.get(auxKey).append(auxcontentContentDataKey[valAuxcontentContentDataKey])
                                                         aux=True
-                                                else:
-                                                    auxcontentContentDataKey=contentContentDataKey[valueContentContetnDatakey]
-                                                    for valAuxcontentContentDataKey in auxcontentContentDataKey:
-                                                        if aux:
-                                                            auxKey=auxcontentContentDataKey[valAuxcontentContentDataKey]
-                                                            values_labels_dict[auxcontentContentDataKey[valAuxcontentContentDataKey]]=list()
-                                                            aux=False
-                                                        else:
-                                                            values_labels_dict.get(auxKey).append(auxcontentContentDataKey[valAuxcontentContentDataKey])
-                                                            aux=True
                         break
-            # print(values_labels)
-            print(values_labels_dict)
-            if "@uniqueElementName" not in key_mapping:
-                children_label=object_instance.__getattribute__(key_mapping_Upper)()
-                children_label.addValues(values_labels_dict)
-                # children_label.getValues()
-                values_labels_dict={}
-                if key_mapping == "aggregationLevel":
-                    key_mapping="aggregation_level"
-                # print(object_instance,": ",key_mapping)
-                object_instance.__setattr__(key_mapping, children_label)
-
+                # print(values_labels)
+                # print(values_labels_dict)
+                if "@uniqueElementName" not in key_mapping:
+                    children_label=object_instance.__getattribute__(key_mapping_Upper)()
+                    children_label.addValues(values_labels_dict)
+                    # children_label.getValues()
+                    values_labels_dict={}
+                    if key_mapping == "aggregationLevel":
+                        key_mapping="aggregation_level"
+                    # print(object_instance,": ",key_mapping)
+                    object_instance.__setattr__(key_mapping, children_label)
+    except Exception as e:
+        print(e)
     return object_instance
 
 
@@ -1433,6 +1455,8 @@ def relation_leaf(data: dict, is_lom):
             identifier = map_attributes(data['resource']['identifier'], LOM.Relation.Resource.Identifier(), is_lom)
         elif 'Identifier' in data['resource'].keys():
             identifier = map_attributes(data['resource']['Identifier'], LOM.Relation.Resource.Identifier(), is_lom)
+        else:
+            identifier=None
 
     resource.identifier = identifier
     relation_object.resource = resource
