@@ -9,6 +9,9 @@ from starlette.responses import FileResponse
 from controller import FileController
 
 app = FastAPI()
+fileFound=''
+booleanLomLomes=True #If booleanLomLomes is True represents a lom format, and
+                     #if booleanLomLomes is False represents a lomes format.
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,6 +31,9 @@ async def upload_file(file: UploadFile = File(...)):
     :return:
         imsmanifest.xml as JSON if parse was correct, else raise a new HTTPException with Exception code 500.
     """
+    global fileFound
+    global booleanLomLomes
+    fileFound=''
     file_type = FileController.get_file_type(file.filename)
     _filepath = None
     _profile = None
@@ -50,7 +56,51 @@ async def upload_file(file: UploadFile = File(...)):
         FileController.unzip_file(file.filename, _hashed_filename, _filepath)
         FileController.delete_temp_file(_filepath)
 
-        xml_manifest_scorm = FileController.read_manifest(_filepath.replace('.zip', '') + '/imslrm.xml')
+        import glob
+        import os 
+        from bs4 import BeautifulSoup
+        from xml.dom import minidom
+
+        hashed=_hashed_filename.replace('.zip', '')
+        
+        print(" this is the hash: ",hashed)
+
+        targetPattern = './temp_files/'+hashed+'/**/*.xml'
+        
+        routes = glob.glob(targetPattern)
+        print("The routes found are")
+        print(routes)
+
+        if len(routes) == 0:
+            targetPattern = './temp_files/'+hashed+'/*.xml'
+            routes = glob.glob(targetPattern)
+            print("The routes found in root are:")
+            print(routes)
+
+
+        from xml.dom import minidom
+
+        for filePath in routes:
+            try:
+                doc = minidom.parse(filePath)
+                childTag = doc.firstChild.tagName
+                if(childTag == "lom"):
+                    fileFound=filePath
+                    print(filePath)
+                    print(childTag)
+                    break
+                if(childTag == "lomes:lom"):
+                    fileFound=filePath
+                    print(filePath)
+                    print(childTag)
+                    booleanLomLomes=False
+                    break
+            except:
+                print("something happened with the file in the path: "+filePath)
+
+        fileFound.replace('./temp_files/', '')
+
+        xml_manifest_scorm = FileController.read_manifest(fileFound)
         if xml_manifest_scorm == -1:
             xml_manifest_ims = FileController.read_manifest(_filepath.replace('.zip', '') + '/imsmanifest.xml')
 
@@ -72,10 +122,18 @@ async def upload_file(file: UploadFile = File(...)):
 
 @app.get("/private/read_file/")
 async def read_file(hashed_code: str, profile: str):
+
+    import glob
+    import os 
+
+    global fileFound
+
+    print ("Se esta recibiendo ", fileFound)
+
     from_lompad = False
 
     if profile == 'SCORM':
-        xml_manifest = FileController.read_manifest(f'./temp_files/{hashed_code}/imslrm.xml')
+        xml_manifest = FileController.read_manifest(fileFound)
     else:
         xml_manifest = FileController.read_manifest(f'./temp_files/{hashed_code}/imsmanifest.xml')
 
@@ -88,18 +146,20 @@ async def read_file(hashed_code: str, profile: str):
                       detail='Error, file not found or corrupted.')
 
     if not from_lompad:
-        return {'DATA': FileController.load_recursive_model(xml_manifest, hashed_code)}
+        return {'DATA': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
     else:
         return {'DATA': FileController.load_recursive_model(xml_manifest, hashed_code, is_lompad_exported=True)}
 
 
 @app.post("/private/update/")
 async def update_file(hashed_code: str, hoja, data):
+    global booleanLomLomes
+
     manifest = FileController.read_manifest(f'./temp_files/{hashed_code}_exported.xml')
     print('PASO 1')
     lom = FileController.load_recursive_as_class(manifest)
     print('PASO 2')
-    response = FileController.update_model(hashed_code, hoja, lom, data)
+    response = FileController.update_model(hashed_code, hoja, lom, data,booleanLomLomes)
     return {'DATA': response}
 
 

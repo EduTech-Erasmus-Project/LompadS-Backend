@@ -1,7 +1,9 @@
+import collections
 import logging
 import traceback
 from collections import OrderedDict
 from pprint import pprint
+from typing import Container
 from fuzzywuzzy import fuzz, process
 
 
@@ -26,29 +28,37 @@ class LOM:
         title = None
         language = None
         description = None
-        keyword = None
+        keywordd = None
         coverage = None
         structure = None
         aggregation_level = None
 
-        def __init__(self, identifier=None, title='', language='', description='', keyword='', coverage='',
+        def __init__(self, identifier=None, title='', language='', description='', keywordd=None, coverage='',
                      structure='', aggregation_level=''):
             self.identifier = identifier
             self.title = title
             self.language = language
             self.description = description
-            self.keyword = keyword
+            self.keywordd = keywordd
             self.coverage = coverage
             self.structure = structure
             self.aggregation_level = aggregation_level
 
         class Identifier:
-            catalog = None
-            entry = None
+            catalog = []
+            entry = []
 
-            def __init__(self, catalog='', entry=''):
+            def __init__(self, catalog=[], entry=[]):
                 self.catalog = catalog
                 self.entry = entry
+            
+            def addValues(self,atributes):
+                self.catalog=atributes.get('catalog')
+                self.entry=atributes.get('entry')
+                    
+            def getValues(self):
+                print("Catalog: ", self.catalog)
+                print("Entry: ", self.entry)
 
             def to_xml(self):
                 return f"""<identifier>
@@ -59,48 +69,208 @@ class LOM:
             def __dict__(self):
                 return {'Catalog': self.catalog, 'Entry': self.entry}
 
+        class Title:
+            language=[]
+            title=[]
+
+            def __init__(self, language=[], title=[]):
+                self.language = language
+                self.title = title
+            
+            def addValues(self,atributes):
+                for val in atributes.keys():
+                    self.title=atributes.get(val)
+                    self.language.append(val)
+                    
+            def getValues(self):
+                print("Languaje: ", self.language)
+                print("Title: ", self.title)
+
+            def to_xml(self):
+                return f"""<title>
+                <string language="{self.language}">{self.title}</string>
+                </title>"""
+
+            def __dict__(self):
+                return {'Languaje': self.language, 'Tittle': self.title}
+        
+        class Language:
+            language=[]
+
+            def __init__(self, language=[]):
+                self.language = language
+            
+            def addValues(self,atributes):
+                self.language=atributes.get('language')
+                    
+            def getValues(self):
+                print("Languaje: ", self.language)
+            
+
+            def to_xml(self):
+                return f"""<language>{self.language}</language>"""
+
+            def __dict__(self):
+                return {'Languaje': self.language}
+        
+        class Description:
+
+            language=[]
+            description=[]
+
+            def __init__(self, language=[], description=[]):
+                self.language = language
+                self.description = description
+            
+            def addValues(self,atributes):
+                for val in atributes.keys():
+                    self.description=atributes.get(val)
+                    self.language.append(val)
+                    
+            def getValues(self):
+                print("Languaje: ", self.language)
+                print("Description: ", self.description)
+
+            def to_xml(self):
+                return f"""<description>
+                <string language="{self.language}">{self.description}</string>
+                </description>"""
+
+            def __dict__(self):
+                return {'Languaje': self.language, 'Description: ': self.description}
+        
+        class Keywordd:
+
+            language=[]
+            keywordd=[]
+
+            def __init__(self, language=[], keywordd=[]):
+                self.language = language
+                self.keywordd = keywordd
+            
+            def addValues(self,atributes):
+                self.language=atributes.get('@language')
+                self.keywordd=atributes.get('#text')
+            def getValues(self):
+                print("Languaje: ", self.language)
+                print("Keyword: ", self.keywordd)
+
+            def to_xml(self):
+                return f"""<string  language="{self.language}">{self.keywordd}</string>"""
+
+            def __dict__(self):
+                return {'Languaje': self.language, 'Keyword: ': self.keywordd}
+        
+        class Aggregationlevel:
+
+            source=[]
+            value=[]
+
+            def __init__(self, source=[], value=[]):
+                self.source = source
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.source=atributes.get('source')
+                self.value=atributes.get('value')
+                    
+            def getValues(self):
+                print("Source: ", self.source)
+                print("Value: ", self.value)
+
+            def to_xml(self):
+                return f"""<aggregationLevel>
+                <source>{self.source}</source>
+                <value>{self.value}</value>
+                </aggregationLevel>"""
+
+            def __dict__(self):
+                return {'Source': self.source, 'Value: ': self.value}
+
         def get_keyword(self):
-            if type(self.keyword) is list:
+            if type(self.keywordd) is list:
                 elements = []
-                for element in self.keyword:
+                for element in self.keywordd:
                     elements.append(f'{element},')
                 return elements
             else:
-                return self.keyword
+                return self.keywordd
 
         def get_xml_keywords(self):
-            if type(self.keyword) is list:
+            if type(self.keywordd) is list:
                 content = ""
-                for key in self.keyword:
+                for key in self.keywordd:
                     content += f"""<string language="en">{key}</string>\n"""
                 return content
             else:
-                return self.keyword
+                return self.keywordd
+        
+        class Coverage:
+
+            language=[]
+            coverage=[]
+
+            def __init__(self, language=[], coverage=[]):
+                self.language = language
+                self.coverage = coverage
+            
+            def addValues(self,atributes):
+                for i in range(len(atributes)):
+                    if i%2==0:
+                        self.language.append(atributes[i])
+                    else:
+                        self.coverage.append(atributes[i])
+                    
+            def getValues(self):
+                print("Language: ", self.language)
+                print("Coverage: ", self.coverage)
+
+            def to_xml(self):
+                return f"""<coverage>
+                <string language="{self.language}">{self.coverage}</string>
+                </coverage>"""
+
+            def __dict__(self):
+                return {'Language': self.language, 'Coverage: ': self.coverage}
+        
+        class Structure:
+            source=[]
+            value=[]
+
+            def __init__(self, source=[], value=[]):
+                self.source = source
+                self.value = value
+            
+            def addValues(self,atributes):
+                for i in range(len(atributes)):
+                    if i%2==0:
+                        self.source.append(atributes[i])
+                    else:
+                        self.value.append(atributes[i])
+                    
+            def getValues(self):
+                print("Source: ", self.language)
+                print("Value: ", self.coverage)
+
+            def to_xml(self):
+                return f""" <structure>
+                <source>{self.source}</source>
+                <value>{self.value}</value>
+                </structure>"""
+
+            def __dict__(self):
+                return {'Source': self.source, 'Value: ': self.value}
 
         def to_xml(self):
             return f"""<general>
-                {self.identifier.to_xml() if self.identifier is not None else ''}
-                <title>
-                <string language="{self.language}">{self.title}</string>
-                </title>
-                <language>{self.language}</language>
-                <description>
-                <string language="{self.language}">{self.description}</string>
-                </description>
-                <keyword>
-                {self.get_xml_keywords()}
-                </keyword>
-                <coverage>
-                <string language="{self.language}">{self.coverage}</string>
-                </coverage>
-                <structure>
-                <source>LOMv1.0</source>
-                <value>{self.structure}</value>
-                </structure>
-                <aggregationLevel>
-                <source>LOMv1.0</source>
-                <value>{self.aggregation_level}</value>
-                </aggregationLevel>
+                {'' if isinstance(self.identifier, str) else self.identifier.to_xml() if self.identifier is not None else ''}
+                {'' if isinstance(self.title, str) else self.title.to_xml() if self.title is not None else ''}
+                {'' if isinstance(self.language, str) else self.language.to_xml() if self.language is not None else ''}
+                {'' if isinstance(self.description, str) else self.description.to_xml() if self.description is not None else ''}
+                {'' if isinstance(self.keywordd, str) else self.keywordd.to_xml() if self.keywordd is not None else ''}
+                {'' if isinstance(self.coverage, str) else self.coverage.to_xml() if self.coverage is not None else ''}
+                {'' if isinstance(self.structure, str) else self.structure.to_xml() if self.structure is not None else ''}
+                {'' if isinstance(self.aggregation_level, str) else self.aggregation_level.to_xml() if self.aggregation_level is not None else ''}
             </general>"""
 
         def __dict__(self):
@@ -120,29 +290,40 @@ class LOM:
             self.contribute = contribute
 
         class Contribute:
-            role = None
-            entity = None
-            date = None
+            source = []
+            value = []
+            entity = []
+            datetime = []
+            description_string = []
 
-            def __init__(self, role='', entity='', date=''):
-                self.role = role
-                self.entity = entity
-                self.date = date
+            def __init__(self, source=[], value=[], entity=[], datetime=[], description_string=[]):
+                self.source=source
+                self.value=value
+                self.entity=entity
+                self.datetime=datetime
+                self.description_string=description_string
+            
+            def addValues(self,atributes):
+                self.source=atributes.get('source')
+                self.value=atributes.get('value')
+                self.entity=atributes.get('entity')
+                self.datetime=atributes.get('dateTime')
+                self.description_string=atributes.get('es')
 
             def __dict__(self):
-                return {'Role': self.role, 'Entity': self.entity, 'Date': self.date}
+                return {'Source': self.source, 'Value': self.value, 'Entity': self.entity, 'Datetime': self.datetime, 'Description_string': self.description_string}
 
             def to_xml(self):
                 return f"""<contribute>
                 <role>
-                <source>LOMv1.0</source>
-                <value>{self.role}</value>
+                <source>{self.source}</source>
+                <value>{self.value}</value>
                 </role>
-                <entity><![CDATA[{self.entity}]]></entity>
+                <entity>{self.entity}</entity>
                 <date>
-                <dateTime>{self.date}</dateTime>
+                <dateTime>{self.datetime}</dateTime>
                 <description>
-                <string language="en">EMPTY</string>
+                <string>{self.description_string}</string>
                 </description>
                 </date>
                 </contribute>"""
@@ -153,33 +334,34 @@ class LOM:
 
         def to_xml(self):
             return f"""<lifeCycle>
-                <version><string language="en">{self.version}</string></version>
-                <status>
-                <source>LOMv1.0</source>
-                <value>{self.status}</value>
-                </status>
-                {self.contribute.to_xml() if self.contribute is not None else ''}
+                {'' if isinstance(self.contribute, str) else self.contribute.to_xml() if self.contribute is not None else ''}
             </lifeCycle>"""
 
     class MetaMetadata:
+
         identifier = None
         contribute = None
-        metadata_schema = None
+        metadataSchema = None
         language = None
 
-        def __init__(self, identifier=None, contribute=None, metadata_schema='', language=''):
+        def __init__(self, identifier=None, contribute=None, metadataSchema=None, language=None):
             self.identifier = identifier
             self.contribute = contribute
-            self.metadata_schema = metadata_schema
+            self.metadataSchema = metadataSchema
             self.language = language
 
         class Identifier:
-            catalog = None
-            entry = None
+            catalog = []
+            entry = []
+            
+            def __init__(self, catalog=[], entry=[]):
+                self.catalog=catalog
+                self.entry=entry
+            
+            def addValues(self,atributes):
+                self.catalog=atributes.get('catalog')
+                self.entry=atributes.get('entry')
 
-            def __init__(self, catalog='', entry=''):
-                self.catalog = catalog
-                self.entry = entry
 
             def to_xml(self):
                 return f"""<identifier>
@@ -188,7 +370,41 @@ class LOM:
                 </identifier>"""
 
             def __dict__(self):
-                return {'Catalog': self.catalog, 'Schema': self.entry}
+                return {'Catalog': self.catalog, 'Entry': self.entry}
+        
+        class Metadataschema:
+
+            value = []
+
+            def __init__(self, value=[]):
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.value=atributes.get('metadataSchema')
+
+
+            def to_xml(self):
+                return f"""<metadataSchema>{self.value}</metadataSchema>"""
+
+            def __dict__(self):
+                return {'Values': self.value}
+        
+        class Language:
+            value = []
+
+            def __init__(self, value=[]):
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.value=atributes.get('language')
+
+
+            def to_xml(self):
+                return f"""<language>{self.value}</language>"""
+
+            def __dict__(self):
+                return {'Values': self.value}
+
 
         class Contribute:
             role = None
@@ -199,6 +415,9 @@ class LOM:
                 self.role = role
                 self.entity = entity
                 self.date = date
+            
+            def addValues(self,atributes):
+                self.value=atributes.get('language')
 
             def to_xml(self):
                 return f"""<contribute>
@@ -222,36 +441,69 @@ class LOM:
 
         def to_xml(self):
             return f"""<metaMetadata>
-            {self.identifier.to_xml() if self.identifier is not None else ''}
-            {self.contribute.to_xml() if self.contribute is not None else ''}
-            <metadataSchema>{self.metadata_schema}</metadataSchema>
-            <language>{self.language}</language>
+            {'' if isinstance(self.identifier, str) else self.identifier.to_xml() if self.identifier is not None else ''}
+            {'' if isinstance(self.metadataSchema, str) else self.metadataSchema.to_xml() if self.metadataSchema is not None else ''}
+            {'' if isinstance(self.language, str) else self.language.to_xml() if self.language is not None else ''}
             </metaMetadata>"""
 
         def __dict__(self):
             return {
                 'Identifier': self.identifier.__dict__() if self.identifier is not None else self.Identifier().__dict__(),
-                'Contribute': self.contribute.__dict__() if self.contribute is not None else self.Contribute().__dict__(),
-                'Metadata Schema': self.metadata_schema, 'Language': self.language}
+                'MetadataSchema': self.metadataSchema.__dict__() if self.metadataSchema is not None else self.Metadataschema().__dict__(),
+                'Language': self.language.__dict__() if self.language is not None else self.Language().__dict__()}
 
     class Technical:
         format = None
         size = None,
         location = None
         requirement = None
-        installation_remarks = None
+        installationRemarks = None
         other_platform_requirements = None
         duration = None
 
-        def __init__(self, technical_format='', size='', location='', requirement=None, installation_remarks='',
+        def __init__(self, technical_format='', size='', location='', requirement=None, installationRemarks='',
                      other_platform_requirements='', duration=''):
             self.format = technical_format
             self.size = size,
             self.location = location
             self.requirement = requirement
-            self.installation_remarks = installation_remarks
+            self.installationRemarks = installationRemarks
             self.other_platform_requirements = other_platform_requirements
             self.duration = duration
+        
+        class Location:
+            value = []
+
+            def __init__(self, value=[]):
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.value=atributes.get('location')
+
+
+            def to_xml(self):
+                return f"""<location>{self.value}</location>"""
+
+            def __dict__(self):
+                return {'Values': self.value}
+        
+        class Installationremarks:
+            language = []
+
+            def __init__(self, language=[]):
+                self.language = language
+            
+            def addValues(self,atributes):
+                self.language=atributes.get('@language')
+
+
+            def to_xml(self):
+                return f"""<installationRemarks>
+                <string  language="{self.language}"></string>
+                </installationRemarks>"""
+
+            def __dict__(self):
+                return {'Language': self.language}
 
         class Requirement:
             or_composite = None
@@ -301,36 +553,20 @@ class LOM:
 
         def to_xml(self):
             return f"""<technical>
-            <format>{self.format}</format>
-            <size>{self.size}</size>
-            <location>{self.location}</location>
-            {self.requirement.to_xml() if self.requirement is not None else ''}
-            <installationRemarks>
-            <string language="en">{self.installation_remarks}</string>
-            </installationRemarks>
-            <otherPlatformRequirements>
-            <string language="en">{self.other_platform_requirements}</string>
-            </otherPlatformRequirements>
-            <duration>
-                <duration>{self.duration}</duration>
-                <description>
-                    <string language="">EMPTY</string>
-                </description>
-            </duration>
+            {'' if isinstance(self.location, str) else self.location.to_xml() if self.location is not None else ''}
+            {'' if isinstance(self.installationRemarks, str) else self.installationRemarks.to_xml() if self.installationRemarks is not None else ''}
             </technical>"""
 
         def __dict__(self):
-            return {'Format': self.format, 'Size': self.size, 'Location': self.location,
-                    'Requirement': self.requirement.__dict__() if self.requirement is not None else self.Requirement().__dict__(),
-                    'Installation Remarks': self.installation_remarks,
-                    'Other Platform Requirements': self.other_platform_requirements, 'Duration': self.duration}
+            return {'Installation Remarks': self.installationRemarks.__dict__() if self.installationRemarks is not None else self.Installationremarks().__dict__(),
+                    'Location': self.location.__dict__() if self.location is not None else self.Location().__dict__()}
 
     class Educational:
         interactivity_type = None
-        learning_resource_type = None
+        learningResourceType = None
         interactivity_level = None
         semantic_density = None
-        intended_end_user_role = None
+        intendedEndUserRole = None
         context = None
         typical_age_range = None
         difficulty = None
@@ -338,103 +574,204 @@ class LOM:
         description = None
         language = None
 
-        def __init__(self, interactivity_type='', learning_resource_type='', interactivity_level='',
-                     semantic_density='', intended_end_user_role='', context='', typical_age_range='', difficulty='',
+        def __init__(self, interactivity_type='', learningResourceType='', interactivity_level='',
+                     semantic_density='', intendedEndUserRole='', context='', typical_age_range='', difficulty='',
                      typical_learning_time='', description='', language=''):
             self.interactivity_type = interactivity_type
-            self.learning_resource_type = learning_resource_type
+            self.learningResourceType = learningResourceType
             self.interactivity_level = interactivity_level
             self.semantic_density = semantic_density
-            self.intended_end_user_role = intended_end_user_role
+            self.intendedEndUserRole = intendedEndUserRole
             self.context = context
             self.typical_age_range = typical_age_range
             self.difficulty = difficulty
             self.typical_learning_time = typical_learning_time
             self.description = description
             self.language = language
+        
+        class Learningresourcetype:
+            source = []
+            value = []
+
+            def __init__(self, source=[], value=[]):
+                self.source = source
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.source=atributes.get('source')
+                self.value=atributes.get('value')
+
+            def to_xml(self):
+                return f"""<learningResourceType >
+                                <source >{self.source}</source>
+                                <value >{self.value}</value>
+                            </learningResourceType>"""
+
+            def __dict__(self):
+                return {'Source': self.source, 'Value': self.value}
+        
+        class Intendedenduserrole:
+            source = []
+            value = []
+
+            def __init__(self, source=[], value=[]):
+                self.source = source
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.source=atributes.get('source')
+                self.value=atributes.get('value')
+
+            def to_xml(self):
+                return f"""<intendedEndUserRole >
+                                <source >{self.source}</source>
+                                <value >{self.value}</value>
+                            </intendedEndUserRole>"""
+
+            def __dict__(self):
+                return {'Source': self.source, 'Value': self.value}
+        
+        class Context:
+            source = []
+            value = []
+
+            def __init__(self, source=[], value=[]):
+                self.source = source
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.source=atributes.get('source')
+                self.value=atributes.get('value')
+
+            def to_xml(self):
+                return f"""<context >
+                                <source >{self.source}</source>
+                                <value >{self.value}</value>
+                            </context>"""
+
+            def __dict__(self):
+                return {'Source': self.source, 'Value': self.value}
+
+        class Description:
+            language = []
+
+            def __init__(self, language=[]):
+                self.language = language
+            
+            def addValues(self,atributes):
+                self.language=atributes.get('@language')
+
+
+            def to_xml(self):
+                return f"""<description>
+                <string  language="{self.language}"></description>
+                </description>"""
+
+            def __dict__(self):
+                return {'Language': self.language}
+        
+        class Language:
+            language = []
+
+            def __init__(self, language=[]):
+                self.language = language
+            
+            def addValues(self,atributes):
+                self.language=atributes.get('language')
+
+
+            def to_xml(self):
+                return f"""<language >{self.language}</language>"""
+
+            def __dict__(self):
+                return {'Language': self.language}
 
         def to_xml(self):
             return f"""<educational>
-            <interactivityType>
-            <source>LOMv1.0</source>
-            <value>{self.interactivity_type}</value>
-            </interactivityType>
-            <learningResourceType>
-            <source>LOMv1.0</source>
-            <value>{self.learning_resource_type}</value>
-            </learningResourceType>
-            <interactivityLevel>
-            <source>LOMv1.0</source>
-            <value>{self.interactivity_level}</value>
-            </interactivityLevel>
-            <semanticDensity>
-            <source>LOMv1.0</source>
-            <value>{self.semantic_density}</value>
-            </semanticDensity>
-            <intendedEndUserRole>
-            <source>LOMv1.0</source>
-            <value>{self.intended_end_user_role}</value>
-            </intendedEndUserRole>
-            <context>
-            <source>LOMv1.0</source>
-            <value>{self.context}</value>
-            </context>
-            <typicalAgeRange>
-            <string language="en">{self.typical_age_range}</string>
-            </typicalAgeRange>
-            <difficulty>
-            <source>LOMv1.0</source>
-            <value>{self.difficulty}</value>
-            </difficulty>
-            <typicalLearningTime>
-            <duration>{self.typical_learning_time}</duration>
-            <description>
-            <string language="en">{self.description}</string>
-            </description>
-            </typicalLearningTime>
-            <description>
-            <string language="en">{self.description}</string>
-            </description>
-            <language>{self.language}</language>
+            {'' if isinstance(self.learningResourceType, str) else self.learningResourceType.to_xml() if self.learningResourceType is not None else ''}
+            {'' if isinstance(self.intendedEndUserRole, str) else self.intendedEndUserRole.to_xml() if self.intendedEndUserRole is not None else ''}
+            {'' if isinstance(self.context, str) else self.context.to_xml() if self.context is not None else ''}
+            {'' if isinstance(self.description, str) else self.description.to_xml() if self.description is not None else ''}
+            {'' if isinstance(self.language, str) else self.language.to_xml() if self.language is not None else ''}
             </educational>"""
 
         def __dict__(self):
             return {'Interactivity Type': self.interactivity_type,
-                    'Learning Resource Type': self.learning_resource_type,
+                    'Learning Resource Type': self.learningResourceType.__dict__() if self.learningResourceType is not None else self.Learningresourcetype().__dict__(),
                     'Interactivity Level': self.interactivity_level, 'Semantic Density': self.semantic_density,
-                    'Intended End User Roles': self.intended_end_user_role, 'Context': self.context,
-                    'Typical Age Range': self.typical_age_range, 'Difficulty': self.difficulty,
-                    'Typical Learning Time': self.typical_learning_time, 'Description': self.description, 'Language':
-                        self.language}
+                    'Intended End User Roles': self.intendedEndUserRole.__dict__() if self.intendedEndUserRole is not None else self.Intendedenduserrole().__dict__(), 
+                    'Context': self.context.__dict__() if self.context is not None else self.Context().__dict__(),
+                    'Typical Age Range': self.typical_age_range, 'Difficulty': self.difficulty,'Typical Learning Time': self.typical_learning_time, 
+                    'Description': self.description.__dict__() if self.description is not None else self.Description().__dict__(),
+                    'Language':self.language.__dict__() if self.language is not None else self.Language().__dict__()}
 
     class Rights:
         cost = None
-        copyright = None
+        copyrightAndOtherRestrictions = None
         description = None
+        access =  None
 
-        def __init__(self, cost='', copyright_and_other_restrictions='', description=''):
+        def __init__(self, cost='', copyright_and_other_restrictions='', description='', access=None):
             self.cost = cost
-            self.copyright = copyright_and_other_restrictions
+            self.copyrightAndOtherRestrictions = copyright_and_other_restrictions
             self.description = description
+            self.access = access
+        
+        class Copyrightandotherrestrictions:
+            source = []
+            value = []
+
+            def __init__(self, source=[], value=[]):
+                self.source = source
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.source=atributes.get('source')
+                self.value=atributes.get('value')
+
+            def to_xml(self):
+                return f"""<copyrightAndOtherRestrictions >
+                                <source >{self.source}</source>
+                                <value >{self.value}</value>
+                            </copyrightAndOtherRestrictions>"""
+            def __dict__(self):
+                return {'Source': self.source, 'Value': self.value}
+
+        class Access:
+            source = []
+            value = []
+            description = []
+            def __init__(self, source=[], value=[], description=[]):
+                self.source = source
+                self.value = value
+                self.description = description
+            
+            def addValues(self,atributes):
+                self.source=atributes.get('source')
+                self.value=atributes.get('value')
+                self.description=atributes.get('es')
+
+            def to_xml(self):
+                return f"""<accessType >
+                    <source >{self.source}</source>
+                    <value >{self.value}</value>
+                </accessType>
+                <description >
+                    <string >{self.description}</string>
+                </description>"""
+            
+            def __dict__(self):
+                return {'Source': self.source, 'Value': self.value, 'Description':self.description}
 
         def to_xml(self):
             return f"""<rights>
-            <cost>
-            <source>LOMv1.0</source>
-            <value>{self.cost}</value>
-            </cost>
-            <copyrightAndOtherRestrictions>
-            <source>LOMv1.0</source>
-            <value>{self.copyright}</value>
-            </copyrightAndOtherRestrictions>
-            <description>
-            <string language="en">{self.description}</string>
-            </description>
+            {'' if isinstance(self.copyrightAndOtherRestrictions, str) else self.copyrightAndOtherRestrictions.to_xml() if self.copyrightAndOtherRestrictions is not None else ''}
+            {'' if isinstance(self.access, str) else self.access.to_xml() if self.access is not None else ''}
             </rights>"""
 
         def __dict__(self):
-            return {'Cost': self.cost, 'Copyright and Other Restrictions': self.copyright,
-                    'Description': self.description}
+            return {'Copyrightandotherrestrictions': self.copyrightAndOtherRestrictions.__dict__() if self.copyrightAndOtherRestrictions is not None else self.Copyrightandotherrestrictions().__dict__(),
+                    'Access': self.access.__dict__() if self.access is not None else self.Access().__dict__()}
 
     class Relation:
         kind = None
@@ -548,13 +885,13 @@ class LOM:
         purpose = None  # purpose
         taxon_path = None  # taxon_path
         description = None  # description
-        keyword = None  # keyword
+        keywordd = None  # keywordd
 
-        def __init__(self, purpose='', taxon_path=None, description='', keyword=''):
+        def __init__(self, purpose='', taxon_path=None, description='', keywordd=''):
             self.purpose = purpose
             self.taxon_path = taxon_path
             self.description = description
-            self.keyword = keyword
+            self.keywordd = keywordd
 
         class TaxonPath:
             source = None
@@ -606,13 +943,13 @@ class LOM:
             <string language="en">{self.description}</string>
             </description>
             <keyword>
-            <string language="en">{self.keyword}</string>
+            <string language="en">{self.keywordd}</string>
             </keyword>
             </classification>"""
 
         def __dict__(self):
             return {'Purpose': self.purpose, 'Taxon Path': self.taxon_path.__dict__() if self.taxon_path is not None
-            else self.TaxonPath().__dict__(), 'Description': self.description, 'Keyword': self.keyword}
+            else self.TaxonPath().__dict__(), 'Description': self.description, 'Keyword': self.keywordd}
 
     class Accessibility:
 
@@ -780,7 +1117,6 @@ class LOM:
 
 
 def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False):
-    print(dictionary)
     """
     Determine which lompad leaf should be mapped.
 
@@ -796,15 +1132,15 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False):
         # Search the key inside dispatch dict.
         for key1 in dispatch.keys():
             if key in key1:
+                print(key1)
                 try:
                     metodo = dispatch[key1]
-                    ejemplo =  metodo(dictionary, is_lompad_exported)
+                    ejemplo =  metodo(dict(dictionary), is_lompad_exported)
                     return ejemplo
                 except:
-                    oLom = LOM().MetaMetaData
+                    oLom = LOM().MetaMetadata
                     oLom.__setattr__(key, None)
                     return oLom.__getattribute__(key)
-                    print("No existe valor para la key: ",key)
     except KeyError as ke:
         logging.error(f' Unexpected key {key}, ignoring key, error {ke}')
     except Exception as ex:
@@ -830,10 +1166,9 @@ def get_keywords(object_data: list):
 
 
 def map_attributes(data_original: dict, object_instance, is_lom):
-    data = data_original.copy()
 
-    for key in data_original.keys():
-        data[str(key).replace('lom:', '')] = data.pop(key)
+    data_original=collections.OrderedDict(data_original)
+    data = data_original.copy()
 
     """
     What a nice function, isn't it? (Just kidding).
@@ -849,65 +1184,131 @@ def map_attributes(data_original: dict, object_instance, is_lom):
     :param object_instance: An instance of Any LOM leaf class or its subclasses.
     :return: an object containing parsed information.
     """
+    values_labels_dict={}
+
     if data is not None and not isinstance(data, list):
         attributes = object_instance.__dir__()
-        for key, value in data.items():
-            # Special cases to extract data because FuzzyWuzzy can be wrong!
-            if 'otherPlatformRequirements' == key:
-                if type(value) is OrderedDict and 'string' in value.keys() and '#text' in value['string'].keys():
-                    object_instance.__setattr__('other_platform_requirements', value['string']['#text'])
-            elif 'modeaccess' == key:
-                if type(value) is OrderedDict and 'value' in value.keys():
-                    object_instance.__setattr__('mode_access', value['value'])
-            elif 'modeaccesssufficient' == key:
-                if type(value) is OrderedDict and 'value' in value.keys():
-                    object_instance.__setattr__('mode_access_sufficient', value['value'])
-            elif 'rol' == key:
-                if type(value) is OrderedDict and 'value' in value.keys():
-                    object_instance.__setattr__('rol', value['value'])
-            elif 'size' == key and is_lom:
-                object_instance.__setattr__('size', value)
-            elif 'size' == key and not is_lom:
-                object_instance.__setattr__('size', value['#text'])
+        
+        print("===============================================================")
+        # print(attributes)
+        # print(object_instance)
+        hijo=None
+        values_labels=[]
+        values_labels_dict={}
+        # print(data)
+        
+        for key in data:
+            print("padre: ", key)
+            key_mapping=key.replace('lomes:', '')
+            # print(key_mapping)
+            if key_mapping == "keyword":
+                key_mapping="keywordd"
+            key_mapping_Upper=key_mapping.capitalize()
+            if isinstance(data[key], str):
+                print("hijo1: ", data[key])
+                values_labels_dict[key]=[data[key]]
             else:
-                attribute_matched = process.extractOne(key.replace('lom:', ''), attributes, scorer=fuzz.partial_ratio)[0]
+                for childrens in data[key]:
+                    dataKey=data[key]
+                    if isinstance(dataKey, str):
+                        print("HijoString: ",dataKey)
+                    else:
+                        for valDataKey in dataKey:
+                            if isinstance(valDataKey, str):
+                                contentDataKey = dataKey[valDataKey]
+                                if isinstance(contentDataKey, str):
+                                    print(valDataKey)
+                                    print("HijoCollections: ", contentDataKey)
+                                    values_labels_dict[valDataKey]=[contentDataKey]
+                                else:
+                                    aux=True
+                                    auxKey=""
+                                    for valContentDataKEy in contentDataKey:
+                                        if isinstance(contentDataKey[valContentDataKEy], str):
+                                            print("HijoCollectionsFor: ",contentDataKey[valContentDataKEy])
+                                            if aux:
+                                                auxKey=contentDataKey[valContentDataKEy]
+                                                values_labels_dict[contentDataKey[valContentDataKEy]]=list()
+                                                aux=False
+                                            else:
+                                                values_labels_dict.get(auxKey).append(contentDataKey[valContentDataKEy])
+                                                aux=True
+                                        else:
+                                            aux=True
+                                            contentContentDataKey = contentDataKey[valContentDataKEy]
+                                            for valueContentContetnDatakey in contentContentDataKey:
+                                                print("HijoCollectionsFor2: ",contentContentDataKey[valueContentContetnDatakey])
+                                                if isinstance(contentContentDataKey[valueContentContetnDatakey], str):
+                                                    if aux:
+                                                        auxKey=contentContentDataKey[valueContentContetnDatakey]
+                                                        values_labels_dict[contentContentDataKey[valueContentContetnDatakey]]=list()
+                                                        aux=False
+                                                    else:
+                                                        values_labels_dict.get(auxKey).append(contentContentDataKey[valueContentContetnDatakey])
+                                                        aux=True
+                                                else:
+                                                    auxcontentContentDataKey=contentContentDataKey[valueContentContetnDatakey]
+                                                    for valAuxcontentContentDataKey in auxcontentContentDataKey:
+                                                        if aux:
+                                                            auxKey=auxcontentContentDataKey[valAuxcontentContentDataKey]
+                                                            values_labels_dict[auxcontentContentDataKey[valAuxcontentContentDataKey]]=list()
+                                                            aux=False
+                                                        else:
+                                                            values_labels_dict.get(auxKey).append(auxcontentContentDataKey[valAuxcontentContentDataKey])
+                                                            aux=True
+                            else:
+                                contentDataKey = valDataKey
+                                if isinstance(contentDataKey, str):
+                                    print("HijoCollections2: ", contentDataKey)
+                                else:
+                                    aux=True
+                                    auxKey=""
+                                    for valContentDataKEy in contentDataKey:
+                                        if isinstance(contentDataKey[valContentDataKEy], str):
+                                            print("HijoCollectionsFor2: ",contentDataKey[valContentDataKEy])
+                                            if aux:
+                                                auxKey=contentDataKey[valContentDataKEy]
+                                                values_labels_dict[contentDataKey[valContentDataKEy]]=list()
+                                                aux=False
+                                            else:
+                                                values_labels_dict.get(auxKey).append(contentDataKey[valContentDataKEy])
+                                                aux=True
+                                        else:
+                                            aux=True
+                                            contentContentDataKey = contentDataKey[valContentDataKEy]
+                                            for valueContentContetnDatakey in contentContentDataKey:
+                                                print("HijoCollectionsFor22: ",contentContentDataKey[valueContentContetnDatakey])
+                                                if isinstance(contentContentDataKey[valueContentContetnDatakey], str):
+                                                    if aux:
+                                                        auxKey=contentContentDataKey[valueContentContetnDatakey]
+                                                        values_labels_dict[contentContentDataKey[valueContentContetnDatakey]]=list()
+                                                        aux=False
+                                                    else:
+                                                        values_labels_dict.get(auxKey).append(contentContentDataKey[valueContentContetnDatakey])
+                                                        aux=True
+                                                else:
+                                                    auxcontentContentDataKey=contentContentDataKey[valueContentContetnDatakey]
+                                                    for valAuxcontentContentDataKey in auxcontentContentDataKey:
+                                                        if aux:
+                                                            auxKey=auxcontentContentDataKey[valAuxcontentContentDataKey]
+                                                            values_labels_dict[auxcontentContentDataKey[valAuxcontentContentDataKey]]=list()
+                                                            aux=False
+                                                        else:
+                                                            values_labels_dict.get(auxKey).append(auxcontentContentDataKey[valAuxcontentContentDataKey])
+                                                            aux=True
+                        break
+            # print(values_labels)
+            print(values_labels_dict)
+            if "@uniqueElementName" not in key_mapping:
+                children_label=object_instance.__getattribute__(key_mapping_Upper)()
+                children_label.addValues(values_labels_dict)
+                # children_label.getValues()
+                values_labels_dict={}
+                if key_mapping == "aggregationLevel":
+                    key_mapping="aggregation_level"
+                # print(object_instance,": ",key_mapping)
+                object_instance.__setattr__(key_mapping, children_label)
 
-                if not is_lom:
-                    if type(object_instance.__getattribute__(attribute_matched)) is str:
-                        if type(value) is OrderedDict and '#text' in value.keys():
-                            object_instance.__setattr__(attribute_matched, value['#text'])
-                        elif type(value) is OrderedDict and 'string' in value.keys() and type(
-                                value['string']) is not OrderedDict:
-                            object_instance.__setattr__(attribute_matched, value['string'])
-                        elif type(value) is OrderedDict and 'string' in value.keys() and '#text' in value['string'].keys():
-                            object_instance.__setattr__(attribute_matched, value['string']['#text'])
-                        elif type(value) is list:
-                            object_instance.__setattr__(attribute_matched, get_keywords(value))
-                        elif type(value) is OrderedDict and 'value' in value.keys() and '#text' in value['value'].keys():
-                            object_instance.__setattr__(attribute_matched, value['value']['#text'])
-                        elif type(value) is OrderedDict and 'dateTime' in value.keys() and '#text' in value[
-                            'dateTime'].keys():
-                            object_instance.__setattr__(attribute_matched, value['dateTime']['#text'])
-                        elif type(value) is OrderedDict and 'description' in value.keys() and 'string' in \
-                                value['description'].keys() and '#text' in value['description']['string']:
-                            object_instance.__setattr__(attribute_matched, value['description']['string']['#text'])
-                        else:
-                            object_instance.__setattr__(attribute_matched, value)
-                else:
-                    if type(object_instance.__getattribute__(attribute_matched)) is str:
-                        if type(value) is OrderedDict and 'string' in value.keys() and type(value['string']) is list:
-                            object_instance.__setattr__(attribute_matched, get_keywords(value['string']))
-                        elif type(value) is OrderedDict and 'string' in value.keys() and type(value['string']) \
-                                is OrderedDict and '#text' in value['string'].keys():
-                            object_instance.__setattr__(attribute_matched, value['string']['#text'])
-                        elif type(value) is OrderedDict and 'value' in value.keys():
-                            object_instance.__setattr__(attribute_matched, value['value'])
-                        elif type(value) is OrderedDict and 'dateTime' in value.keys():
-                            object_instance.__setattr__(attribute_matched, value['dateTime'])
-                        elif type(value) is OrderedDict and 'duration' in value.keys():
-                            object_instance.__setattr__(attribute_matched, value['duration'])
-                        else:
-                            object_instance.__setattr__(attribute_matched, value)
     return object_instance
 
 
@@ -916,13 +1317,13 @@ def general_leaf(data: dict, is_lom):
     Function to map General Leaf.
 
     :param data: data from manifest.
-    :return: a General class instance.
-    """
+    :return: a General class instance. 
+    """             
     general_object = map_attributes(data, LOM.General(), is_lom)
-    if 'lom:identifier' in data.keys():
-        general_object.identifier = map_attributes(data.get('lom:identifier'), LOM.General.Identifier(), is_lom)
-    elif 'identifier' in data.keys():
-        general_object.identifier = map_attributes(data.get('identifier'), LOM.General.Identifier(), is_lom)
+    # if 'identifier' in data.keys():
+    #     general_object.identifier = map_attributes(data.get('identifier'), LOM.General.Identifier(), is_lom)
+    # elif 'identifier' in data.keys():
+    #     general_object.identifier = map_attributes(data.get('identifier'), LOM.General.Identifier(), is_lom)
 
     return general_object.__dict__(), general_object
 
@@ -934,12 +1335,13 @@ def life_cycle_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a LifeCycle class instance.
         """
-    life_cycle_object = map_attributes(data, LOM.LifeCycle(), is_lom)
-    life_cycle_object.contribute = map_attributes(
-        data.get('lom:contribute') if data.get('lom:contribute') is not None
-        else data.get('contribute'),
-        LOM.LifeCycle.Contribute(), is_lom)
-    return life_cycle_object.__dict__(), life_cycle_object
+    general_object = map_attributes(data, LOM.LifeCycle(), is_lom)
+    # if 'identifier' in data.keys():
+    #     general_object.identifier = map_attributes(data.get('identifier'), LOM.General.Identifier(), is_lom)
+    # elif 'identifier' in data.keys():
+    #     general_object.identifier = map_attributes(data.get('identifier'), LOM.General.Identifier(), is_lom)
+
+    return general_object.__dict__(), general_object
 
 
 def meta_metadata_leaf(data: dict, is_lom):
@@ -949,15 +1351,23 @@ def meta_metadata_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a MetaMetaData class instance.
         """
-    meta_metadata_object = map_attributes(data, LOM.MetaMetadata(), is_lom)
-    meta_metadata_object.identifier = map_attributes(data.get('lom:identifier') if data.get('lom:identifier')
-                                                     is not None else data,
-                                                     LOM.MetaMetadata.Identifier(), is_lom)
-    meta_metadata_object.contribute = map_attributes(data.get('lom:contribute')
-                                                     if data.get('lom:contribute') is not None
-                                                     else data, LOM.MetaMetadata.Contribute(), is_lom)
+    general_object = map_attributes(data, LOM.MetaMetadata(), is_lom)
+    # if 'identifier' in data.keys():
+    #     general_object.identifier = map_attributes(data.get('identifier'), LOM.General.Identifier(), is_lom)
+    # elif 'identifier' in data.keys():
+    #     general_object.identifier = map_attributes(data.get('identifier'), LOM.General.Identifier(), is_lom)
 
-    return meta_metadata_object.__dict__(), meta_metadata_object
+    return general_object.__dict__(), general_object
+
+    # meta_metadata_object = map_attributes(data, LOM.MetaMetadata(), is_lom)
+    # meta_metadata_object.identifier = map_attributes(data.get('identifier') if data.get('identifier')
+    #                                                  is not None else data,
+    #                                                  LOM.MetaMetadata.Identifier(), is_lom)
+    # meta_metadata_object.contribute = map_attributes(data.get('contribute')
+    #                                                  if data.get('contribute') is not None
+    #                                                  else data, LOM.MetaMetadata.Contribute(), is_lom)
+
+    # return meta_metadata_object.__dict__(), meta_metadata_object
 
 
 def technical_leaf(data: dict, is_lom):
@@ -968,18 +1378,18 @@ def technical_leaf(data: dict, is_lom):
         :return: a Technical class instance.
         """
     technical_object = map_attributes(data, LOM.Technical(), is_lom)
-    orComposite = None
-    if 'lom:requirement' in data.keys() and 'lom:OrComposite' in data.get('lom:requirement').keys():
-        orComposite = map_attributes(data.get('lom:requirement').get('lom:OrComposite'), LOM.Technical.Requirement
-                                     .OrComposite(), is_lom)
-    elif 'requirement' in data.keys():
-        if data.get('requirement') is not None and 'orComposite' in data.get('requirement').keys():
-            orComposite = map_attributes(data.get('requirement').get('orComposite'),
-                                     LOM.Technical.Requirement.OrComposite(), is_lom)
-        elif data.get('requirement') is not None and 'OrComposite' in data.get('requirement').keys():
-            orComposite = map_attributes(data.get('requirement').get('OrComposite'),
-                                     LOM.Technical.Requirement.OrComposite(), is_lom)
-    technical_object.requirement = technical_object.Requirement(orComposite)
+    # orComposite = None
+    # if 'requirement' in data.keys() and 'OrComposite' in data.get('requirement').keys():
+    #     orComposite = map_attributes(data.get('requirement').get('OrComposite'), LOM.Technical.Requirement
+    #                                  .OrComposite(), is_lom)
+    # elif 'requirement' in data.keys():
+    #     if data.get('requirement') is not None and 'orComposite' in data.get('requirement').keys():
+    #         orComposite = map_attributes(data.get('requirement').get('orComposite'),
+    #                                  LOM.Technical.Requirement.OrComposite(), is_lom)
+    #     elif data.get('requirement') is not None and 'OrComposite' in data.get('requirement').keys():
+    #         orComposite = map_attributes(data.get('requirement').get('OrComposite'),
+    #                                  LOM.Technical.Requirement.OrComposite(), is_lom)
+    # technical_object.requirement = technical_object.Requirement(orComposite)
 
     return technical_object.__dict__(), technical_object
 
@@ -1051,14 +1461,14 @@ def classification_leaf(data: dict, is_lom):
         """
     classification_object = map_attributes(data, LOM.Classification(), is_lom)
 
-    taxon_path = map_attributes(data.get('lom:taxonPath') if data.get('lom:taxonPath') is not None else
+    taxon_path = map_attributes(data.get('taxonPath') if data.get('taxonPath') is not None else
                                 data.get('taxonPath'), classification_object.TaxonPath(), is_lom)
 
     taxon = None
-    if data.get('lom:taxonPath') is not None and data.get('lom:taxonPath').get('lom:taxon') is not None:
-        taxon = map_attributes(data.get('lom:taxonPath').get('lom:taxon')[0]
-                               if type(data.get('lom:taxonPath').get('lom:taxon')) is list else
-                               data.get('lom:taxonPath').get('lom:taxon'), classification_object.TaxonPath.Taxon(),
+    if data.get('taxonPath') is not None and data.get('taxonPath').get('taxon') is not None:
+        taxon = map_attributes(data.get('taxonPath').get('taxon')[0]
+                               if type(data.get('taxonPath').get('taxon')) is list else
+                               data.get('taxonPath').get('taxon'), classification_object.TaxonPath.Taxon(),
                                is_lom)
 
     elif data.get('taxonPath') is not None and data.get('taxonPath').get('taxon') is not None:
@@ -1104,18 +1514,15 @@ def accessibility_leaf(data: dict, is_lom):
     accessibility_object.accessibility_hazard = hazard
     accessibility_object.accessibility_control = control
 
-    print(data)
-    print('**********************************')
-    print(accessibility_object.__dict__())
 
     return accessibility_object.__dict__(), accessibility_object
 
 
 dispatch = {
-    'lom:general': general_leaf, 'lom:lifeCycle': life_cycle_leaf, 'lom:metaMetadata': meta_metadata_leaf,
-    'lom:technical': technical_leaf, 'lom:educational': educational_leaf,
-    'lom:rights': rights_leaf, 'lom:relation': relation_leaf, 'lom:annotation': annotation_leaf,
-    'lom:classification': classification_leaf, 'accesibility': accessibility_leaf
+    'general': general_leaf, 'lifeCycle': life_cycle_leaf, 'metaMetadata': meta_metadata_leaf,
+    'technical': technical_leaf, 'educational': educational_leaf,
+    'rights': rights_leaf, 'relation': relation_leaf, 'annotation': annotation_leaf,
+    'classification': classification_leaf, 'accesibility': accessibility_leaf
 }
 
 dispatch_update = {

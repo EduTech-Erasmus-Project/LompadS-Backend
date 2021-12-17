@@ -8,7 +8,7 @@ import json
 from libraries import xmltodict
 
 # Temporal file storage path
-from model import LOMModel
+from model import LOMModel, LOMESModel
 from controller import LOMController
 
 import pprint
@@ -148,7 +148,7 @@ def read_manifest(ims_manifest_path):
         A string representing the whole file.
     """
     try:
-        with open(ims_manifest_path) as file:
+        with open(ims_manifest_path, encoding="utf8") as file:
             return ''.join(file.readlines())
     except Exception as e:
         print(e)
@@ -180,7 +180,7 @@ def load_recursive_as_class(manifest):
     return lom
 
 
-def load_recursive_model(manifest, hashed_code, is_lompad_exported=False):
+def load_recursive_model(manifest, booleanLomLomes,hashed_code, is_lompad_exported=False):
     """
     Load LOMPAD XML file into Python Class
 
@@ -192,14 +192,31 @@ def load_recursive_model(manifest, hashed_code, is_lompad_exported=False):
     lom_controller = LOMController.Controller()
     parsed_dictionary: dict = lom_controller.parse_str_to_dict(manifest)
 
-    print(parsed_dictionary.get('lom').keys())
+    #print(parsed_dictionary.get('lom').keys())
 
-    lom_controller.map_recursively(parsed_dictionary, is_lompad_exported=is_lompad_exported)
-    return lom_controller.get_mapped_manifest(hashed_code)
+    lom_controller.map_recursively(parsed_dictionary, booleanLomLomes,is_lompad_exported=is_lompad_exported)
+    
+    new_dict={}
+
+    for key in lom_controller.get_mapped_manifest(hashed_code, booleanLomLomes).keys():
+        if "lomes:" in key:
+            key2 = key.replace('lomes:', '')
+            new_dict[key2]=lom_controller.get_mapped_manifest(hashed_code, booleanLomLomes)[key]
+        print(new_dict)
+    if bool(new_dict):
+        print("Esta cosa si entra")
+        print(new_dict)
+        return new_dict
+    return lom_controller.get_mapped_manifest(hashed_code, booleanLomLomes)
 
 
-def update_model(hashed_code, leaf, model, data):
-    model = LOMModel.update_leaf(leaf, model, data)
+
+def update_model(hashed_code, leaf, model, data, booleanLomLomes):
+    if booleanLomLomes == True:
+        model = LOMModel.update_leaf(leaf, model, data)
+    else:
+        model = LOMESModel.update_leaf(leaf, model, data)
+
     with open('temp_files/' + hashed_code + '_exported.xml', 'w') as file:
         file.write(model.to_xml().strip())
     return model.__dict__()
