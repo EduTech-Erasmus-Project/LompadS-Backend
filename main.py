@@ -62,7 +62,7 @@ async def upload_file(file: UploadFile = File(...)):
             fileFound=_filepath
             booleanLomLomes=False
         else:
-            HTTPException(status_code=500,
+            return HTTPException(status_code=500,
                           detail='Error, the uploaded file does not contain metadata')
 
         if xml_manifest == -1:
@@ -70,7 +70,7 @@ async def upload_file(file: UploadFile = File(...)):
         elif xml_manifest != -1:
             _profile = 'SCORM'
         else:
-            HTTPException(status_code=500,
+            return  HTTPException(status_code=500,
                           detail='Error, the uploaded file does not contain imslrm.xml nor imsmanifest.xml files.')            
     else:
         _filepath, _hashed_filename = FileController.save_zip(file=file)
@@ -130,10 +130,10 @@ async def upload_file(file: UploadFile = File(...)):
             _profile = 'SCORM'
             xml_manifest = xml_manifest_scorm
         else:
-            HTTPException(status_code=500,
+            return HTTPException(status_code=500,
                           detail='Error, the uploaded file does not contain imslrm.xml nor imsmanifest.xml files.')
 
-    return {'PERFIL': _profile, 'HASHED_VALUE': _hashed_filename.replace('.zip', '').replace('.xml', '')} \
+    return {'STATUS_CODE':200,'PERFIL': _profile, 'HASHED_VALUE': _hashed_filename.replace('.zip', '').replace('.xml', '')} \
         if xml_manifest is not None else HTTPException(status_code=500,
                                                        detail='Error trying to parse the'
                                                               ' imsmanifest.xml')
