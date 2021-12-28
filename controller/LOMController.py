@@ -2,7 +2,7 @@ from collections import OrderedDict
 from pprint import pprint
 import pickle
 import xmltodict
-from model import LOMModel, LOMESModel, LOMUnificado
+from model import LOMModel, LOMESModel
 from lxml import etree
 
 
@@ -43,7 +43,7 @@ class Controller:
             for key, value in dictionary.items():
                 if isinstance(dictionary[key], dict):
                     if any(key in leaf for leaf in self._leafs) and key != 'lom':
-                        # ERROR
+                        
                         self._mapped_data[key], self._object_dict[key] = LOMModel.determine_lompad_leaf(dictionary[key], str(key),
                                                                                 is_lompad_exported)
 
@@ -52,7 +52,7 @@ class Controller:
             for key, value in dictionary.items():
                 if isinstance(dictionary[key], dict):
                     if any(key in leaf for leaf in self._leafsLomes) and key != 'lomes:lom':
-                        # ERROR
+
                         self._mapped_data[key], self._object_dict[key] = LOMESModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
                                                                                 is_lompad_exported)
                     
@@ -83,8 +83,6 @@ class Controller:
         else:
             lom_object =LOMESModel.LOM()
             for key, value in self._object_dict.items():
-                print("=================================================")
-                print(key)
                 if "lomes:" in key:
                     key = key.split(':')[1]
                 key = 'keywordd' if key == 'keyword' else key

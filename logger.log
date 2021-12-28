@@ -49944,3 +49944,1652 @@ INFO:uvicorn.error:Shutting down
 INFO:uvicorn.error:Waiting for application shutdown.
 INFO:uvicorn.error:Application shutdown complete.
 INFO:uvicorn.error:Finished server process [8232]
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 161, in update_file
+    lom = FileController.load_recursive_as_class(manifest)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 179, in load_recursive_as_class
+    parsed_dict = lom_controller.parse_str_to_dict(manifest)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 31, in parse_str_to_dict
+    return xmltodict.parse(data)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\xmltodict.py", line 327, in parse
+    parser.Parse(xml_input, True)
+TypeError: a bytes-like object is required, not 'int'
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [9332]
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [19740]
+ERROR:root: Error:  expected 2 arguments, got 1
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 150, in read_file
+    return {'DATA': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 199, in load_recursive_model
+    lom_controller.map_recursively(parsed_dictionary, booleanLomLomes,is_lompad_exported=is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 59, in map_recursively
+    self.map_recursively(dictionary[key], booleanLomLomes,is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 56, in map_recursively
+    self._mapped_data[key], self._object_dict[key] = LOMESModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
+TypeError: cannot unpack non-iterable NoneType object
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 161, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\concurrency.py", line 40, in run_in_threadpool
+    return await loop.run_in_executor(None, func, *args)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 175, in get_file
+    FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
+FileNotFoundError: [Errno 2] No such file or directory: './temp_files/Aparato_circulatorio-HTML_-1332388249201477762_exported.xml'
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [22456]
+ERROR:root: Error:  expected 2 arguments, got 1
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 150, in read_file
+    return {'DATA': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 199, in load_recursive_model
+    lom_controller.map_recursively(parsed_dictionary, booleanLomLomes,is_lompad_exported=is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 59, in map_recursively
+    self.map_recursively(dictionary[key], booleanLomLomes,is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 56, in map_recursively
+    self._mapped_data[key], self._object_dict[key] = LOMESModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
+TypeError: cannot unpack non-iterable NoneType object
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 161, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\concurrency.py", line 40, in run_in_threadpool
+    return await loop.run_in_executor(None, func, *args)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 175, in get_file
+    FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
+FileNotFoundError: [Errno 2] No such file or directory: './temp_files/Aparato_circulatorio-HTML_-6677440190098976270_exported.xml'
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [1816]
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [21304]
+ERROR:root: Error:  expected 2 arguments, got 1
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 150, in read_file
+    return {'DATA': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 199, in load_recursive_model
+    lom_controller.map_recursively(parsed_dictionary, booleanLomLomes,is_lompad_exported=is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 59, in map_recursively
+    self.map_recursively(dictionary[key], booleanLomLomes,is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 56, in map_recursively
+    self._mapped_data[key], self._object_dict[key] = LOMESModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
+TypeError: cannot unpack non-iterable NoneType object
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 161, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\concurrency.py", line 40, in run_in_threadpool
+    return await loop.run_in_executor(None, func, *args)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 175, in get_file
+    FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
+FileNotFoundError: [Errno 2] No such file or directory: './temp_files/Aparato_circulatorio-HTML_-6580411643523268443_exported.xml'
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [7948]
+ERROR:root: Error:  expected 2 arguments, got 1
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 150, in read_file
+    return {'DATA': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 199, in load_recursive_model
+    lom_controller.map_recursively(parsed_dictionary, booleanLomLomes,is_lompad_exported=is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 59, in map_recursively
+    self.map_recursively(dictionary[key], booleanLomLomes,is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 56, in map_recursively
+    self._mapped_data[key], self._object_dict[key] = LOMESModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
+TypeError: cannot unpack non-iterable NoneType object
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 161, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\concurrency.py", line 40, in run_in_threadpool
+    return await loop.run_in_executor(None, func, *args)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 175, in get_file
+    FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
+FileNotFoundError: [Errno 2] No such file or directory: './temp_files/Aparato_circulatorio-HTML_5350263556065059581_exported.xml'
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [2084]
+ERROR:root: Error:  expected 2 arguments, got 1
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 150, in read_file
+    return {'DATA': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 199, in load_recursive_model
+    lom_controller.map_recursively(parsed_dictionary, booleanLomLomes,is_lompad_exported=is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 59, in map_recursively
+    self.map_recursively(dictionary[key], booleanLomLomes,is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 56, in map_recursively
+    self._mapped_data[key], self._object_dict[key] = LOMESModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
+TypeError: cannot unpack non-iterable NoneType object
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 161, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\concurrency.py", line 40, in run_in_threadpool
+    return await loop.run_in_executor(None, func, *args)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 175, in get_file
+    FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
+FileNotFoundError: [Errno 2] No such file or directory: './temp_files/Aparato_circulatorio-HTML_-8370393315583405007_exported.xml'
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [7572]
+ERROR:root: Error:  expected 2 arguments, got 1
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 150, in read_file
+    return {'DATA': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 199, in load_recursive_model
+    lom_controller.map_recursively(parsed_dictionary, booleanLomLomes,is_lompad_exported=is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 59, in map_recursively
+    self.map_recursively(dictionary[key], booleanLomLomes,is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 56, in map_recursively
+    self._mapped_data[key], self._object_dict[key] = LOMESModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
+TypeError: cannot unpack non-iterable NoneType object
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 161, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\concurrency.py", line 40, in run_in_threadpool
+    return await loop.run_in_executor(None, func, *args)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 175, in get_file
+    FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
+FileNotFoundError: [Errno 2] No such file or directory: './temp_files/Aparato_circulatorio-HTML_-3802770556425102367_exported.xml'
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [20736]
+ERROR:root: Error:  expected 2 arguments, got 1
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 150, in read_file
+    return {'DATA': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 199, in load_recursive_model
+    lom_controller.map_recursively(parsed_dictionary, booleanLomLomes,is_lompad_exported=is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 59, in map_recursively
+    self.map_recursively(dictionary[key], booleanLomLomes,is_lompad_exported)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 56, in map_recursively
+    self._mapped_data[key], self._object_dict[key] = LOMESModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
+TypeError: cannot unpack non-iterable NoneType object
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 161, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\concurrency.py", line 40, in run_in_threadpool
+    return await loop.run_in_executor(None, func, *args)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 175, in get_file
+    FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
+FileNotFoundError: [Errno 2] No such file or directory: './temp_files/Aparato_circulatorio-HTML_4752429888275650247_exported.xml'
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [19024]
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [14340]
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [19172]
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [18804]
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 152, in read_file
+    return {'DATA': FileController.load_recursive_model(xml_manifest, hashed_code, is_lompad_exported=True)}
+TypeError: load_recursive_model() missing 1 required positional argument: 'hashed_code'
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 286, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ./temp_files/catalogacionLomes_7956768938923269628_exported.xml does not exist.
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [3304]
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [10716]
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [3876]
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [20916]
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 286, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ./temp_files/catalogacionLomes_5573346903751247333_exported.xml does not exist.
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 286, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ./temp_files/catalogacionLomes_5573346903751247333_exported.xml does not exist.
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 286, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ./temp_files/catalogacionLomes_5573346903751247333_exported.xml does not exist.
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [16624]
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 286, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ./temp_files/catalogacionLomes_-1982359689501840983_exported.xml does not exist.
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 286, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ./temp_files/catalogacionLomes_-1982359689501840983_exported.xml does not exist.
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 286, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ./temp_files/catalogacionLomes_-1982359689501840983_exported.xml does not exist.
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [16700]
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 161, in update_file
+    lom = FileController.load_recursive_as_class(manifest)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 179, in load_recursive_as_class
+    parsed_dict = lom_controller.parse_str_to_dict(manifest)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 31, in parse_str_to_dict
+    return xmltodict.parse(data)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\xmltodict.py", line 327, in parse
+    parser.Parse(xml_input, True)
+TypeError: a bytes-like object is required, not 'int'
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [15128]
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 52, in app
+    response = await func(request)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\main.py", line 181, in update_file
+    lom = FileController.load_recursive_as_class(manifest)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\FileController.py", line 179, in load_recursive_as_class
+    parsed_dict = lom_controller.parse_str_to_dict(manifest)
+  File "D:\Escritorio\universidad\Noveno\Sistemas distribuidos\mensajesRPC\LompadS-Backend\.\controller\LOMController.py", line 31, in parse_str_to_dict
+    return xmltodict.parse(data)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\xmltodict.py", line 327, in parse
+    parser.Parse(xml_input, True)
+TypeError: a bytes-like object is required, not 'int'
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [16432]
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [15192]
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [2760]
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [16476]
+ERROR:uvicorn.error:Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 396, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\middleware\proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\fastapi\applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 181, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 86, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 142, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 82, in __call__
+    raise exc from None
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 580, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 241, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\routing.py", line 55, in app
+    await response(scope, receive, send)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\responses.py", line 309, in __call__
+    await send(
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\exceptions.py", line 68, in sender
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\cors.py", line 148, in send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\starlette\middleware\errors.py", line 156, in _send
+    await send(message)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 468, in send
+    data_list = self.send_with_data_passthrough(event)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_connection.py", line 501, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 60, in __call__
+    self.send_eom(event.headers, write)
+  File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
+    raise LocalProtocolError("Too little data for declared Content-Length")
+h11._util.LocalProtocolError: Too little data for declared Content-Length

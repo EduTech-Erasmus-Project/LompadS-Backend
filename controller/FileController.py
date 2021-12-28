@@ -204,10 +204,7 @@ def load_recursive_model(manifest, booleanLomLomes,hashed_code, is_lompad_export
         if "lomes:" in key:
             key2 = key.replace('lomes:', '')
             new_dict[key2]=lom_controller.get_mapped_manifest(hashed_code, booleanLomLomes)[key]
-        print(new_dict)
     if bool(new_dict):
-        print("Esta cosa si entra")
-        print(new_dict)
         return new_dict
     return lom_controller.get_mapped_manifest(hashed_code, booleanLomLomes)
 

@@ -8,6 +8,11 @@ from starlette.responses import FileResponse
 
 from controller import FileController
 
+import glob
+import os 
+from bs4 import BeautifulSoup
+from xml.dom import minidom
+
 app = FastAPI()
 fileFound=''
 booleanLomLomes=True #If booleanLomLomes is True represents a lom format, and
@@ -47,19 +52,33 @@ async def upload_file(file: UploadFile = File(...)):
     elif file_type == 1:
         _filepath, _hashed_filename = FileController.save_xml(file)
         xml_manifest = FileController.read_manifest(_filepath)
-        if '<lom:lom>' in xml_manifest and all(list([val in xml_manifest for val in required_tags])):
+
+        doc = minidom.parse(_filepath)
+        childTag = doc.firstChild.tagName
+        if(childTag == "lom"):
+            fileFound=_filepath
+            booleanLomLomes=True
+        elif(childTag == "lomes:lom"):
+            fileFound=_filepath
+            booleanLomLomes=False
+        else:
+            HTTPException(status_code=500,
+                          detail='Error, the uploaded file does not contain metadata')
+
+        if xml_manifest == -1:
             _profile = 'IMS'
-        elif '<lom:lom>' not in xml_manifest and all(list([val in xml_manifest for val in required_tags])):
+        elif xml_manifest != -1:
             _profile = 'SCORM'
+        else:
+            HTTPException(status_code=500,
+                          detail='Error, the uploaded file does not contain imslrm.xml nor imsmanifest.xml files.')            
     else:
         _filepath, _hashed_filename = FileController.save_zip(file=file)
         FileController.unzip_file(file.filename, _hashed_filename, _filepath)
         FileController.delete_temp_file(_filepath)
 
-        import glob
-        import os 
-        from bs4 import BeautifulSoup
-        from xml.dom import minidom
+        
+        
 
         hashed=_hashed_filename.replace('.zip', '')
         
@@ -77,8 +96,7 @@ async def upload_file(file: UploadFile = File(...)):
             print("The routes found in root are:")
             print(routes)
 
-
-        from xml.dom import minidom
+        containmetadata=False
 
         for filePath in routes:
             try:
@@ -86,26 +104,26 @@ async def upload_file(file: UploadFile = File(...)):
                 childTag = doc.firstChild.tagName
                 if(childTag == "lom"):
                     fileFound=filePath
-                    print(filePath)
-                    print(childTag)
                     booleanLomLomes=True
+                    containmetadata=True
                     break
-                if(childTag == "lomes:lom"):
+                elif(childTag == "lomes:lom"):
                     fileFound=filePath
-                    print(filePath)
-                    print(childTag)
                     booleanLomLomes=False
+                    containmetadata=True
                     break
             except:
                 print("something happened with the file in the path: "+filePath)
+
+        if not containmetadata:
+            HTTPException(status_code=500,
+                          detail='Error, the uploaded file does not contain imslrm.xml nor imsmanifest.xml files.')
 
         fileFound.replace('./temp_files/', '')
 
         xml_manifest_scorm = FileController.read_manifest(fileFound)
         if xml_manifest_scorm == -1:
             xml_manifest_ims = FileController.read_manifest(_filepath.replace('.zip', '') + '/imsmanifest.xml')
-
-        if xml_manifest_ims != -1:
             xml_manifest = xml_manifest_ims
             _profile = 'IMS'
         elif xml_manifest_scorm != -1:
