@@ -116,7 +116,7 @@ async def upload_file(file: UploadFile = File(...)):
                 print("something happened with the file in the path: "+filePath)
 
         if not containmetadata:
-            HTTPException(status_code=500,
+            return HTTPException(status_code=500,
                           detail='Error, the uploaded file does not contain imslrm.xml nor imsmanifest.xml files.')
 
         fileFound.replace('./temp_files/', '')

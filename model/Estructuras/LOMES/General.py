@@ -110,7 +110,7 @@ class General:
                 </description>"""
 
             def __dict__(self):
-                return {'Languaje': self.language, 'Description: ': self.description}
+                return {'Languaje': self.language, 'Description': self.description}
         
         class Keywordd:
 
@@ -132,7 +132,7 @@ class General:
                 return f"""<string  language="{self.language}">{self.keywordd}</string>"""
 
             def __dict__(self):
-                return {'Languaje': self.language, 'Keyword: ': self.keywordd}
+                return {'Languaje': self.language, 'Keyword': self.keywordd}
         
         class Aggregationlevel:
 
@@ -161,7 +161,7 @@ class General:
                 </aggregationLevel>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value: ': self.value}
+                return {'Source': self.source, 'Value': self.value}
 
         def get_keyword(self):
             if type(self.keywordd) is list:
@@ -207,7 +207,7 @@ class General:
                 </coverage>"""
 
             def __dict__(self):
-                return {'Language': self.language, 'Coverage: ': self.coverage}
+                return {'Language': self.language, 'Coverage': self.coverage}
         
         class Structure:
             source=[]
@@ -235,7 +235,7 @@ class General:
                 </structure>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value: ': self.value}
+                return {'Source': self.source, 'Value': self.value}
 
         def to_xml(self):
             return f"""<general>
