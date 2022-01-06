@@ -6,7 +6,7 @@ class Annotation:
         mode_access_sufficient = None
         rol = None
 
-        def __init__(self, entity='', date='', description='', mode_access='', mode_access_sufficient='', rol=''):
+        def __init__(self, entity=None, date=None, description=None, mode_access=None, mode_access_sufficient=None, rol=None):
             self.entity = entity
             self.date = date
             self.description = description
