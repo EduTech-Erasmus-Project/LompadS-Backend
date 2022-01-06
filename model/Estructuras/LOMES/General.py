@@ -252,7 +252,7 @@ class General:
         def __dict__(self):
             return {'Identifier': self.identifier.__dict__() if self.identifier is not None else '',
                     'Title': self.title.__dict__() if self.title is not None else '', 
-                    'Languaje': self.language.__dict__() if self.language is not None else '',
+                    'Language': self.language.__dict__() if self.language is not None else '',
                     'Description': self.description.__dict__() if self.description is not None else '',
                     'keyword': self.keywordd.__dict__() if self.keywordd is not None else '',
                     'Coverage': self.coverage.__dict__() if self.coverage is not None else '',
