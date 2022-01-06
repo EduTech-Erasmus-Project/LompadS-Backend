@@ -52318,3 +52318,7 @@ Traceback (most recent call last):
   File "C:\Users\carlo\anaconda3\envs\practicas\lib\site-packages\h11\_writers.py", line 83, in send_eom
     raise LocalProtocolError("Too little data for declared Content-Length")
 h11._util.LocalProtocolError: Too little data for declared Content-Length
+INFO:uvicorn.error:Shutting down
+INFO:uvicorn.error:Waiting for application shutdown.
+INFO:uvicorn.error:Application shutdown complete.
+INFO:uvicorn.error:Finished server process [19196]

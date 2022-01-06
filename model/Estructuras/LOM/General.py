@@ -69,7 +69,7 @@ class General:
                 </title>"""
 
             def __dict__(self):
-                return {'Languaje': self.language, 'Tittle': self.title}
+                return {'Language': self.language, 'Title': self.title}
         
         class Catalogentry:
             catalog=[]
@@ -102,14 +102,14 @@ class General:
                 self.language=atributes.get('language')
                     
             def getValues(self):
-                print("Languaje: ", self.language)
+                print("Language: ", self.language)
             
 
             def to_xml(self):
                 return f"""<language>{self.language}</language>"""
 
             def __dict__(self):
-                return {'Languaje': self.language}
+                return {'Language': self.language}
         
         class Description:
 
@@ -135,7 +135,7 @@ class General:
                 </description>"""
 
             def __dict__(self):
-                return {'Languaje': self.language, 'Description': self.description}
+                return {'Language': self.language, 'Description': self.description}
         
         class Keywordd:
 
@@ -157,7 +157,7 @@ class General:
                 return f"""<string  language="{self.language}">{self.keywordd}</string>"""
 
             def __dict__(self):
-                return {'Languaje': self.language, 'Keyword': self.keywordd}
+                return {'Language': self.language, 'Keyword': self.keywordd}
         
         class Aggregationlevel:
 
