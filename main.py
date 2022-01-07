@@ -77,9 +77,6 @@ async def upload_file(file: UploadFile = File(...)):
         FileController.unzip_file(file.filename, _hashed_filename, _filepath)
         FileController.delete_temp_file(_filepath)
 
-        
-        
-
         hashed=_hashed_filename.replace('.zip', '')
         
         print(" this is the hash: ",hashed)

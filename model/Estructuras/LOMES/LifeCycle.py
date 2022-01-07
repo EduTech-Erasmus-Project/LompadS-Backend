@@ -30,7 +30,7 @@ class LifeCycle:
                 self.description_string=atributes.get('lomes:string')
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value, 'Entity': self.entity, 'Datetime': self.datetime, 'Description_string': self.description_string}
+                return {'Source': self.source, 'Role': self.value, 'Entity': self.entity, 'Datetime': self.datetime, 'Description': self.description_string}
 
             def to_xml(self):
                 return f"""<contribute>
@@ -49,7 +49,7 @@ class LifeCycle:
 
         def __dict__(self):
             return {'Version': self.version, 'Status': self.status,
-                    'Contribute': self.contribute.__dict__() if self.contribute is not None else self.Contribute().__dict__()}
+                    'Contribute': self.contribute.__dict__() if self.contribute is not None else []}
 
         def to_xml(self):
             return f"""<lifeCycle>

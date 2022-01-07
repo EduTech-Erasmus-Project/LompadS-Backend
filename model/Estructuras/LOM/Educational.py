@@ -1,5 +1,5 @@
 class Educational:
-        interactivity_type = None
+        interactivityType = None
         learningResourceType = None
         interactivity_level = None
         semantic_density = None
@@ -11,10 +11,10 @@ class Educational:
         description = None
         language = None
 
-        def __init__(self, interactivity_type=None, learningResourceType=None, interactivity_level=None,
+        def __init__(self, interactivityType=None, learningResourceType=None, interactivity_level=None,
                      semantic_density=None, intendedEndUserRole=None, context=None, typical_age_range=None, difficulty=None,
                      typical_learning_time=None, description=None, language=None):
-            self.interactivity_type = interactivity_type
+            self.interactivityType = interactivityType
             self.learningResourceType = learningResourceType
             self.interactivity_level = interactivity_level
             self.semantic_density = semantic_density
@@ -122,6 +122,27 @@ class Educational:
 
             def __dict__(self):
                 return {'Language': self.language}
+        
+        class Interactivitytype:
+            source = []
+            value = []
+
+            def __init__(self, source=[], value=[]):
+                self.source = source
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.source=atributes.get('source')
+                self.value=atributes.get('value')
+
+            def to_xml(self):
+                return f"""<interactivityType >
+                                <source >{self.source}</source>
+                                <value >{self.value}</value>
+                            </interactivityType>"""
+
+            def __dict__(self):
+                return {'Source': self.source, 'Value': self.value}
 
         def to_xml(self):
             return f"""<educational>

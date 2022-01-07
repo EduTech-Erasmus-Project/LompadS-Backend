@@ -17,6 +17,22 @@ class Technical:
             self.other_platform_requirements = other_platform_requirements
             self.duration = duration
         
+        class Format:
+            value = []
+
+            def __init__(self, value=[]):
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.value=atributes.get('format')
+
+
+            def to_xml(self):
+                return f"""<format>{self.value}</format>"""
+
+            def __dict__(self):
+                return {'Format': self.value}
+
         class Location:
             value = []
 

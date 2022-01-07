@@ -158,7 +158,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
         if data is not None and not isinstance(data, list):
             attributes = object_instance.__dir__()
             
-            # print("===============================================================")
+            print("===============================================================")
             # print(attributes)
             # print(object_instance)
             hijo=None
@@ -167,7 +167,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
             # print(data)
             
             for key in data:
-                # print("padre: ", key)
+                print("padre: ", key)
                 key_mapping=key.replace('lomes:', '')
                 # print(key_mapping)
                 if key_mapping == "keyword":
@@ -261,7 +261,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                                         aux=True
                         break
                 # print(values_labels)
-                # print(values_labels_dict)
+                print(values_labels_dict)
                 if "@uniqueElementName" not in key_mapping:
                     children_label=object_instance.__getattribute__(key_mapping_Upper)()
                     children_label.addValues(values_labels_dict)
