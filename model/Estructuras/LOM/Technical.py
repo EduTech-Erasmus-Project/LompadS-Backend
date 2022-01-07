@@ -32,6 +32,22 @@ class Technical:
 
             def __dict__(self):
                 return {'Format': self.value}
+        
+        class Size:
+            value = []
+
+            def __init__(self, value=[]):
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.value=atributes.get('size')
+
+
+            def to_xml(self):
+                return f"""<size>{self.value}</size>"""
+
+            def __dict__(self):
+                return {'Size': self.value}
 
         class Location:
             value = []
@@ -84,6 +100,8 @@ class Technical:
                     self.name = name
                     self.minimum_version = minimum_version
                     self.maximum_version = maximum_version
+                
+                
 
                 def to_xml(self):
                     return f"""<orComposite>
@@ -115,10 +133,14 @@ class Technical:
 
         def to_xml(self):
             return f"""<technical>
+            {'' if isinstance(self.format, str) else self.format.to_xml() if self.format is not None else ''}
+            {'' if isinstance(self.size, str) else self.size.to_xml() if self.size is not None else ''}
             {'' if isinstance(self.location, str) else self.location.to_xml() if self.location is not None else ''}
             {'' if isinstance(self.installationRemarks, str) else self.installationRemarks.to_xml() if self.installationRemarks is not None else ''}
             </technical>"""
 
         def __dict__(self):
-            return {'Installation Remarks': self.installationRemarks.__dict__() if self.installationRemarks is not None else self.Installationremarks().__dict__(),
-                    'Location': self.location.__dict__() if self.location is not None else self.Location().__dict__()}
+            return {'Format': self.format.__dict__() if self.format is not None else [],
+                    'Size': self.size.__dict__() if self.size is not None else [],
+                    'Location': self.location.__dict__() if self.location is not None else [],
+                    'Installation Remarks': self.installationRemarks.__dict__() if self.installationRemarks is not None else []}
