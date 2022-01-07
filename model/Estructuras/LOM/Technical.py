@@ -101,7 +101,10 @@ class Technical:
                     self.minimum_version = minimum_version
                     self.maximum_version = maximum_version
                 
-                
+                def addValues(self,atributes):
+                    self.source=atributes.get('source')
+                    self.value=atributes.get('value')
+                    self.description=atributes.get('es')
 
                 def to_xml(self):
                     return f"""<orComposite>

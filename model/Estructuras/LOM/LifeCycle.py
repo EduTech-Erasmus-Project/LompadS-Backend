@@ -30,7 +30,7 @@ class LifeCycle:
                 self.description_string=atributes.get('es')
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value, 'Entity': self.entity, 'Datetime': self.datetime, 'Description_string': self.description_string}
+                return {'Source': self.source, 'Role': self.value, 'Entity': self.entity, 'Datetime': self.datetime, 'Description': self.description_string}
 
             def to_xml(self):
                 return f"""<contribute>
@@ -87,13 +87,13 @@ class LifeCycle:
                 return {'Source': self.source, 'Value': self.value}
         
         def __dict__(self):
-            return {'Version': self.version.__dict__() if self.version is not None else self.Version().__dict__(),
-                    'Status': self.status.__dict__() if self.status is not None else self.Status().__dict__(),
-                    'Contribute': self.contribute.__dict__() if self.contribute is not None else self.Contribute().__dict__()}
+            return {'Version': self.version.__dict__() if self.version is not None else [],
+                    'Status': self.status.__dict__() if self.status is not None else [],
+                    'Contribute': self.contribute.__dict__() if self.contribute is not None else []}
 
         def to_xml(self):
             return f"""<lifeCycle>
-                {'' if isinstance(self.contribute, str) else self.contribute.to_xml() if self.contribute is not None else '',
-                 '' if isinstance(self.status, str) else self.status.to_xml() if self.status is not None else '',
-                 '' if isinstance(self.version, str) else self.version.to_xml() if self.version is not None else ''}
+                {'' if isinstance(self.contribute, str) else self.contribute.to_xml() if self.contribute is not None else ''}
+                {'' if isinstance(self.status, str) else self.status.to_xml() if self.status is not None else ''}
+                {'' if isinstance(self.version, str) else self.version.to_xml() if self.version is not None else ''}
             </lifeCycle>"""
