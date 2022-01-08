@@ -202,13 +202,24 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                         else:
                                             auxContainerofChildren=containerOfChildren[val2]
                                             for valAuxContChildren in auxContainerofChildren:
-                                                if auxContainerofChildren[valAuxContChildren] is None:
-                                                    containerOfChildren[val2]="None"
-                                                elif val2 not in values_labels_dict.keys():
-                                                    values_labels_dict[val2]=[auxContainerofChildren[valAuxContChildren]]
+                                                if isinstance(auxContainerofChildren[valAuxContChildren], str):
+                                                    if auxContainerofChildren[valAuxContChildren] is None:
+                                                        containerOfChildren[val2]="None"
+                                                    elif val2 not in values_labels_dict.keys():
+                                                        values_labels_dict[val2]=[auxContainerofChildren[valAuxContChildren]]
+                                                    else:
+                                                        values_labels_dict.get(val2).append(auxContainerofChildren[valAuxContChildren])
+                                                        values_labels.append(auxContainerofChildren[valAuxContChildren])
                                                 else:
-                                                    values_labels_dict.get(val2).append(auxContainerofChildren[valAuxContChildren])
-                                                    values_labels.append(auxContainerofChildren[valAuxContChildren])
+                                                    containterAux=auxContainerofChildren[valAuxContChildren]
+                                                    for auxContainerAux in containterAux:
+                                                        if containterAux[auxContainerAux] is None:
+                                                            containerOfChildren[val2]="None"
+                                                        elif val2 not in values_labels_dict.keys():
+                                                            values_labels_dict[val2]=[containterAux[auxContainerAux]]
+                                                        else:
+                                                            values_labels_dict.get(val2).append(containterAux[auxContainerAux])
+                                                            values_labels.append(containterAux[auxContainerAux])
                                 else:
                                     # print("data key con object: ", containerOfChildren)
                                     if containerOfChildren is None:
