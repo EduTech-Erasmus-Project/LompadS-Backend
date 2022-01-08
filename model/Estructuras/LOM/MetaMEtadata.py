@@ -68,37 +68,45 @@ class MetaMetadata:
 
 
         class Contribute:
-            role = None
-            entity = None
-            date = None
+            source=[]
+            value=[]
+            entity=[]
+            dateTime=[]
+            description=[]
 
-            def __init__(self, role='', entity='', date=''):
-                self.role = role
+            def __init__(self, source=[], value=[], entity=[], dateTime=[], description=[]):
+                self.source = source
+                self.value = value
                 self.entity = entity
-                self.date = date
+                self.dateTime = dateTime
+                self.description = description
             
             def addValues(self,atributes):
-                self.value=atributes.get('language')
+                self.source=atributes.get('source')
+                self.value=atributes.get('value')
+                self.entity=atributes.get('entity')
+                self.dateTime=atributes.get('dateTime')
+                self.description=atributes.get('description')
 
             def to_xml(self):
                 return f"""<contribute>
                 <role>
-                <source>LOMv1.0</source>
-                <value>{self.role}</value>
+                <source>{self.source}</source>
+                <value>{self.value}</value>
                 </role>
-                <entity>
-                <![CDATA[{self.entity}]]>
+                <entity>{self.entity}
                 </entity>
                 <date>
-                <dateTime>{self.date}</dateTime>
+                <dateTime>{self.dateTime}</dateTime>
                 <description>
-                <string language="en">EMPTY</string>
+                <string>{self.description}</string>
                 </description>
                 </date>
                 </contribute>"""
 
             def __dict__(self):
-                return {'Role': self.role, 'Entity': self.entity, 'Date': self.date}
+                return {'Source': self.source, 'Value': self.value, 'Entity': self.entity, 
+                'Date': self.dateTime, 'Description':self.description}
 
         def to_xml(self):
             return f"""<metaMetadata>
