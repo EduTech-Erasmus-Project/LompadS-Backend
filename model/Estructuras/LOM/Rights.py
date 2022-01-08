@@ -59,7 +59,10 @@ class Rights:
             
             def addValues(self,atributes):
                 self.source=atributes.get('string')
-
+                if self.source is None:
+                    self.source=atributes.get('description')
+                    if len(self.source) > 1:
+                        self.source=[atributes.get('description')[1]]
             def to_xml(self):
                 return f"""<description>
                                 <string>{self.string}</string>
