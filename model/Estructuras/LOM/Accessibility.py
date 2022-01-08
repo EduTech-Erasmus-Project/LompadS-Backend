@@ -1,18 +1,18 @@
 class Accessibility:
 
         description = None
-        accessibility_features = None
-        accessibility_hazard = None
-        accessibility_control = None
-        accessibility_api = None
+        accessibilityfeatures = None
+        accessibilityhazard = None
+        accessibilitycontrol = None
+        accessibilityAPI = None
 
-        def __init__(self, description='', accesibility_features=None, accessibility_hazard=None,
-                     accessibility_control=None, accessibility_api=None):
+        def __init__(self, description='', accessibilityfeatures=None, accessibilityhazard=None,
+                     accessibilitycontrol=None, accessibilityAPI=None):
             self.description = description
-            self.accessibility_features = accesibility_features
-            self.accessibility_hazard = accessibility_hazard
-            self.accessibility_control = accessibility_control
-            self.accessibility_api = accessibility_api
+            self.accessibilityfeatures = accessibilityfeatures
+            self.accessibilityhazard = accessibilityhazard
+            self.accessibilitycontrol = accessibilitycontrol
+            self.accessibilityAPI = accessibilityAPI
         
         class Description:
             Description=[]
@@ -113,15 +113,15 @@ class Accessibility:
         def to_xml(self):
             return f"""<accesibility>
             {'' if isinstance(self.description, str) else self.description.to_xml() if self.description is not None else ''}
-            {'' if isinstance(self.accessibility_features, str) else self.accessibility_features.to_xml() if self.accessibility_features is not None else ''}
-            {'' if isinstance(self.accessibility_hazard, str) else self.accessibility_hazard.to_xml() if self.accessibility_hazard is not None else ''}
-            {'' if isinstance(self.accessibility_control, str) else self.accessibility_control.to_xml() if self.accessibility_control is not None else ''}
-            {'' if isinstance(self.accessibility_api, str) else self.accessibility_api.to_xml() if self.accessibility_api is not None else ''}
+            {'' if isinstance(self.accessibilityfeatures, str) else self.accessibilityfeatures.to_xml() if self.accessibilityfeatures is not None else ''}
+            {'' if isinstance(self.accessibilityhazard, str) else self.accessibilityhazard.to_xml() if self.accessibilityhazard is not None else ''}
+            {'' if isinstance(self.accessibilitycontrol, str) else self.accessibilitycontrol.to_xml() if self.accessibilitycontrol is not None else ''}
+            {'' if isinstance(self.accessibilityAPI, str) else self.accessibilityAPI.to_xml() if self.accessibilityAPI is not None else ''}
             </accesibility>"""
 
         def __dict__(self):
             return {'Description': self.description.__dict__() if self.description is not None else [],
-                    'Accessibility Features': self.accessibility_features.__dict__() if self.accessibility_features is not None else [], 
-                    'Accessibility Hazard': self.accessibility_hazard.__dict__() if self.accessibility_hazard is not None else [], 
-                    'Accessibility Control': self.accessibility_control.__dict__() if self.accessibility_control is not None else [], 
-                    'Accessibility API': self.accessibility_api.__dict__() if self.accessibility_api is not None else []}
+                    'Accessibility Features': self.accessibilityfeatures.__dict__() if self.accessibilityfeatures is not None else [], 
+                    'Accessibility Hazard': self.accessibilityhazard.__dict__() if self.accessibilityhazard is not None else [], 
+                    'Accessibility Control': self.accessibilitycontrol.__dict__() if self.accessibilitycontrol is not None else [], 
+                    'Accessibility API': self.accessibilityAPI.__dict__() if self.accessibilityAPI is not None else []}
