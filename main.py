@@ -47,12 +47,18 @@ async def upload_file(file: UploadFile = File(...)):
     required_tags = ['identifier', 'title', 'language', 'description', 'aggregationLevel', 'metaMetadata',
                      'metadataSchema']
 
+    redundant_elements = [' uniqueElementName="general"', ' uniqueElementName="catalog"',' uniqueElementName="entry"',
+                          ' uniqueElementName="aggregationLevel"', ' uniqueElementName="source"', ' uniqueElementName="value"',
+                          ' uniqueElementName="metaMetadata"', ' uniqueElementName="rights"', ' uniqueElementName="access"', 
+                          ' uniqueElementName="accessType"', ' uniqueElementName="source"',' uniqueElementName="value"']
+
     if file_type == -1:
         return HTTPException(status_code=500, detail='Error, not a valid file type.')
     elif file_type == 1:
         _filepath, _hashed_filename = FileController.save_xml(file)
         xml_manifest = FileController.read_manifest(_filepath)
-
+        for redundant in redundant_elements:
+            xml_manifest_scorm = xml_manifest_scorm.replace(redundant, '')
         doc = minidom.parse(_filepath)
         childTag = doc.firstChild.tagName
         if(childTag == "lom"):
@@ -119,13 +125,20 @@ async def upload_file(file: UploadFile = File(...)):
         fileFound.replace('./temp_files/', '')
 
         xml_manifest_scorm = FileController.read_manifest(fileFound)
+        for redundant in redundant_elements:
+            xml_manifest_scorm = xml_manifest_scorm.replace(redundant, '')
+
         if xml_manifest_scorm == -1:
             xml_manifest_ims = FileController.read_manifest(_filepath.replace('.zip', '') + '/imsmanifest.xml')
             xml_manifest = xml_manifest_ims
+            for redundant in redundant_elements:
+                xml_manifest = xml_manifest.replace(redundant, '')
             _profile = 'IMS'
         elif xml_manifest_scorm != -1:
             _profile = 'SCORM'
             xml_manifest = xml_manifest_scorm
+            for redundant in redundant_elements:
+                xml_manifest = xml_manifest.replace(redundant, '')
         else:
             return HTTPException(status_code=500,
                           detail='Error, the uploaded file does not contain imslrm.xml nor imsmanifest.xml files.')
@@ -139,6 +152,11 @@ async def upload_file(file: UploadFile = File(...)):
 @app.get("/private/read_file/")
 async def read_file(hashed_code: str, profile: str):
 
+    redundant_elements = [' uniqueElementName="general"', ' uniqueElementName="catalog"',' uniqueElementName="entry"',
+                          ' uniqueElementName="aggregationLevel"', ' uniqueElementName="source"', ' uniqueElementName="value"',
+                          ' uniqueElementName="metaMetadata"', ' uniqueElementName="rights"', ' uniqueElementName="access"', 
+                          ' uniqueElementName="accessType"', ' uniqueElementName="source"',' uniqueElementName="value"']
+
     import glob
     import os 
 
@@ -150,11 +168,19 @@ async def read_file(hashed_code: str, profile: str):
 
     if profile == 'SCORM':
         xml_manifest = FileController.read_manifest(fileFound)
+        # print(xml_manifest)
+        for redundant in redundant_elements:
+                xml_manifest = xml_manifest.replace(redundant,'')
+        # print("*********************************************")
+        # print(xml_manifest)
     else:
         xml_manifest = FileController.read_manifest(f'./temp_files/{hashed_code}/imsmanifest.xml')
-
+        for redundant in redundant_elements:
+                xml_manifest = xml_manifest.replace(redundant, '')
     if xml_manifest == -1:
         xml_manifest = FileController.read_manifest(f'./temp_files/{hashed_code}.xml')
+        for redundant in redundant_elements:
+                xml_manifest = xml_manifest.replace(redundant, '')
         from_lompad = True
 
     if xml_manifest == -1:

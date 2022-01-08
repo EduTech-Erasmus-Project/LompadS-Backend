@@ -148,7 +148,8 @@ class General:
             
             def addValues(self,atributes):
                 self.language=atributes.get('@language')
-                self.keywordd=atributes.get('#text')
+                self.keywordd=atributes.get('string')
+
             def getValues(self):
                 print("Languaje: ", self.language)
                 print("Keyword: ", self.keywordd)

@@ -21,6 +21,7 @@ class LOM:
     def __init__(self, general=None, life_cycle=None, meta_metadata=None, technical=None, educational=None, rights=None,
                  relation=None, annotation=None, classification=None, accessibility=None):
         logging.basicConfig(filename='logger.log')
+        
         self.general = general
         self.lifeCycle = life_cycle
         self.metaMetadata = meta_metadata
@@ -101,14 +102,12 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False):
                 print(key1)
                 try:
                     metodo = dispatch[key1]
-                    ejemplo =  metodo(dict(dictionary), is_lompad_exported)
+                    ejemplo = metodo(dict(dictionary), is_lompad_exported)
+                    # print(ejemplo)
                     return ejemplo
                 except Exception as e:
                     print("======>")
                     print(e)
-                    oLom = LOM().MetaMetadata
-                    oLom.__setattr__(key, None)
-                    return oLom.__getattribute__(key)
     except KeyError as ke:
         logging.error(f' Unexpected key {key}, ignoring key, error {ke}')
     except Exception as ex:
@@ -154,18 +153,17 @@ def map_attributes(data_original: dict, object_instance, is_lom):
     """
     values_labels_dict={}
 
-    try:
-        if data is not None and not isinstance(data, list):
-            attributes = object_instance.__dir__()
-            
-            print("===============================================================")
-            # print(attributes)
-            # print(object_instance)
-            hijo=None
-            values_labels=[]
-            values_labels_dict={}
-            # print(data)
-            
+    if data is not None and not isinstance(data, list):
+        attributes = object_instance.__dir__()
+        
+        print("===============================================================")
+        # print(attributes)
+        # print(object_instance)
+        hijo=None
+        values_labels=[]
+        values_labels_dict={}
+        # print(data)
+        try:
             for key in data:
                 print("padre: ", key)
                 key_mapping=key.replace('lomes:', '')
@@ -175,104 +173,109 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                 key_mapping_Upper=key_mapping.capitalize()
                 if isinstance(data[key], str):
                     # print("hijo1: ", data[key])
-                    values_labels_dict[key]=[data[key]]
+                    if data[key] is None:
+                        data[key]="None"
+                    if key not in values_labels_dict.keys():
+                        values_labels_dict[key]=[data[key]]
+                    else:
+                        values_labels_dict.get(key).append(data[key])
+                    values_labels.append(data[key])
                 else:
                     for childrens in data[key]:
-                        dataKey=data[key]
-                        for valDataKey in dataKey:
-                            if isinstance(valDataKey, str):
-                                contentDataKey = dataKey[valDataKey]
-                                if isinstance(contentDataKey, str):
-                                    # print(valDataKey)
-                                    # print("HijoCollections: ", contentDataKey)
-                                    values_labels_dict[valDataKey]=[contentDataKey]
+                        # print("hijo: ",childrens)
+                        if isinstance(childrens, str):
+                            containerOfFather=data[key]
+                            for val in containerOfFather:
+                                # print("nieto: ", containerOfFather[val])
+                                containerOfChildren=containerOfFather[val]
+                                if isinstance(containerOfChildren, collections.OrderedDict):
+                                    for val2 in containerOfChildren:
+                                        # print("objeto de objeto: ", containerOfChildren[val2])
+                                        if isinstance(containerOfChildren[val2], str) or isinstance(containerOfChildren[val2], list):
+                                            if containerOfChildren[val2] is None:
+                                                containerOfChildren[val2]="None"
+                                            elif val2 not in values_labels_dict.keys():
+                                                values_labels_dict[val2]=[containerOfChildren[val2]]
+                                            else:
+                                                values_labels_dict.get(val2).append(containerOfChildren[val2])
+                                                values_labels.append(containerOfChildren[val2])
+                                        else:
+                                            auxContainerofChildren=containerOfChildren[val2]
+                                            for valAuxContChildren in auxContainerofChildren:
+                                                if auxContainerofChildren[valAuxContChildren] is None:
+                                                    containerOfChildren[val2]="None"
+                                                elif val2 not in values_labels_dict.keys():
+                                                    values_labels_dict[val2]=[auxContainerofChildren[valAuxContChildren]]
+                                                else:
+                                                    values_labels_dict.get(val2).append(auxContainerofChildren[valAuxContChildren])
+                                                    values_labels.append(auxContainerofChildren[valAuxContChildren])
                                 else:
-                                    aux=True
-                                    auxKey=""
-                                    for valContentDataKEy in contentDataKey:
-                                        if isinstance(contentDataKey[valContentDataKEy], str):
-                                            # print("HijoCollectionsFor: ",contentDataKey[valContentDataKEy])
-                                            if aux:
-                                                auxKey=contentDataKey[valContentDataKEy]
-                                                values_labels_dict[contentDataKey[valContentDataKEy]]=list()
-                                                aux=False
-                                            else:
-                                                values_labels_dict.get(auxKey).append(contentDataKey[valContentDataKEy])
-                                                aux=True
-                                        else:
-                                            aux=True
-                                            contentContentDataKey = contentDataKey[valContentDataKEy]
-                                            for valueContentContetnDatakey in contentContentDataKey:
-                                                # print("HijoCollectionsFor2: ",contentContentDataKey[valueContentContetnDatakey])
-                                                if isinstance(contentContentDataKey[valueContentContetnDatakey], str):
-                                                    if aux:
-                                                        auxKey=contentContentDataKey[valueContentContetnDatakey]
-                                                        values_labels_dict[contentContentDataKey[valueContentContetnDatakey]]=list()
-                                                        aux=False
-                                                    else:
-                                                        values_labels_dict.get(auxKey).append(contentContentDataKey[valueContentContetnDatakey])
-                                                        aux=True
-                                                else:
-                                                    auxcontentContentDataKey=contentContentDataKey[valueContentContetnDatakey]
-                                                    for valAuxcontentContentDataKey in auxcontentContentDataKey:
-                                                        if aux:
-                                                            auxKey=auxcontentContentDataKey[valAuxcontentContentDataKey]
-                                                            values_labels_dict[auxcontentContentDataKey[valAuxcontentContentDataKey]]=list()
-                                                            aux=False
-                                                        else:
-                                                            values_labels_dict.get(auxKey).append(auxcontentContentDataKey[valAuxcontentContentDataKey])
-                                                            aux=True
-                            else:
-                                contentDataKey = valDataKey
-                                aux=True
-                                auxKey=""
-                                for valContentDataKEy in contentDataKey:
-                                    if isinstance(contentDataKey[valContentDataKEy], str):
-                                        # print("HijoCollectionsFor2: ",contentDataKey[valContentDataKEy])
-                                        if aux:
-                                            auxKey=contentDataKey[valContentDataKEy]
-                                            values_labels_dict[contentDataKey[valContentDataKEy]]=list()
-                                            aux=False
-                                        else:
-                                            values_labels_dict.get(auxKey).append(contentDataKey[valContentDataKEy])
-                                            aux=True
+                                    # print("data key con object: ", containerOfChildren)
+                                    if containerOfChildren is None:
+                                            containerOfChildren="None"
+                                    elif val not in values_labels_dict.keys():
+                                        values_labels_dict[val]=[containerOfChildren]
+                                        values_labels.append(containerOfChildren)
                                     else:
-                                        aux=True
-                                        contentContentDataKey = contentDataKey[valContentDataKEy]
-                                        for valueContentContetnDatakey in contentContentDataKey:
-                                            # print("HijoCollectionsFor22: ",contentContentDataKey[valueContentContetnDatakey])
-                                            if isinstance(contentContentDataKey[valueContentContetnDatakey], str):
-                                                if aux:
-                                                    auxKey=contentContentDataKey[valueContentContetnDatakey]
-                                                    values_labels_dict[contentContentDataKey[valueContentContetnDatakey]]=list()
-                                                    aux=False
-                                                else:
-                                                    values_labels_dict.get(auxKey).append(contentContentDataKey[valueContentContetnDatakey])
-                                                    aux=True
-                                            else:
-                                                auxcontentContentDataKey=contentContentDataKey[valueContentContetnDatakey]
-                                                for valAuxcontentContentDataKey in auxcontentContentDataKey:
-                                                    if aux:
-                                                        auxKey=auxcontentContentDataKey[valAuxcontentContentDataKey]
-                                                        values_labels_dict[auxcontentContentDataKey[valAuxcontentContentDataKey]]=list()
-                                                        aux=False
+                                        values_labels_dict.get(val).append(containerOfChildren)
+                                        values_labels.append(containerOfChildren)
+                            break
+                        else:
+                            for val_children in childrens:
+                                # print("val childrens: ", childrens[val_children])
+                                if isinstance(childrens[val_children],str):
+                                    if childrens[val_children] is None:
+                                            childrens[val_children]="None"
+                                    if val_children not in values_labels_dict.keys():
+                                        values_labels_dict[val_children]=[childrens[val_children]]
+                                    else:
+                                        values_labels_dict.get(val_children).append(childrens[val_children])
+                                    values_labels.append(childrens[val_children])
+                                elif childrens[val_children] is None:
+                                    if childrens[val_children] is None:
+                                            childrens[val_children]="None"
+                                    if val_children not in values_labels_dict.keys():
+                                        values_labels_dict[val_children]=[childrens[val_children]]
+                                    else:
+                                        values_labels_dict.get(val_children).append(childrens[val_children])
+                                    values_labels.append(childrens[val_children])
+                                else:
+                                    containerOfChildren=childrens[val_children]
+                                    if isinstance(containerOfChildren, collections.OrderedDict):
+                                        for val2 in containerOfChildren:
+                                            if containerOfChildren[val2] is None:
+                                                containerOfChildren[val2]="None"
+                                            if isinstance(containerOfChildren[val2], collections.OrderedDict):
+                                                container_container=containerOfChildren[val2]
+                                                for val3 in container_container:
+                                                    # print("val val val children: ", container_container[val3])
+                                                    if val3 not in values_labels_dict.keys():
+                                                        values_labels_dict[val3]=[container_container[val3]]
                                                     else:
-                                                        values_labels_dict.get(auxKey).append(auxcontentContentDataKey[valAuxcontentContentDataKey])
-                                                        aux=True
-                        break
+                                                        values_labels_dict.get(val3).append(container_container[val3])
+                                                    values_labels.append(container_container[val3])
+                                            else:
+                                                # print("val val  childrens: ", containerOfChildren[val2])
+                                                if val2 not in values_labels_dict.keys():
+                                                    values_labels_dict[val2]=[containerOfChildren[val2]]
+                                                else:
+                                                    values_labels_dict.get(val2).append(containerOfChildren[val2])
+                                                values_labels.append(containerOfChildren[val2])
+                                
                 # print(values_labels)
                 print(values_labels_dict)
-                if "@uniqueElementName" not in key_mapping:
-                    children_label=object_instance.__getattribute__(key_mapping_Upper)()
-                    children_label.addValues(values_labels_dict)
-                    # children_label.getValues()
-                    values_labels_dict={}
-                    if key_mapping == "aggregationLevel":
-                        key_mapping="aggregation_level"
-                    # print(object_instance,": ",key_mapping)
-                    object_instance.__setattr__(key_mapping, children_label)
-    except Exception as e:
-        print(e)
+                children_label=object_instance.__getattribute__(key_mapping_Upper)()
+                children_label.addValues(values_labels_dict)
+                # children_label.getValues()
+                values_labels=[]   
+                values_labels_dict={}
+                if key_mapping == "aggregationLevel":
+                    key_mapping="aggregation_level"
+                # print(object_instance,": ",key_mapping)
+                object_instance.__setattr__(key_mapping, children_label)
+        except Exception as e:
+            print(e)
+    
     return object_instance
 
 
@@ -319,6 +322,7 @@ def technical_leaf(data: dict, is_lom):
         :return: a Technical class instance.
         """
     technical_object = map_attributes(data, LOM.Technical, is_lom)
+
     return technical_object.__dict__(), technical_object
 
 
@@ -354,18 +358,6 @@ def relation_leaf(data: dict, is_lom):
         :return: a Relation class instance.
         """
     relation_object = map_attributes(data, LOM.Relation, is_lom)
-    resource = map_attributes(data['resource'], LOM.Relation.Resource(), is_lom)
-
-    if 'resource' in data.keys():
-        if 'identifier' in data['resource'].keys():
-            identifier = map_attributes(data['resource']['identifier'], LOM.Relation.Resource.Identifier(), is_lom)
-        elif 'Identifier' in data['resource'].keys():
-            identifier = map_attributes(data['resource']['Identifier'], LOM.Relation.Resource.Identifier(), is_lom)
-        else:
-            identifier=None
-
-    resource.identifier = identifier
-    relation_object.resource = resource
 
     return relation_object.__dict__(), relation_object
 
@@ -390,61 +382,11 @@ def classification_leaf(data: dict, is_lom):
         :return: a Classification class instance.
         """
     classification_object = map_attributes(data, LOM.Classification, is_lom)
-
-    taxon_path = map_attributes(data.get('taxonPath') if data.get('taxonPath') is not None else
-                                data.get('taxonPath'), classification_object.TaxonPath(), is_lom)
-
-    taxon = None
-    if data.get('taxonPath') is not None and data.get('taxonPath').get('taxon') is not None:
-        taxon = map_attributes(data.get('taxonPath').get('taxon')[0]
-                               if type(data.get('taxonPath').get('taxon')) is list else
-                               data.get('taxonPath').get('taxon'), classification_object.TaxonPath.Taxon(),
-                               is_lom)
-
-    elif data.get('taxonPath') is not None and data.get('taxonPath').get('taxon') is not None:
-        taxon = map_attributes(data.get('taxonPath').get('taxon')[0]
-                               if type(data.get('taxonPath').get('taxon')) is list else
-                               data.get('taxonPath').get('taxon'), classification_object.TaxonPath.Taxon(),
-                               is_lom)
-
-    classification_object.taxon_path = taxon_path
-    classification_object.taxon_path.taxon = taxon
-
     return classification_object.__dict__(), classification_object
 
 
 def accessibility_leaf(data: dict, is_lom):
     accessibility_object = map_attributes(data, LOM.Accessibility, is_lom)
-    api, features, hazard, control = None, None, None, None
-
-    if data.get('accessibilityAPI') is not None:
-        api = map_attributes(data.get('accessibilityAPI'), LOM.Accessibility.AccessibilityAPI(), is_lom)
-    elif data.get('accessibilityApi') is not None:
-        api = map_attributes(data.get('accessibilityApi'), LOM.Accessibility.AccessibilityAPI(), is_lom)
-
-    if data.get('accessibilityfeatures') is not None:
-        features = map_attributes(data.get('accessibilityfeatures'), LOM.Accessibility.AccessibilityFeatures(), is_lom)
-    elif data.get('accessibilityFeatures') is not None:
-        features = map_attributes(data.get('accessibilityFeatures'), LOM.Accessibility.AccessibilityFeatures(), is_lom)
-
-    if data.get('accessibilityhazard') is not None:
-        hazard = map_attributes(data.get('accessibilityhazard'), LOM.Accessibility.AccessibilityHazard(), is_lom)
-    elif data.get('accessibilityHazard') is not None:
-        hazard = map_attributes(data.get('accessibilityHazard'), LOM.Accessibility.AccessibilityHazard(), is_lom)
-
-    if data.get('accessibilitycontrol') is not None:
-        control = map_attributes(data.get('accessibilitycontrol'), LOM.Accessibility.AccessibilityControl(), is_lom)
-    elif data.get('accessibilityControl') is not None:
-        control = map_attributes(data.get('accessibilityControl'), LOM.Accessibility.AccessibilityControl(), is_lom)
-
-
-
-    accessibility_object.accessibility_api = api
-    accessibility_object.accessibility_features = features
-    accessibility_object.accessibility_hazard = hazard
-    accessibility_object.accessibility_control = control
-
-
     return accessibility_object.__dict__(), accessibility_object
 
 

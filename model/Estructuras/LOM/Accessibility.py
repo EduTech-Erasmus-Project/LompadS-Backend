@@ -13,122 +13,115 @@ class Accessibility:
             self.accessibility_hazard = accessibility_hazard
             self.accessibility_control = accessibility_control
             self.accessibility_api = accessibility_api
+        
+        class Description:
+            Description=[]
 
-        class AccessibilityFeatures:
-            resource_content = None
+            def __init__(self, description=[]):
+                self.description = description
+            
+            def addValues(self,atributes):
+                self.description=atributes.get("string")
+                    
+            def getValues(self):
+                print("Description: ", self.description)
 
-            def __init__(self, resource_content=''):
-                self.resource_content = resource_content
+            def to_xml(self):
+                return f"""<description>
+                                <string>{self.description}</string>
+                            </description>"""
 
             def __dict__(self):
-                return {'Resource Content': self.resource_content}
+                return {'Description': self.description}
 
-            def get_resource_content(self):
-                content = ""
-                if type(self.resource_content) is OrderedDict and type(self.resource_content.get('br')) is list:
-                    for resource in self.resource_content.get('br'):
-                        content += f"<br>{resource}</br>\n"
-                    return content
-                else:
-                    return self.resource_content.get('br')
+        class Accessibilityfeatures:
+            br=[]
+
+            def __init__(self, br=[]):
+                self.br = br
+            
+            def addValues(self,atributes):
+                self.br=atributes.get("br")[0]
 
             def to_xml(self):
                 return f"""<accessibilityfeatures>
-                <resourcecontent>
-                {self.get_resource_content()}
-                </resourcecontent>
-                </accessibilityfeatures>"""
-
-        class AccessibilityHazard:
-            properties = None
-
-            def __init__(self, properties=''):
-                self.properties = properties
+                                <resourcecontent>
+                                    <br>{self.br}</br>
+                                </resourcecontent>
+                            </accessibilityfeatures>"""
 
             def __dict__(self):
-                return {'Properties': self.properties}
+                return {'Accessibilityfeatures': self.br}
+        
+        class Accessibilityhazard:
+            br=[]
 
-            def get_properties(self):
-                content = ""
-                if type(self.properties) is OrderedDict and type(self.properties.get('br')) is list:
-                    for resource in self.properties.get('br'):
-                        content += f"<br>{resource}</br>\n"
-                    return content
-                else:
-                    return self.properties.get('br')
+            def __init__(self, br=[]):
+                self.br = br
+            
+            def addValues(self,atributes):
+                self.br=atributes.get("br")[0]
 
             def to_xml(self):
                 return f"""<accessibilityhazard>
-                <properties>
-                {self.get_properties()}
-                </properties>
-                </accessibilityhazard>"""
-
-        class AccessibilityControl:
-            methods = None
-
-            def __init__(self, methods=''):
-                self.methods = methods
+                                <properties>
+                                    <br>{self.br}</br>
+                                </properties>
+                            </accessibilityhazard>"""
 
             def __dict__(self):
-                return {'Methods': self.methods}
+                return {'Accessibilityhazard': self.br}
 
-            def get_methods(self):
-                content = ""
-                if type(self.methods) is OrderedDict and type(self.methods.get('br')) is list:
-                    for resource in self.methods.get('br'):
-                        content += f"<br>{resource}</br>\n"
-                    return content
-                else:
-                    return self.methods.get('br')
+        class Accessibilitycontrol:
+            br=[]
+
+            def __init__(self, br=[]):
+                self.br = br
+            
+            def addValues(self,atributes):
+                self.br=atributes.get("br")[0]
 
             def to_xml(self):
                 return f"""<accessibilitycontrol>
-                <methods>
-                {self.get_methods()}
-                </methods>
-                </accessibilitycontrol>"""
-
-        class AccessibilityAPI:
-            compatible_resource = None
-
-            def __init__(self, compatible_resource=''):
-                self.compatible_resource = compatible_resource
+                                <methods>
+                                    <br>{self.br}</br>
+                                </methods>
+                            </accessibilitycontrol>"""
 
             def __dict__(self):
-                return {'Compatible Resource': self.compatible_resource}
+                return {'Accessibilitycontrol': self.br}
+        
+        class Accessibilityapi:
+            br=[]
 
-            def get_compatible_resources(self):
-                content = ""
-                if type(self.compatible_resource) is OrderedDict and type(self.compatible_resource.get('br')) is list:
-                    for resource in self.compatible_resource.get('br'):
-                        content += f"<br>{resource}</br>\n"
-                    return content
-                else:
-                    return self.compatible_resource.get('br')
+            def __init__(self, br=[]):
+                self.br = br
+            
+            def addValues(self,atributes):
+                self.br=atributes.get("br")[0]
 
             def to_xml(self):
                 return f"""<accessibilityAPI>
-                <compatibleresource>
-                {self.get_compatible_resources()}
-                </compatibleresource>
-                </accessibilityAPI>"""
+                                <compatibleresource>
+                                    <br>{self.br}</br>
+                                </compatibleresource>
+                            </accessibilityAPI>"""
+
+            def __dict__(self):
+                return {'Accessibilityapi': self.br}
 
         def to_xml(self):
             return f"""<accesibility>
-            <description><string language="en">{self.description}</string></description>
-            {self.accessibility_features.to_xml() if self.accessibility_features is not None else ''}
-            {self.accessibility_hazard.to_xml() if self.accessibility_hazard is not None else ''}
-            {self.accessibility_control.to_xml() if self.accessibility_control is not None else ''}
-            {self.accessibility_api.to_xml() if self.accessibility_api is not None else ''}
+            {'' if isinstance(self.description, str) else self.description.to_xml() if self.description is not None else ''}
+            {'' if isinstance(self.accessibility_features, str) else self.accessibility_features.to_xml() if self.accessibility_features is not None else ''}
+            {'' if isinstance(self.accessibility_hazard, str) else self.accessibility_hazard.to_xml() if self.accessibility_hazard is not None else ''}
+            {'' if isinstance(self.accessibility_control, str) else self.accessibility_control.to_xml() if self.accessibility_control is not None else ''}
+            {'' if isinstance(self.accessibility_api, str) else self.accessibility_api.to_xml() if self.accessibility_api is not None else ''}
             </accesibility>"""
 
         def __dict__(self):
-            return {'Description': self.description, 'Accessibility Features': self.accessibility_features.__dict__()
-                    if self.accessibility_features is not None else self.AccessibilityFeatures().__dict__(),
-                    'Accessibility Hazard': self.accessibility_hazard.__dict__() if self.accessibility_hazard is not None
-                    else self.AccessibilityHazard().__dict__(),
-                    'Accessibility Control': self.accessibility_control.__dict__() if self.accessibility_control is not None
-                    else self.AccessibilityControl().__dict__(),
-                    'Accessibility API': self.accessibility_api.__dict__() if self.accessibility_api is not None
-                    else self.AccessibilityAPI().__dict__()}
+            return {'Description': self.description.__dict__() if self.description is not None else [],
+                    'Accessibility Features': self.accessibility_features.__dict__() if self.accessibility_features is not None else [], 
+                    'Accessibility Hazard': self.accessibility_hazard.__dict__() if self.accessibility_hazard is not None else [], 
+                    'Accessibility Control': self.accessibility_control.__dict__() if self.accessibility_control is not None else [], 
+                    'Accessibility API': self.accessibility_api.__dict__() if self.accessibility_api is not None else []}
