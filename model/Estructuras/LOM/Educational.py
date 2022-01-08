@@ -1,28 +1,28 @@
 class Educational:
-        interactivity_type = None
+        interactivityType = None
         learningResourceType = None
-        interactivity_level = None
-        semantic_density = None
+        interactivityLevel = None
+        semanticDensity = None
         intendedEndUserRole = None
         context = None
-        typical_age_range = None
+        typicalAgeRange = None
         difficulty = None
-        typical_learning_time = None
+        typicalLearningTime = None
         description = None
         language = None
 
-        def __init__(self, interactivity_type=None, learningResourceType=None, interactivity_level=None,
-                     semantic_density=None, intendedEndUserRole=None, context=None, typical_age_range=None, difficulty=None,
-                     typical_learning_time=None, description=None, language=None):
-            self.interactivity_type = interactivity_type
+        def __init__(self, interactivityType=None, learningResourceType=None, interactivityLevel=None,
+                     semanticDensity=None, intendedEndUserRole=None, context=None, typicalAgeRange=None, difficulty=None,
+                     typicalLearningTime=None, description=None, language=None):
+            self.interactivityType = interactivityType
             self.learningResourceType = learningResourceType
-            self.interactivity_level = interactivity_level
-            self.semantic_density = semantic_density
+            self.interactivityLevel = interactivityLevel
+            self.semanticDensity = semanticDensity
             self.intendedEndUserRole = intendedEndUserRole
             self.context = context
-            self.typical_age_range = typical_age_range
+            self.typicalAgeRange = typicalAgeRange
             self.difficulty = difficulty
-            self.typical_learning_time = typical_learning_time
+            self.typicalLearningTime = typicalLearningTime
             self.description = description
             self.language = language
         
@@ -250,28 +250,28 @@ class Educational:
 
         def to_xml(self):
             return f"""<educational>
-            {'' if isinstance(self.interactivity_type, str) else self.interactivity_type.to_xml() if self.interactivity_type is not None else ''}
+            {'' if isinstance(self.interactivityType, str) else self.interactivityType.to_xml() if self.interactivityType is not None else ''}
             {'' if isinstance(self.learningResourceType, str) else self.learningResourceType.to_xml() if self.learningResourceType is not None else ''}
-            {'' if isinstance(self.interactivity_level, str) else self.interactivity_level.to_xml() if self.interactivity_level is not None else ''}
-            {'' if isinstance(self.semantic_density, str) else self.semantic_density.to_xml() if self.semantic_density is not None else ''}
+            {'' if isinstance(self.interactivityLevel, str) else self.interactivityLevel.to_xml() if self.interactivityLevel is not None else ''}
+            {'' if isinstance(self.semanticDensity, str) else self.semanticDensity.to_xml() if self.semanticDensity is not None else ''}
             {'' if isinstance(self.intendedEndUserRole, str) else self.intendedEndUserRole.to_xml() if self.intendedEndUserRole is not None else ''}
             {'' if isinstance(self.context, str) else self.context.to_xml() if self.context is not None else ''}
-            {'' if isinstance(self.typical_age_range, str) else self.typical_age_range.to_xml() if self.typical_age_range is not None else ''}
+            {'' if isinstance(self.typicalAgeRange, str) else self.typicalAgeRange.to_xml() if self.typicalAgeRange is not None else ''}
             {'' if isinstance(self.difficulty, str) else self.difficulty.to_xml() if self.difficulty is not None else ''}
-            {'' if isinstance(self.typical_learning_time, str) else self.typical_learning_time.to_xml() if self.typical_learning_time is not None else ''}
+            {'' if isinstance(self.typicalLearningTime, str) else self.typicalLearningTime.to_xml() if self.typicalLearningTime is not None else ''}
             {'' if isinstance(self.description, str) else self.description.to_xml() if self.description is not None else ''}
             {'' if isinstance(self.language, str) else self.language.to_xml() if self.language is not None else ''}
             </educational>"""
 
         def __dict__(self):
-            return {'Interactivity Type': self.interactivity_type.__dict__() if self.interactivity_type is not None else [],
+            return {'Interactivity Type': self.interactivityType.__dict__() if self.interactivityType is not None else [],
                     'Learning Resource Type': self.learningResourceType.__dict__() if self.learningResourceType is not None else [],
-                    'Interactivity Level': self.interactivity_level.__dict__() if self.interactivity_level is not None else [],
+                    'Interactivity Level': self.interactivityLevel.__dict__() if self.interactivityLevel is not None else [],
                     'Intended End UserRole': self.intendedEndUserRole.__dict__() if self.intendedEndUserRole is not None else [],
-                    'Semantic Density': self.semantic_density.__dict__() if self.semantic_density is not None else [],
+                    'Semantic Density': self.semanticDensity.__dict__() if self.semanticDensity is not None else [],
                     'Context': self.context.__dict__() if self.context is not None else [],
                     'Difficulty': self.difficulty.__dict__() if self.difficulty is not None else [],
                     'Description': self.description.__dict__() if self.description is not None else [],
-                    'Typical Age Range': self.typical_age_range.__dict__() if self.typical_age_range is not None else [],
-                    'Typical Learning Time': self.typical_learning_time.__dict__() if self.typical_learning_time is not None else [],
+                    'Typical Age Range': self.typicalAgeRange.__dict__() if self.typicalAgeRange is not None else [],
+                    'Typical Learning Time': self.typicalLearningTime.__dict__() if self.typicalLearningTime is not None else [],
                     'Language': self.language.__dict__() if self.language is not None else []}
