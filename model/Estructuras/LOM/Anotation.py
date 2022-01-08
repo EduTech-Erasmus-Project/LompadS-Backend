@@ -2,17 +2,17 @@ class Annotation:
         entity = None
         date = None
         description = None
-        mode_access = None
-        mode_access_sufficient = None
-        rol = None
+        modeaccess = None
+        modeaccesssufficient = None
+        Rol = None
 
-        def __init__(self, entity=None, date=None, description=None, mode_access=None, mode_access_sufficient=None, rol=None):
+        def __init__(self, entity=None, date=None, description=None, modeaccess=None, modeaccesssufficient=None, Rol=None):
             self.entity = entity
             self.date = date
             self.description = description
-            self.mode_access = mode_access
-            self.mode_access_sufficient = mode_access_sufficient
-            self.rol = rol
+            self.modeaccess = modeaccess
+            self.modeaccesssufficient = modeaccesssufficient
+            self.Rol = Rol
         
         class Entity:
             entity=[]
@@ -151,8 +151,8 @@ class Annotation:
             {'' if isinstance(self.entity, str) else self.entity.to_xml() if self.entity is not None else ''}
             {'' if isinstance(self.date, str) else self.date.to_xml() if self.date is not None else ''}
             {'' if isinstance(self.description, str) else self.description.to_xml() if self.description is not None else ''}
-            {'' if isinstance(self.mode_access, str) else self.mode_access.to_xml() if self.mode_access is not None else ''}
-            {'' if isinstance(self.mode_access_sufficient, str) else self.mode_access_sufficient.to_xml() if self.mode_access_sufficient is not None else ''}
+            {'' if isinstance(self.modeaccess, str) else self.modeaccess.to_xml() if self.modeaccess is not None else ''}
+            {'' if isinstance(self.modeaccesssufficient, str) else self.modeaccesssufficient.to_xml() if self.modeaccesssufficient is not None else ''}
             {'' if isinstance(self.rol, str) else self.rol.to_xml() if self.rol is not None else ''}
             </annotation>"""
 
@@ -161,5 +161,5 @@ class Annotation:
                     'Date': self.date.__dict__() if self.date is not None else [], 
                     'Description': self.description.__dict__() if self.description is not None else [],
                     'Mode Access': self.mode_access.__dict__() if self.mode_access is not None else [],
-                    'Mode Access Sufficient': self.mode_access_sufficient.__dict__() if self.mode_access_sufficient is not None else [],
+                    'Mode Access Sufficient': self.modeaccesssufficient.__dict__() if self.modeaccesssufficient is not None else [],
                     'Rol': self.rol.__dict__() if self.rol is not None else []}
