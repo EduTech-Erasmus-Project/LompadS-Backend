@@ -81,11 +81,11 @@ class Technical:
 
         def to_xml(self):
             return f"""<installationRemarks>
-            <string  language="{self.value}"></string>
+            <string>{self.value}></string>
             </installationRemarks>"""
 
         def __dict__(self):
-            return {'Language': self.value}
+            return {'InstallationRemarks': self.value}
 
     class Otherplatformrequirements:
         string = []
@@ -94,7 +94,7 @@ class Technical:
             self.string = string
         
         def addValues(self,atributes):
-            self.language=atributes.get('string')
+            self.string=atributes.get('string')
 
 
         def to_xml(self):
@@ -103,7 +103,7 @@ class Technical:
             </otherPlatformRequirements>"""
 
         def __dict__(self):
-            return {'Otherplatformrequirements': self.string}
+            return {'OtherPlatformRequirements': self.string}
 
 
     class Duration:
