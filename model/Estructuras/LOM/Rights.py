@@ -55,14 +55,14 @@ class Rights:
             string = []
 
             def __init__(self, string=[]):
-                self.source = string
+                self.string = string
             
             def addValues(self,atributes):
-                self.source=atributes.get('string')
-                if self.source is None:
-                    self.source=atributes.get('description')
+                self.string=atributes.get('string')
+                if self.string is None:
+                    self.string=atributes.get('description')
                     if len(self.source) > 1:
-                        self.source=[atributes.get('description')[1]]
+                        self.string=[atributes.get('description')[1]]
             def to_xml(self):
                 return f"""<description>
                                 <string>{self.string}</string>
@@ -111,6 +111,6 @@ class Rights:
 
         def __dict__(self):
             return {'Cost': self.cost.__dict__() if self.cost is not None else [],
-                    'Copyrightandotherrestrictions': self.copyrightAndOtherRestrictions.__dict__() if self.copyrightAndOtherRestrictions is not None else [],
+                    'CopyrightAndOtherRestrictions': self.copyrightAndOtherRestrictions.__dict__() if self.copyrightAndOtherRestrictions is not None else [],
                     'Description': self.description.__dict__() if self.description is not None else [],
                     'Access': self.access.__dict__() if self.access is not None else []}
