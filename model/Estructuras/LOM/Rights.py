@@ -85,9 +85,9 @@ class Rights:
                 self.value=atributes.get('value')
                 self.description=atributes.get('es')
                 if self.description is None:
-                    self.description=atributes.get('description')
+                    self.description=atributes.get('string')
                     if len(self.description) > 1:
-                        self.description=[atributes.get('description')[1]]
+                        self.description=[atributes.get('string')[1]]
 
             def to_xml(self):
                 return f"""<accessType >
