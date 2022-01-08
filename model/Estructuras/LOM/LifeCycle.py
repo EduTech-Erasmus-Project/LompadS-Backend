@@ -31,7 +31,7 @@ class LifeCycle:
                 if self.description_string is None:
                     self.description_string=atributes.get('description')
                     if len(self.description_string) > 1:
-                        self.description_string=atributes.get('description')[1]
+                        self.description_string=[atributes.get('description')[1]]
 
             def __dict__(self):
                 return {'Source': self.source, 'Role': self.value, 'Entity': self.entity, 'Datetime': self.datetime, 'Description': self.description_string}
