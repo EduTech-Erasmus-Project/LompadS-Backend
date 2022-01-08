@@ -214,11 +214,7 @@ class General:
                 self.coverage = coverage
             
             def addValues(self,atributes):
-                for i in range(len(atributes)):
-                    if i%2==0:
-                        self.language.append(atributes[i])
-                    else:
-                        self.coverage.append(atributes[i])
+                self.coverage=atributes.get("string")
                     
             def getValues(self):
                 print("Language: ", self.language)
@@ -241,11 +237,8 @@ class General:
                 self.value = value
             
             def addValues(self,atributes):
-                for i in range(len(atributes)):
-                    if i%2==0:
-                        self.source.append(atributes[i])
-                    else:
-                        self.value.append(atributes[i])
+                self.source=atributes.get("source")
+                self.value=atributes.get("value")
                     
             def getValues(self):
                 print("Source: ", self.language)
@@ -278,7 +271,7 @@ class General:
                     'Title': self.title.__dict__() if self.title is not None else [], 
                     'Language': self.language.__dict__() if self.language is not None else [],
                     'Description': self.description.__dict__() if self.description is not None else [],
-                    'keyword': self.keywordd.__dict__() if self.keywordd is not None else [],
+                    'Keyword': self.keywordd.__dict__() if self.keywordd is not None else [],
                     'Coverage': self.coverage.__dict__() if self.coverage is not None else [],
                     'Structure': self.structure.__dict__() if self.structure is not None else [],
                     'Aggregation Level': self.aggregation_level.__dict__() if self.aggregation_level is not None else []}
