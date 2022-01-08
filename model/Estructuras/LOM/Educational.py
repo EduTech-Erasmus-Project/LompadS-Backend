@@ -183,7 +183,8 @@ class Educational:
             
             def addValues(self,atributes):
                 self.language=atributes.get('string')
-
+                if self.language is None:
+                    self.language=atributes.get('#text')
             def to_xml(self):
                 return f"""<description>
                 <string>{self.language}</description>
