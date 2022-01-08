@@ -1,12 +1,12 @@
 class Classification:
         purpose = None  # purpose
-        taxon_path = None  # taxon_path
+        taxonPath = None  # taxon_path
         description = None  # description
         keywordd = None  # keywordd
 
-        def __init__(self, purpose='', taxon_path=None, description='', keywordd=''):
+        def __init__(self, purpose='', taxonPath=None, description='', keywordd=''):
             self.purpose = purpose
-            self.taxon_path = taxon_path
+            self.taxonPath = taxonPath
             self.description = description
             self.keywordd = keywordd
         
@@ -106,13 +106,13 @@ class Classification:
         def to_xml(self):
             return f"""<classification>
             {'' if isinstance(self.purpose, str) else self.purpose.to_xml() if self.purpose is not None else ''}
-            {'' if isinstance(self.taxon_path, str) else self.taxon_path.to_xml() if self.taxon_path is not None else ''}
+            {'' if isinstance(self.taxonPath, str) else self.taxonPath.to_xml() if self.taxonPath is not None else ''}
             {'' if isinstance(self.description, str) else self.description.to_xml() if self.description is not None else ''}
             {'' if isinstance(self.keywordd, str) else self.keywordd.to_xml() if self.keywordd is not None else ''}
             </classification>"""
 
         def __dict__(self):
             return {'Purpose': self.purpose.__dict__() if self.purpose is not None else [], 
-                    'Taxon Path': self.taxon_path.__dict__() if self.taxon_path is not None else [], 
-                    'Description': self.taxon_path.__dict__() if self.taxon_path is not None else [], 
+                    'Taxon Path': self.taxonPath.__dict__() if self.taxonPath is not None else [], 
+                    'Description': self.description.__dict__() if self.description is not None else [], 
                     'Keyword': self.keywordd.__dict__() if self.keywordd is not None else []}
