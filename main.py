@@ -48,9 +48,10 @@ async def upload_file(file: UploadFile = File(...)):
                      'metadataSchema']
 
     redundant_elements = [' uniqueElementName="general"', ' uniqueElementName="catalog"',' uniqueElementName="entry"',
-                          ' uniqueElementName="aggregationLevel"', ' uniqueElementName="source"', ' uniqueElementName="value"',
-                          ' uniqueElementName="metaMetadata"', ' uniqueElementName="rights"', ' uniqueElementName="access"', 
-                          ' uniqueElementName="accessType"', ' uniqueElementName="source"',' uniqueElementName="value"']
+                          ' uniqueElementName="aggregationLevel"', ' uniqueElementName="role"', ' uniqueElementName="dateTime"',
+                          ' uniqueElementName="source"',' uniqueElementName="value"', ' uniqueElementName="metaMetadata"', 
+                          ' uniqueElementName="rights"', ' uniqueElementName="access"', ' uniqueElementName="accessType"', 
+                          ' uniqueElementName="source"', ' uniqueElementName="value"']
 
     if file_type == -1:
         return HTTPException(status_code=500, detail='Error, not a valid file type.')
@@ -153,9 +154,10 @@ async def upload_file(file: UploadFile = File(...)):
 async def read_file(hashed_code: str, profile: str):
 
     redundant_elements = [' uniqueElementName="general"', ' uniqueElementName="catalog"',' uniqueElementName="entry"',
-                          ' uniqueElementName="aggregationLevel"', ' uniqueElementName="source"', ' uniqueElementName="value"',
-                          ' uniqueElementName="metaMetadata"', ' uniqueElementName="rights"', ' uniqueElementName="access"', 
-                          ' uniqueElementName="accessType"', ' uniqueElementName="source"',' uniqueElementName="value"']
+                          ' uniqueElementName="aggregationLevel"', ' uniqueElementName="role"', ' uniqueElementName="dateTime"',
+                          ' uniqueElementName="source"',' uniqueElementName="value"', ' uniqueElementName="metaMetadata"', 
+                          ' uniqueElementName="rights"', ' uniqueElementName="access"', ' uniqueElementName="accessType"', 
+                          ' uniqueElementName="source"', ' uniqueElementName="value"']
 
     import glob
     import os 
