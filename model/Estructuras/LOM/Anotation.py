@@ -4,15 +4,15 @@ class Annotation:
         description = None
         modeaccess = None
         modeaccesssufficient = None
-        Rol = None
+        rol = None
 
-        def __init__(self, entity=None, date=None, description=None, modeaccess=None, modeaccesssufficient=None, Rol=None):
+        def __init__(self, entity=None, date=None, description=None, modeaccess=None, modeaccesssufficient=None, rol=None):
             self.entity = entity
             self.date = date
             self.description = description
             self.modeaccess = modeaccess
             self.modeaccesssufficient = modeaccesssufficient
-            self.Rol = Rol
+            self.rol = rol
         
         class Entity:
             entity=[]
@@ -160,6 +160,6 @@ class Annotation:
             return {'Entity': self.entity.__dict__() if self.entity is not None else [], 
                     'Date': self.date.__dict__() if self.date is not None else [], 
                     'Description': self.description.__dict__() if self.description is not None else [],
-                    'Mode Access': self.mode_access.__dict__() if self.mode_access is not None else [],
+                    'Mode Access': self.modeaccess.__dict__() if self.modeaccess is not None else [],
                     'Mode Access Sufficient': self.modeaccesssufficient.__dict__() if self.modeaccesssufficient is not None else [],
                     'Rol': self.rol.__dict__() if self.rol is not None else []}

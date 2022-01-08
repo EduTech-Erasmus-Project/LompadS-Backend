@@ -73,6 +73,7 @@ class Controller:
             lom_object =LOMModel.LOM()
             for key, value in self._object_dict.items():
                 key = 'keywordd' if key == 'keyword' else key
+                key = 'rol' if key == 'Rol' else key
                 lom_object.__setattr__(key, value)
 
             with open('temp_files/'+object_name+'_exported.xml', 'w') as file:
@@ -84,6 +85,7 @@ class Controller:
                 if "lomes:" in key:
                     key = key.split(':')[1]
                 key = 'keywordd' if key == 'keyword' else key
+                key = 'rol' if key == 'Rol' else key
                 lom_object.__setattr__(key, value)
                 # print(key)
                 # print(value.__dir__())
