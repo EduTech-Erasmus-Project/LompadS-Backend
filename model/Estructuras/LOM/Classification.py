@@ -44,7 +44,7 @@ class Classification:
             
             def addValues(self,atributes):
                 self.string=atributes.get('string')
-                self.id=atributes.get('value')
+                self.id=atributes.get('id')
                 self.entry=atributes.get('entry')
 
             def to_xml(self):
@@ -67,10 +67,10 @@ class Classification:
             string = []
 
             def __init__(self, string=[]):
-                self.source = string
+                self.string = string
             
             def addValues(self,atributes):
-                self.source=atributes.get('string')
+                self.string=atributes.get('string')
 
             def to_xml(self):
                 return f"""<description>
