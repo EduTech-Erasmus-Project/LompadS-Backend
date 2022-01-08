@@ -176,22 +176,22 @@ class Educational:
                 return {'Duration': self.source, 'Description': self.value}
 
         class Description:
-            language = []
+            description = []
 
-            def __init__(self, language=[]):
-                self.language = language
+            def __init__(self, description=[]):
+                self.description = description
             
             def addValues(self,atributes):
-                self.language=atributes.get('string')
-                if self.language is None:
-                    self.language=atributes.get('#text')
+                self.description=atributes.get('string')
+                if self.description is None:
+                    self.description=atributes.get('#text')
             def to_xml(self):
                 return f"""<description>
-                <string>{self.language}</description>
+                <string>{self.description}</description>
                 </description>"""
 
             def __dict__(self):
-                return {'Language': self.language}
+                return {'Description': self.description}
         
         class Typicalagerange:
             string = []
