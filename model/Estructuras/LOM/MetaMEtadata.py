@@ -113,10 +113,12 @@ class MetaMetadata:
             {'' if isinstance(self.identifier, str) else self.identifier.to_xml() if self.identifier is not None else ''}
             {'' if isinstance(self.metadataSchema, str) else self.metadataSchema.to_xml() if self.metadataSchema is not None else ''}
             {'' if isinstance(self.language, str) else self.language.to_xml() if self.language is not None else ''}
+            {'' if isinstance(self.contribute, str) else self.contribute.to_xml() if self.contribute is not None else ''}
             </metaMetadata>"""
 
         def __dict__(self):
             return {
-                'Identifier': self.identifier.__dict__() if self.identifier is not None else self.Identifier().__dict__(),
-                'MetadataSchema': self.metadataSchema.__dict__() if self.metadataSchema is not None else self.Metadataschema().__dict__(),
-                'Language': self.language.__dict__() if self.language is not None else self.Language().__dict__()}
+                'Identifier': self.identifier.__dict__() if self.identifier is not None else [],
+                'MetadataSchema': self.metadataSchema.__dict__() if self.metadataSchema is not None else [],
+                'Language': self.language.__dict__() if self.language is not None else [],
+                'Contribute': self.contribute.__dict__() if self.contribute is not None else []}
