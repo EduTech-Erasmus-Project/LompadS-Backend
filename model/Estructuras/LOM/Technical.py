@@ -185,6 +185,7 @@ class Technical:
         {'' if isinstance(self.size, str) else self.size.to_xml() if self.size is not None else ''}
         {'' if isinstance(self.location, str) else self.location.to_xml() if self.location is not None else ''}
         {'' if isinstance(self.installationRemarks, str) else self.installationRemarks.to_xml() if self.installationRemarks is not None else ''}
+        {'' if isinstance(self.other_platform_requirements, str) else self.other_platform_requirements.to_xml() if self.other_platform_requirements is not None else ''}
         {'' if isinstance(self.requirement, str) else self.requirement.to_xml() if self.requirement is not None else ''}
         {'' if isinstance(self.duration, str) else self.duration.to_xml() if self.duration is not None else ''}
         </technical>"""
@@ -194,5 +195,6 @@ class Technical:
                 'Size': self.size.__dict__() if self.size is not None else [],
                 'Location': self.location.__dict__() if self.location is not None else [],
                 'Installation Remarks': self.installationRemarks.__dict__() if self.installationRemarks is not None else [],
+                'OtherPlatformRequirements': self.other_platform_requirements.__dict__() if self.other_platform_requirements is not None else [],
                 'Requirement': self.requirement.__dict__() if self.requirement is not None else [],
                 'Duration': self.duration.__dict__() if self.duration is not None else []}
