@@ -81,11 +81,11 @@ class Technical:
 
         def to_xml(self):
             return f"""<installationRemarks>
-            <string  language="{self.language}"></string>
+            <string  language="{self.value}"></string>
             </installationRemarks>"""
 
         def __dict__(self):
-            return {'Language': self.language}
+            return {'Language': self.value}
 
     class Otherplatformrequirements:
         string = []
