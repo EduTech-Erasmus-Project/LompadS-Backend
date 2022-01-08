@@ -67,14 +67,17 @@ class Technical:
             return {'Location': self.value}
 
     class Installationremarks:
-        language = []
+        value = []
 
-        def __init__(self, language=[]):
-            self.language = language
+        def __init__(self, value=[]):
+            self.value = value
         
         def addValues(self,atributes):
-            self.language=atributes.get('@language')
-
+            self.value=atributes.get('@language')
+            if self.value is None:
+                    self.value=atributes.get('string')
+                    if len(self.value) > 1:
+                        self.value=[atributes.get('string')[1]]
 
         def to_xml(self):
             return f"""<installationRemarks>
