@@ -4,15 +4,15 @@ class Annotation:
         description = None
         modeaccess = None
         modeaccesssufficient = None
-        rol = None
+        Rol = None
 
-        def __init__(self, entity=None, date=None, description=None, modeaccess=None, modeaccesssufficient=None, rol=None):
+        def __init__(self, entity=None, date=None, description=None, modeaccess=None, modeaccesssufficient=None, Rol=None):
             self.entity = entity
             self.date = date
             self.description = description
             self.modeaccess = modeaccess
             self.modeaccesssufficient = modeaccesssufficient
-            self.rol = rol
+            self.Rol = Rol
         
         class Entity:
             entity=[]
@@ -123,7 +123,7 @@ class Annotation:
             def __dict__(self):
                 return {'Source': self.source, 'Value': self.value}
         
-        class Rol:
+        class CRol:
 
             source=[]
             value=[]
@@ -153,7 +153,7 @@ class Annotation:
             {'' if isinstance(self.description, str) else self.description.to_xml() if self.description is not None else ''}
             {'' if isinstance(self.modeaccess, str) else self.modeaccess.to_xml() if self.modeaccess is not None else ''}
             {'' if isinstance(self.modeaccesssufficient, str) else self.modeaccesssufficient.to_xml() if self.modeaccesssufficient is not None else ''}
-            {'' if isinstance(self.rol, str) else self.rol.to_xml() if self.rol is not None else ''}
+            {'' if isinstance(self.Rol, str) else self.Rol.to_xml() if self.Rol is not None else ''}
             </annotation>"""
 
         def __dict__(self):
@@ -162,4 +162,4 @@ class Annotation:
                     'Description': self.description.__dict__() if self.description is not None else [],
                     'Mode Access': self.modeaccess.__dict__() if self.modeaccess is not None else [],
                     'Mode Access Sufficient': self.modeaccesssufficient.__dict__() if self.modeaccesssufficient is not None else [],
-                    'Rol': self.rol.__dict__() if self.rol is not None else []}
+                    'Rol': self.Rol.__dict__() if self.Rol is not None else []}

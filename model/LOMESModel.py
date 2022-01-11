@@ -167,6 +167,8 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                 # print(key_mapping)
                 if key_mapping == "keyword":
                     key_mapping="keywordd"
+                if key_mapping == "Rol":
+                    key_mapping="CRol"
                 key_mapping_Upper=key_mapping.capitalize()
                 if isinstance(data[key], str):
                     # print("hijo1: ", data[key])
