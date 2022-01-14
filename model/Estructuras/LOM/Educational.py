@@ -36,7 +36,11 @@ class Educational:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                if self.source is None:
+                    self.source=atributes.get('lomes:source')
                 self.value=atributes.get('value')
+                if self.value is None:
+                    self.value=atributes.get('lomes:value')
 
             def to_xml(self):
                 return f"""<learningResourceType >
@@ -57,7 +61,11 @@ class Educational:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                if self.source is None:
+                    self.source=atributes.get('lomes:source')
                 self.value=atributes.get('value')
+                if self.value is None:
+                    self.value=atributes.get('lomes:value')
 
             def to_xml(self):
                 return f"""<intendedEndUserRole >
@@ -120,7 +128,11 @@ class Educational:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                if self.source is None:
+                    self.source=atributes.get('lomes:source')
                 self.value=atributes.get('value')
+                if self.value is None:
+                    self.value=atributes.get('lomes:value')
 
             def to_xml(self):
                 return f"""<context>
@@ -185,6 +197,8 @@ class Educational:
                 self.description=atributes.get('string')
                 if self.description is None:
                     self.description=atributes.get('#text')
+                if self.description is None:
+                    self.description=atributes.get("@language")
             def to_xml(self):
                 return f"""<description>
                 <string>{self.description}</description>
@@ -219,7 +233,8 @@ class Educational:
             
             def addValues(self,atributes):
                 self.language=atributes.get('language')
-
+                if self.language is None:
+                    self.language=atributes.get('lomes:language')
 
             def to_xml(self):
                 return f"""<language >{self.language}</language>"""

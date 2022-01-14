@@ -4,7 +4,7 @@ class Classification:
         description = None  # description
         keywordd = None  # keywordd
 
-        def __init__(self, purpose='', taxonPath=None, description='', keywordd=''):
+        def __init__(self, purpose=None, taxonPath=None, description=None, keywordd=None):
             self.purpose = purpose
             self.taxonPath = taxonPath
             self.description = description
@@ -20,8 +20,12 @@ class Classification:
                 self.value = value
             
             def addValues(self,atributes):
-                self.source=atributes.get("source")
-                self.value=atributes.get("value")
+                self.source=atributes.get('source')
+                if self.source is None:
+                    self.source=atributes.get('lomes:source')
+                self.value=atributes.get('value')
+                if self.value is None:
+                    self.value=atributes.get('lomes:value')
                     
 
             def to_xml(self):
@@ -44,8 +48,14 @@ class Classification:
             
             def addValues(self,atributes):
                 self.string=atributes.get('string')
+                if self.string is None:
+                    self.string=[atributes.get('#text')[0]]
                 self.id=atributes.get('id')
+                if self.id is None:
+                    self.id=atributes.get('lomes:id')
                 self.entry=atributes.get('entry')
+                if self.entry is None:
+                    self.entry=atributes.get('#text')[1:]
 
             def to_xml(self):
                 return f"""<taxonPath>

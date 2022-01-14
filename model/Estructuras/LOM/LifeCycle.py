@@ -24,13 +24,23 @@ class LifeCycle:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                if self.source is None:
+                    self.source=atributes.get('lomes:source')
                 self.value=atributes.get('value')
+                if self.value is None:
+                    self.value=atributes.get('lomes:value')
                 self.entity=atributes.get('entity')
+                if self.entity is None:
+                    self.entity=atributes.get('lomes:entity')
                 self.datetime=atributes.get('dateTime')
+                if self.datetime is None:
+                    self.datetime=atributes.get('lomes:dateTime')
                 self.description_string=atributes.get('es')
                 if self.description_string is None:
                     self.description_string=atributes.get('description')
-                    if len(self.description_string) > 1:
+                    if self.description_string is None:
+                         self.description_string=atributes.get('lomes:string')
+                    elif len(self.description_string) > 1:
                         self.description_string=[atributes.get('description')[1]]
 
             def __dict__(self):

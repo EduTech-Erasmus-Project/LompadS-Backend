@@ -41,7 +41,11 @@ class Rights:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                if self.source is None:
+                    self.source=atributes.get('lomes:source')
                 self.value=atributes.get('value')
+                if self.value is None:
+                    self.value=atributes.get('lomes:value')
 
             def to_xml(self):
                 return f"""<copyrightAndOtherRestrictions>
@@ -82,10 +86,16 @@ class Rights:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                if self.source is None:
+                    self.source=atributes.get('lomes:source')
                 self.value=atributes.get('value')
+                if self.value is None:
+                    self.value=atributes.get('lomes:value')
                 self.description=atributes.get('es')
                 if self.description is None:
                     self.description=atributes.get('string')
+                    if self.description is None:
+                        self.description=atributes.get('lomes:string')
                     if len(self.description) > 1:
                         self.description=[atributes.get('string')[1]]
 

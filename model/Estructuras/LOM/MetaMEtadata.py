@@ -21,7 +21,12 @@ class MetaMetadata:
             
             def addValues(self,atributes):
                 self.catalog=atributes.get('catalog')
+                if self.catalog is None:
+                    self.catalog=atributes.get('lomes:catalog')
+
                 self.entry=atributes.get('entry')
+                if self.entry is None:
+                    self.entry=atributes.get('lomes:entry')
 
 
             def to_xml(self):
@@ -42,7 +47,8 @@ class MetaMetadata:
             
             def addValues(self,atributes):
                 self.value=atributes.get('metadataSchema')
-
+                if self.value is None:
+                    self.value=atributes.get('lomes:metadataSchema')
 
             def to_xml(self):
                 return f"""<metadataSchema>{self.value}</metadataSchema>"""
@@ -58,7 +64,8 @@ class MetaMetadata:
             
             def addValues(self,atributes):
                 self.value=atributes.get('language')
-
+                if self.value is None:
+                    self.value=atributes.get('lomes:language')
 
             def to_xml(self):
                 return f"""<language>{self.value}</language>"""

@@ -21,6 +21,7 @@ class LOM:
     def __init__(self, general=None, life_cycle=None, meta_metadata=None, technical=None, educational=None, rights=None,
                  relation=None, annotation=None, classification=None, accessibility=None):
         logging.basicConfig(filename='logger.log')
+        
         self.general = general
         self.lifeCycle = life_cycle
         self.metaMetadata = meta_metadata
@@ -33,24 +34,24 @@ class LOM:
         self.accesibility = accessibility
 
     General = General()
-    
-    LifeCycle = LifeCycle()
 
-    MetaMetadata = MetaMetadata()
+    LifeCycle = LifeCycle()
     
+    MetaMetadata = MetaMetadata()
+
     Technical = Technical()
 
-    Educational = Educational()    
+    Educational = Educational()
 
     Rights = Rights()
 
-    Relation = Relation()
+    Relation = Relation()    
 
-    Annotation = Annotation()    
+    Annotation = Annotation()
 
     Classification = Classification()
 
-    Accessibility = Accessibility()
+    Accessibility = Accessibility()    
 
     def to_xml(self):
         return f"""
@@ -82,7 +83,7 @@ class LOM:
                 'Accessibility': self.accesibility.__dict__() if self.accesibility is not None else self.Accessibility().__dict__()}
 
 
-def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False):
+def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False, booleanLomLomes=True):
     """
     Determine which lompad leaf should be mapped.
 
@@ -96,22 +97,34 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False):
     """
     try:
         # Search the key inside dispatch dict.
-        for key1 in dispatch.keys():
-            if key in key1:
-                try:
-                    metodo = dispatch[key1]
-                    ejemplo =  metodo(dict(dictionary), is_lompad_exported)
-                    return ejemplo
-                except:
-                    oLom = LOM().MetaMetadata
-                    oLom.__setattr__(key, None)
-                    return oLom.__getattribute__(key)
+        if booleanLomLomes:
+            for key1 in dispatch.keys():
+                if key in key1:
+                    print(key1)
+                    try:
+                        metodo = dispatch[key1]
+                        ejemplo = metodo(dict(dictionary), is_lompad_exported)
+                        # print(ejemplo)
+                        return ejemplo
+                    except Exception as e:
+                        print("======>")
+                        print(e)
+        else:
+            for key1 in dispatchLomes.keys():
+                if key in key1:
+                    try:
+                        metodo = dispatchLomes[key1]
+                        ejemplo = metodo(dict(dictionary), is_lompad_exported)
+                        # print(ejemplo)
+                        return ejemplo
+                    except Exception as e:
+                        print("======>")
+                        print(e)
     except KeyError as ke:
         logging.error(f' Unexpected key {key}, ignoring key, error {ke}')
     except Exception as ex:
         logging.error(f' Error: {ex}')
-        print(ex)
-        # print(traceback.format_exc())
+        print(traceback.format_exc())
 
 
 def get_keywords(object_data: list):
@@ -150,10 +163,12 @@ def map_attributes(data_original: dict, object_instance, is_lom):
     :param object_instance: An instance of Any LOM leaf class or its subclasses.
     :return: an object containing parsed information.
     """
+    values_labels_dict={}
+
     if data is not None and not isinstance(data, list):
         attributes = object_instance.__dir__()
         
-        # print("===============================================================")
+        print("===============================================================")
         # print(attributes)
         # print(object_instance)
         hijo=None
@@ -162,14 +177,14 @@ def map_attributes(data_original: dict, object_instance, is_lom):
         # print(data)
         try:
             for key in data:
-                # print("padre: ", key)
+                print("padre: ", key)
                 key_mapping=key.replace('lomes:', '')
                 # print(key_mapping)
                 if key_mapping == "keyword":
                     key_mapping="keywordd"
-                if key_mapping == "Rol":
-                    key_mapping="CRol"
                 key_mapping_Upper=key_mapping.capitalize()
+                if key_mapping_Upper == "Rol":
+                    key_mapping_Upper="CRol"
                 if isinstance(data[key], str):
                     # print("hijo1: ", data[key])
                     if data[key] is None:
@@ -190,13 +205,35 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                 if isinstance(containerOfChildren, collections.OrderedDict):
                                     for val2 in containerOfChildren:
                                         # print("objeto de objeto: ", containerOfChildren[val2])
-                                        if containerOfChildren[val2] is None:
-                                            containerOfChildren[val2]="None"
-                                        elif val2 not in values_labels_dict.keys():
-                                            values_labels_dict[val2]=[containerOfChildren[val2]]
+                                        if isinstance(containerOfChildren[val2], str) or isinstance(containerOfChildren[val2], list):
+                                            if containerOfChildren[val2] is None:
+                                                containerOfChildren[val2]="None"
+                                            elif val2 not in values_labels_dict.keys():
+                                                values_labels_dict[val2]=[containerOfChildren[val2]]
+                                            else:
+                                                values_labels_dict.get(val2).append(containerOfChildren[val2])
+                                                values_labels.append(containerOfChildren[val2])
                                         else:
-                                            values_labels_dict.get(val2).append(containerOfChildren[val2])
-                                            values_labels.append(containerOfChildren[val2])
+                                            auxContainerofChildren=containerOfChildren[val2]
+                                            for valAuxContChildren in auxContainerofChildren:
+                                                if isinstance(auxContainerofChildren[valAuxContChildren], str):
+                                                    if auxContainerofChildren[valAuxContChildren] is None:
+                                                        containerOfChildren[val2]="None"
+                                                    elif val2 not in values_labels_dict.keys():
+                                                        values_labels_dict[val2]=[auxContainerofChildren[valAuxContChildren]]
+                                                    else:
+                                                        values_labels_dict.get(val2).append(auxContainerofChildren[valAuxContChildren])
+                                                        values_labels.append(auxContainerofChildren[valAuxContChildren])
+                                                else:
+                                                    containterAux=auxContainerofChildren[valAuxContChildren]
+                                                    for auxContainerAux in containterAux:
+                                                        if containterAux[auxContainerAux] is None:
+                                                            containerOfChildren[val2]="None"
+                                                        elif val2 not in values_labels_dict.keys():
+                                                            values_labels_dict[val2]=[containterAux[auxContainerAux]]
+                                                        else:
+                                                            values_labels_dict.get(val2).append(containterAux[auxContainerAux])
+                                                            values_labels.append(containterAux[auxContainerAux])
                                 else:
                                     # print("data key con object: ", containerOfChildren)
                                     if containerOfChildren is None:
@@ -249,8 +286,9 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                                 else:
                                                     values_labels_dict.get(val2).append(containerOfChildren[val2])
                                                 values_labels.append(containerOfChildren[val2])
+                                
                 # print(values_labels)
-                # print(values_labels_dict)
+                print(values_labels_dict)
                 children_label=object_instance.__getattribute__(key_mapping_Upper)()
                 children_label.addValues(values_labels_dict)
                 # children_label.getValues()
@@ -262,6 +300,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                 object_instance.__setattr__(key_mapping, children_label)
         except Exception as e:
             print(e)
+    
     return object_instance
 
 
@@ -273,7 +312,6 @@ def general_leaf(data: dict, is_lom):
     :return: a General class instance. 
     """             
     general_object = map_attributes(data, LOM.General, is_lom)
-
     return general_object.__dict__(), general_object
 
 
@@ -299,7 +337,6 @@ def meta_metadata_leaf(data: dict, is_lom):
     general_object = map_attributes(data, LOM.MetaMetadata, is_lom)
 
     return general_object.__dict__(), general_object
-
 
 
 def technical_leaf(data: dict, is_lom):
@@ -370,72 +407,36 @@ def classification_leaf(data: dict, is_lom):
         :return: a Classification class instance.
         """
     classification_object = map_attributes(data, LOM.Classification, is_lom)
-
-    taxon_path = map_attributes(data.get('lomes:taxonPath') if data.get('lomes:taxonPath') is not None else
-                                data.get('taxonPath'), classification_object.TaxonPath(), is_lom)
-
-    taxon = None
-    if data.get('lomes:taxonPath') is not None and data.get('lomes:taxonPath').get('lomes:taxon') is not None:
-        taxon = map_attributes(data.get('lomes:taxonPath').get('lomes:taxon')[0]
-                               if type(data.get('lomes:taxonPath').get('lomes:taxon')) is list else
-                               data.get('lomes:taxonPath').get('lomes:taxon'), classification_object.TaxonPath.Taxon(),
-                               is_lom)
-
-    elif data.get('taxonPath') is not None and data.get('taxonPath').get('taxon') is not None:
-        taxon = map_attributes(data.get('taxonPath').get('taxon')[0]
-                               if type(data.get('taxonPath').get('taxon')) is list else
-                               data.get('taxonPath').get('taxon'), classification_object.TaxonPath.Taxon(),
-                               is_lom)
-
-    classification_object.taxon_path = taxon_path
-    classification_object.taxon_path.taxon = taxon
-
     return classification_object.__dict__(), classification_object
 
 
 def accessibility_leaf(data: dict, is_lom):
     accessibility_object = map_attributes(data, LOM.Accessibility, is_lom)
-    api, features, hazard, control = None, None, None, None
-
-    if data.get('accessibilityAPI') is not None:
-        api = map_attributes(data.get('accessibilityAPI'), LOM.Accessibility.AccessibilityAPI(), is_lom)
-    elif data.get('accessibilityApi') is not None:
-        api = map_attributes(data.get('accessibilityApi'), LOM.Accessibility.AccessibilityAPI(), is_lom)
-
-    if data.get('accessibilityfeatures') is not None:
-        features = map_attributes(data.get('accessibilityfeatures'), LOM.Accessibility.AccessibilityFeatures(), is_lom)
-    elif data.get('accessibilityFeatures') is not None:
-        features = map_attributes(data.get('accessibilityFeatures'), LOM.Accessibility.AccessibilityFeatures(), is_lom)
-
-    if data.get('accessibilityhazard') is not None:
-        hazard = map_attributes(data.get('accessibilityhazard'), LOM.Accessibility.AccessibilityHazard(), is_lom)
-    elif data.get('accessibilityHazard') is not None:
-        hazard = map_attributes(data.get('accessibilityHazard'), LOM.Accessibility.AccessibilityHazard(), is_lom)
-
-    if data.get('accessibilitycontrol') is not None:
-        control = map_attributes(data.get('accessibilitycontrol'), LOM.Accessibility.AccessibilityControl(), is_lom)
-    elif data.get('accessibilityControl') is not None:
-        control = map_attributes(data.get('accessibilityControl'), LOM.Accessibility.AccessibilityControl(), is_lom)
-
-
-
-    accessibility_object.accessibility_api = api
-    accessibility_object.accessibility_features = features
-    accessibility_object.accessibility_hazard = hazard
-    accessibility_object.accessibility_control = control
-
-
     return accessibility_object.__dict__(), accessibility_object
 
 
 dispatch = {
+    'general': general_leaf, 'lifeCycle': life_cycle_leaf, 'metaMetadata': meta_metadata_leaf,
+    'technical': technical_leaf, 'educational': educational_leaf,
+    'rights': rights_leaf, 'relation': relation_leaf, 'annotation': annotation_leaf,
+    'classification': classification_leaf, 'accesibility': accessibility_leaf
+}
+
+dispatch_update = {
+    'general': general_leaf, 'lifeCycle': life_cycle_leaf, 'metaMetadata': meta_metadata_leaf,
+    'technical': technical_leaf, 'educational': educational_leaf,
+    'rights': rights_leaf, 'relation': relation_leaf, 'annotation': annotation_leaf,
+    'classification': classification_leaf, 'accesibility': accessibility_leaf
+}
+
+dispatchLomes = {
     'lomes:general': general_leaf, 'lomes:lifeCycle': life_cycle_leaf, 'lomes:metaMetadata': meta_metadata_leaf,
     'lomes:technical': technical_leaf, 'lomes:educational': educational_leaf,
     'lomes:rights': rights_leaf, 'lomes:relation': relation_leaf, 'lomes:annotation': annotation_leaf,
     'lomes:classification': classification_leaf, 'accesibility': accessibility_leaf
 }
 
-dispatch_update = {
+dispatch_updateLomes = {
     'lomes:general': general_leaf, 'lomes:lifeCycle': life_cycle_leaf, 'lomes:metaMetadata': meta_metadata_leaf,
     'lomes:technical': technical_leaf, 'lomes:educational': educational_leaf,
     'lomes:rights': rights_leaf, 'lomes:relation': relation_leaf, 'lomes:annotation': annotation_leaf,

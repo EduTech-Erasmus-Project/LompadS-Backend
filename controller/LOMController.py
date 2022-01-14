@@ -2,7 +2,7 @@ from collections import OrderedDict
 from pprint import pprint
 import pickle
 import xmltodict
-from model import LOMModel, LOMESModel
+from model import LOMModel, LOMESModel, LOMESLOMModel
 from lxml import etree
 
 
@@ -44,8 +44,8 @@ class Controller:
                 if isinstance(dictionary[key], dict):
                     if any(key in leaf for leaf in self._leafs) and key != 'lom':
                         
-                        self._mapped_data[key], self._object_dict[key] = LOMModel.determine_lompad_leaf(dictionary[key], str(key),
-                                                                                is_lompad_exported)
+                        self._mapped_data[key], self._object_dict[key] = LOMESLOMModel.determine_lompad_leaf(dictionary[key], str(key),
+                                                                                is_lompad_exported,booleanLomLomes)
 
                     self.map_recursively(dictionary[key], booleanLomLomes,is_lompad_exported)
         else: 
@@ -53,10 +53,18 @@ class Controller:
                 if isinstance(dictionary[key], dict):
                     if any(key in leaf for leaf in self._leafsLomes) and key != 'lomes:lom':
 
-                        self._mapped_data[key], self._object_dict[key] = LOMESModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
-                                                                                is_lompad_exported)
+                        self._mapped_data[key], self._object_dict[key] = LOMESLOMModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
+                                                                                is_lompad_exported, booleanLomLomes)
                     
                     self.map_recursively(dictionary[key], booleanLomLomes,is_lompad_exported)
+
+                if isinstance(dictionary[key], list):
+                    if any(key in leaf for leaf in self._leafsLomes) and key != 'lomes:lom':
+                        print(key)
+                        self._mapped_data[key], self._object_dict[key] = LOMESLOMModel.determine_lompad_leaf(dict(dictionary[key][0]), str(key),
+                                                                                is_lompad_exported, booleanLomLomes)
+                    
+                    self.map_recursively(dictionary[key][0], booleanLomLomes,is_lompad_exported)
 
     def get_mapped_manifest(self, object_name, booleanLomLomes):
         self.get_object(object_name, booleanLomLomes)

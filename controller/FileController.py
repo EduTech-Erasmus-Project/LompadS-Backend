@@ -194,7 +194,9 @@ def load_recursive_model(manifest, booleanLomLomes,hashed_code, is_lompad_export
     lom_controller = LOMController.Controller()
     parsed_dictionary: dict = lom_controller.parse_str_to_dict(manifest)
 
-    #print(parsed_dictionary.get('lom').keys())
+    # print("=============================================================")
+    # print(parsed_dictionary.get('lomes:lom').keys())
+    # print("=============================================================")
 
     lom_controller.map_recursively(parsed_dictionary, booleanLomLomes,is_lompad_exported=is_lompad_exported)
     

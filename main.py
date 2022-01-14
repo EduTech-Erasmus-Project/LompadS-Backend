@@ -168,6 +168,13 @@ async def read_file(hashed_code: str, profile: str):
 
     from_lompad = False
 
+    # xml_manifest = FileController.read_manifest(fileFound)
+    # # print(xml_manifest)
+    # for redundant in redundant_elements:
+    #         xml_manifest = xml_manifest.replace(redundant,'')
+    # # print("*********************************************")
+    # # print(xml_manifest)
+
     if profile == 'SCORM':
         xml_manifest = FileController.read_manifest(fileFound)
         # print(xml_manifest)
@@ -189,6 +196,7 @@ async def read_file(hashed_code: str, profile: str):
         raise HTTPException(status_code=500,
                       detail='Error, file not found or corrupted.')
 
+        
     if not from_lompad:
         return {'DATA': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
     else:

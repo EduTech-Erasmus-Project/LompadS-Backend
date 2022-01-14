@@ -58,7 +58,8 @@ class Technical:
         
         def addValues(self,atributes):
             self.value=atributes.get('location')
-
+            if self.value is None:
+                self.value=atributes.get('lomes:location')
 
         def to_xml(self):
             return f"""<location>{self.value}</location>"""
@@ -148,10 +149,10 @@ class Technical:
             self.maxVersion =  maxVersion
         
         def addValues(self,atributes):
-            self.typeValue = atributes.get("type")[0]
-            self.typeSource = atributes.get("type")[1]
-            self.nameValue = atributes.get("name")[0]
-            self.nameSource = atributes.get("name")[1]
+            self.typeValue = [atributes.get("type")[0]]
+            self.typeSource = [atributes.get("type")[1]]
+            self.nameValue = [atributes.get("name")[0]]
+            self.nameSource = [atributes.get("name")[1]]
             self.minVersion = atributes.get("minimumVersion")
             self.maxVersion = atributes.get("maximumVersion")
 

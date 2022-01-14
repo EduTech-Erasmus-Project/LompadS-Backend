@@ -31,7 +31,12 @@ class General:
             
             def addValues(self,atributes):
                 self.catalog=atributes.get('catalog')
+                if self.catalog is None:
+                    self.catalog=atributes.get('lomes:catalog')
+
                 self.entry=atributes.get('entry')
+                if self.entry is None:
+                    self.entry=atributes.get('lomes:entry')
                     
             def getValues(self):
                 print("Catalog: ", self.catalog)
@@ -55,9 +60,13 @@ class General:
                 self.title = title
             
             def addValues(self,atributes):
-                for val in atributes.keys():
-                    self.title=atributes.get(val)
-                    self.language.append(val)
+                # for val in atributes.keys():
+                #     self.title=atributes.get(val)
+                #     self.language.append(val)
+                self.title=atributes.get("#text")
+                if self.title is None:
+                    self.title=atributes.get("string")
+                self.language=atributes.get("@language")
                     
             def getValues(self):
                 print("Languaje: ", self.language)
@@ -100,6 +109,8 @@ class General:
             
             def addValues(self,atributes):
                 self.language=atributes.get('language')
+                if self.language is None:
+                    self.language=atributes.get('lomes:language')        
                     
             def getValues(self):
                 print("Language: ", self.language)
@@ -113,52 +124,55 @@ class General:
         
         class Description:
 
-            language=[]
+            languageDescription=[]
             description=[]
 
-            def __init__(self, language=[], description=[]):
-                self.language = language
+            def __init__(self, languageDescription=[], description=[]):
+                self.languageDescription = languageDescription
                 self.description = description
             
             def addValues(self,atributes):
-                for val in atributes.keys():
-                    self.description=atributes.get(val)
-                    self.language.append(val)
+                self.description=atributes.get("#text")
+                if self.description is None:
+                    self.description=atributes.get("string")
+                self.languageDescription=atributes.get("@language")
                     
             def getValues(self):
-                print("Languaje: ", self.language)
+                print("Languaje: ", self.languageDescription)
                 print("Description: ", self.description)
 
             def to_xml(self):
                 return f"""<description>
-                <string language="{self.language}">{self.description}</string>
+                <string language="{self.languageDescription}">{self.description}</string>
                 </description>"""
 
             def __dict__(self):
-                return {'Language': self.language, 'Description': self.description}
+                return {'Language': self.languageDescription, 'Description': self.description}
         
         class Keywordd:
 
-            language=[]
+            languageKeyword=[]
             keywordd=[]
 
-            def __init__(self, language=[], keywordd=[]):
-                self.language = language
+            def __init__(self, languageKeyword=[], keywordd=[]):
+                self.languageKeyword = languageKeyword
                 self.keywordd = keywordd
             
             def addValues(self,atributes):
-                self.language=atributes.get('@language')
+                self.languageKeyword=atributes.get('@language')
                 self.keywordd=atributes.get('string')
+                if self.keywordd is None:
+                    self.keywordd=atributes.get('#text')
 
             def getValues(self):
-                print("Languaje: ", self.language)
+                print("Languaje: ", self.languageKeyword)
                 print("Keyword: ", self.keywordd)
 
             def to_xml(self):
-                return f"""<string  language="{self.language}">{self.keywordd}</string>"""
+                return f"""<string  language="{self.languageKeyword}">{self.keywordd}</string>"""
 
             def __dict__(self):
-                return {'Language': self.language, 'Keyword': self.keywordd}
+                return {'Language': self.languageKeyword, 'Keyword': self.keywordd}
         
         class Aggregationlevel:
 
@@ -171,7 +185,12 @@ class General:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                if self.source is None:
+                    self.source=atributes.get('lomes:source')
+                
                 self.value=atributes.get('value')
+                if self.value is None:
+                    self.value=atributes.get('lomes:value')
                     
             def getValues(self):
                 print("Source: ", self.source)
@@ -185,24 +204,6 @@ class General:
 
             def __dict__(self):
                 return {'Source': self.source, 'Value': self.value}
-
-        def get_keyword(self):
-            if type(self.keywordd) is list:
-                elements = []
-                for element in self.keywordd:
-                    elements.append(f'{element},')
-                return elements
-            else:
-                return self.keywordd
-
-        def get_xml_keywords(self):
-            if type(self.keywordd) is list:
-                content = ""
-                for key in self.keywordd:
-                    content += f"""<string language="en">{key}</string>\n"""
-                return content
-            else:
-                return self.keywordd
         
         class Coverage:
 
