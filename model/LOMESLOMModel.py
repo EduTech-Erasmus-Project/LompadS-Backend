@@ -307,7 +307,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                 values_labels_dict={}
                 if key_mapping == "aggregationLevel":
                     key_mapping="aggregation_level"
-                # print(object_instance,": ",key_mapping)
+                print(object_instance,": ",key_mapping," : ", children_label)
                 object_instance.__setattr__(key_mapping, children_label)
         except Exception as e:
             print(e)

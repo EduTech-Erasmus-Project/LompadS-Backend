@@ -197,7 +197,7 @@ class Technical:
                 'location': self.location.__dict__() if self.location is not None else {'location': []},
                 'installationRemarks': self.installationRemarks.__dict__() if self.installationRemarks is not None else {'installationRemarks': []},
                 'otherPlatformRequirements': self.otherPlatformRequirements.__dict__() if self.otherPlatformRequirements is not None else {'otherPlatformRequirements': []},
-                'requirement': self.requirement.__dict__() if self.requirement is not None else {'typeValue': self.typeValue,
+                'requirement': self.requirement.__dict__() if self.requirement is not None else {'typeValue': [],
                     'typeSource': [],
                     'nameValue': [],
                     'nameSource': [],
