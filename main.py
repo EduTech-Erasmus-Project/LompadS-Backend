@@ -123,7 +123,15 @@ async def upload_file(file: UploadFile = File(...)):
                     containmetadata=True
                     break
             except:
-                print("something happened with the file in the path: "+filePath)
+                try:
+                    childTag = doc.getElementsByTagName("lom:lom")
+                    if(len(childTag)>=1):
+                        fileFound=filePath
+                        booleanLomLomes=True
+                        containmetadata=True
+                    break
+                except:
+                    print("something happened with the file in the path: "+filePath)
 
         if not containmetadata:
             return HTTPException(status_code=500,
@@ -134,7 +142,7 @@ async def upload_file(file: UploadFile = File(...)):
         xml_manifest_scorm = FileController.read_manifest(fileFound)
         for redundant in redundant_elements:
             xml_manifest_scorm = xml_manifest_scorm.replace(redundant, '')
-
+        xml_manifest_scorm = xml_manifest_scorm.replace('lom:', '')
         if xml_manifest_scorm == -1:
             xml_manifest_ims = FileController.read_manifest(_filepath.replace('.zip', '') + '/imsmanifest.xml')
             xml_manifest = xml_manifest_ims
@@ -186,23 +194,26 @@ async def read_file(hashed_code: str, profile: str):
         # print(xml_manifest)
         for redundant in redundant_elements:
                 xml_manifest = xml_manifest.replace(redundant,'')
+        xml_manifest = xml_manifest.replace('lom:', '')
         # print("*********************************************")
         # print(xml_manifest)
     else:
         xml_manifest = FileController.read_manifest(f'./temp_files/{hashed_code}/imsmanifest.xml')
         for redundant in redundant_elements:
                 xml_manifest = xml_manifest.replace(redundant, '')
+        xml_manifest = xml_manifest.replace('lom:', '')
     if xml_manifest == -1:
         xml_manifest = FileController.read_manifest(f'./temp_files/{hashed_code}.xml')
         for redundant in redundant_elements:
                 xml_manifest = xml_manifest.replace(redundant, '')
+        xml_manifest = xml_manifest.replace('lom:', '')
         from_lompad = True
 
     if xml_manifest == -1:
         raise HTTPException(status_code=500,
                       detail='Error, file not found or corrupted.')
 
-        
+
     if not from_lompad:
         return {'data': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
     else:

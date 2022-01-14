@@ -28,6 +28,7 @@ class Controller:
 
         :return: An instance of OrderedDict
         """
+        print(data)
         return xmltodict.parse(data)
 
     def map_recursively(self, dictionary: dict, booleanLomLomes,is_lompad_exported=False):
