@@ -36,7 +36,7 @@ class MetaMetadata:
                 </identifier>"""
 
             def __dict__(self):
-                return {'Catalog': self.catalog, 'Entry': self.entry}
+                return {'catalog': self.catalog, 'entry': self.entry}
         
         class Metadataschema:
 
@@ -54,7 +54,7 @@ class MetaMetadata:
                 return f"""<metadataSchema>{self.value}</metadataSchema>"""
 
             def __dict__(self):
-                return {'Values': self.value}
+                return {'metadataSchema': self.value}
         
         class Language:
             value = []
@@ -71,7 +71,7 @@ class MetaMetadata:
                 return f"""<language>{self.value}</language>"""
 
             def __dict__(self):
-                return {'Values': self.value}
+                return {'language': self.value}
 
 
         class Contribute:
@@ -112,8 +112,8 @@ class MetaMetadata:
                 </contribute>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value, 'Entity': self.entity, 
-                'Date': self.dateTime, 'Description':self.description}
+                return {'source': self.source, 'value': self.value, 'entity': self.entity, 
+                'date': self.dateTime, 'description':self.description}
 
         def to_xml(self):
             return f"""<metaMetadata>
@@ -125,7 +125,7 @@ class MetaMetadata:
 
         def __dict__(self):
             return {
-                'Identifier': self.identifier.__dict__() if self.identifier is not None else [],
-                'MetadataSchema': self.metadataSchema.__dict__() if self.metadataSchema is not None else [],
-                'Language': self.language.__dict__() if self.language is not None else [],
-                'Contribute': self.contribute.__dict__() if self.contribute is not None else []}
+                'identifier': self.identifier.__dict__() if self.identifier is not None else {'catalog': [], 'entry': []},
+                'metadataSchema': self.metadataSchema.__dict__() if self.metadataSchema is not None else {'metadataSchema': []},
+                'language': self.language.__dict__() if self.language is not None else {'language': []},
+                'contribute': self.contribute.__dict__() if self.contribute is not None else {'source': [], 'value': [], 'entity': [], 'date': [], 'description':[]}}

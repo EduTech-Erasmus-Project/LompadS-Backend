@@ -49,7 +49,7 @@ class Educational:
                             </learningResourceType>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
         
         class Intendedenduserrole:
             source = []
@@ -74,7 +74,7 @@ class Educational:
                             </intendedEndUserRole>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
         
         class Interactivitylevel:
             source = []
@@ -95,7 +95,7 @@ class Educational:
                             </interactivityLevel>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
         
         class Semanticdensity:
             source = []
@@ -116,7 +116,7 @@ class Educational:
                             </semanticDensity>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
         
         class Context:
             source = []
@@ -141,7 +141,7 @@ class Educational:
                             </context>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
         
         class Difficulty:
             source = []
@@ -162,7 +162,7 @@ class Educational:
                             </Difficulty>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
         
         class Typicallearningtime:
             duration = []
@@ -185,7 +185,7 @@ class Educational:
                             </typicalLearningTime>"""
 
             def __dict__(self):
-                return {'Duration': self.source, 'Description': self.value}
+                return {'duration': self.source, 'description': self.value}
 
         class Description:
             description = []
@@ -205,7 +205,7 @@ class Educational:
                 </description>"""
 
             def __dict__(self):
-                return {'Description': self.description}
+                return {'description': self.description}
         
         class Typicalagerange:
             string = []
@@ -240,7 +240,7 @@ class Educational:
                 return f"""<language >{self.language}</language>"""
 
             def __dict__(self):
-                return {'Language': self.language}
+                return {'language': self.language}
         
         class Interactivitytype:
             source = []
@@ -261,7 +261,7 @@ class Educational:
                             </interactivityType>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
 
         def to_xml(self):
             return f"""<educational>
@@ -279,14 +279,14 @@ class Educational:
             </educational>"""
 
         def __dict__(self):
-            return {'Interactivity Type': self.interactivityType.__dict__() if self.interactivityType is not None else [],
-                    'Learning Resource Type': self.learningResourceType.__dict__() if self.learningResourceType is not None else [],
-                    'Interactivity Level': self.interactivityLevel.__dict__() if self.interactivityLevel is not None else [],
-                    'Intended End UserRole': self.intendedEndUserRole.__dict__() if self.intendedEndUserRole is not None else [],
-                    'Semantic Density': self.semanticDensity.__dict__() if self.semanticDensity is not None else [],
-                    'Context': self.context.__dict__() if self.context is not None else [],
-                    'Difficulty': self.difficulty.__dict__() if self.difficulty is not None else [],
-                    'Description': self.description.__dict__() if self.description is not None else [],
-                    'Typical Age Range': self.typicalAgeRange.__dict__() if self.typicalAgeRange is not None else [],
-                    'Typical Learning Time': self.typicalLearningTime.__dict__() if self.typicalLearningTime is not None else [],
-                    'Language': self.language.__dict__() if self.language is not None else []}
+            return {'interactivityType': self.interactivityType.__dict__() if self.interactivityType is not None else [],
+                    'learningResourceType': self.learningResourceType.__dict__() if self.learningResourceType is not None else {'source': [], 'value': []},
+                    'interactivityLevel': self.interactivityLevel.__dict__() if self.interactivityLevel is not None else {'source': [], 'value': []},
+                    'intendedEndUserRole': self.intendedEndUserRole.__dict__() if self.intendedEndUserRole is not None else {'source': [], 'value': []},
+                    'semanticDensity': self.semanticDensity.__dict__() if self.semanticDensity is not None else {'source': [], 'value': []},
+                    'context': self.context.__dict__() if self.context is not None else {'source': [], 'value': []},
+                    'difficulty': self.difficulty.__dict__() if self.difficulty is not None else {'source': [], 'value': []},
+                    'description': self.description.__dict__() if self.description is not None else {'description': []},
+                    'typicalAgeRange': self.typicalAgeRange.__dict__() if self.typicalAgeRange is not None else {'typicalAgeRange': []},
+                    'typicalLearningTime': self.typicalLearningTime.__dict__() if self.typicalLearningTime is not None else {'duration': [], 'description': []},
+                    'language': self.language.__dict__() if self.language is not None else {'language': []}}

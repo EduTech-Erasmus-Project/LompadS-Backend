@@ -49,7 +49,7 @@ class General:
                 </identifier>"""
 
             def __dict__(self):
-                return {'Catalog': self.catalog, 'Entry': self.entry}
+                return {'catalog': self.catalog, 'entry': self.entry}
 
         class Title:
             language=[]
@@ -78,7 +78,7 @@ class General:
                 </title>"""
 
             def __dict__(self):
-                return {'Language': self.language, 'Title': self.title}
+                return {'language': self.language, 'title': self.title}
         
         class Catalogentry:
             catalog=[]
@@ -120,7 +120,7 @@ class General:
                 return f"""<language>{self.language}</language>"""
 
             def __dict__(self):
-                return {'Language': self.language}
+                return {'language': self.language}
         
         class Description:
 
@@ -147,7 +147,7 @@ class General:
                 </description>"""
 
             def __dict__(self):
-                return {'Language': self.languageDescription, 'Description': self.description}
+                return {'language': self.languageDescription, 'description': self.description}
         
         class Keywordd:
 
@@ -172,7 +172,57 @@ class General:
                 return f"""<string  language="{self.languageKeyword}">{self.keywordd}</string>"""
 
             def __dict__(self):
-                return {'Language': self.languageKeyword, 'Keyword': self.keywordd}
+                return {'language': self.languageKeyword, 'keyword': self.keywordd}
+        
+        
+        class Coverage:
+
+            language=[]
+            coverage=[]
+
+            def __init__(self, language=[], coverage=[]):
+                self.language = language
+                self.coverage = coverage
+            
+            def addValues(self,atributes):
+                self.coverage=atributes.get("string")
+                    
+            def getValues(self):
+                print("Language: ", self.language)
+                print("Coverage: ", self.coverage)
+
+            def to_xml(self):
+                return f"""<coverage>
+                <string language="{self.language}">{self.coverage}</string>
+                </coverage>"""
+
+            def __dict__(self):
+                return {'language': self.language, 'coverage': self.coverage}
+        
+        class Structure:
+            source=[]
+            value=[]
+
+            def __init__(self, source=[], value=[]):
+                self.source = source
+                self.value = value
+            
+            def addValues(self,atributes):
+                self.source=atributes.get("source")
+                self.value=atributes.get("value")
+                    
+            def getValues(self):
+                print("Source: ", self.language)
+                print("Value: ", self.coverage)
+
+            def to_xml(self):
+                return f""" <structure>
+                <source>{self.source}</source>
+                <value>{self.value}</value>
+                </structure>"""
+
+            def __dict__(self):
+                return {'source': self.source, 'value': self.value}
         
         class Aggregationlevel:
 
@@ -203,56 +253,7 @@ class General:
                 </aggregationLevel>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
-        
-        class Coverage:
-
-            language=[]
-            coverage=[]
-
-            def __init__(self, language=[], coverage=[]):
-                self.language = language
-                self.coverage = coverage
-            
-            def addValues(self,atributes):
-                self.coverage=atributes.get("string")
-                    
-            def getValues(self):
-                print("Language: ", self.language)
-                print("Coverage: ", self.coverage)
-
-            def to_xml(self):
-                return f"""<coverage>
-                <string language="{self.language}">{self.coverage}</string>
-                </coverage>"""
-
-            def __dict__(self):
-                return {'Language': self.language, 'Coverage': self.coverage}
-        
-        class Structure:
-            source=[]
-            value=[]
-
-            def __init__(self, source=[], value=[]):
-                self.source = source
-                self.value = value
-            
-            def addValues(self,atributes):
-                self.source=atributes.get("source")
-                self.value=atributes.get("value")
-                    
-            def getValues(self):
-                print("Source: ", self.language)
-                print("Value: ", self.coverage)
-
-            def to_xml(self):
-                return f""" <structure>
-                <source>{self.source}</source>
-                <value>{self.value}</value>
-                </structure>"""
-
-            def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
 
         def to_xml(self):
             return f"""<general>
@@ -268,11 +269,11 @@ class General:
             </general>"""
 
         def __dict__(self):
-            return {'Identifier': self.identifier.__dict__() if self.identifier is not None else [],
-                    'Title': self.title.__dict__() if self.title is not None else [], 
-                    'Language': self.language.__dict__() if self.language is not None else [],
-                    'Description': self.description.__dict__() if self.description is not None else [],
-                    'Keyword': self.keywordd.__dict__() if self.keywordd is not None else [],
-                    'Coverage': self.coverage.__dict__() if self.coverage is not None else [],
-                    'Structure': self.structure.__dict__() if self.structure is not None else [],
-                    'Aggregation Level': self.aggregation_level.__dict__() if self.aggregation_level is not None else []}
+            return {'identifier': self.identifier.__dict__() if self.identifier is not None else  {'catalog': [], 'entry': []},
+                    'title': self.title.__dict__() if self.title is not None else {'language': [], 'title': []}, 
+                    'language': self.language.__dict__() if self.language is not None else {'language': []},
+                    'description': self.description.__dict__() if self.description is not None else {'language': [], 'description': []},
+                    'keyword': self.keywordd.__dict__() if self.keywordd is not None else {'language': [], 'keyword': []},
+                    'coverage': self.coverage.__dict__() if self.coverage is not None else {'language': [], 'coverage': []},
+                    'structure': self.structure.__dict__() if self.structure is not None else {'source': [], 'value': []},
+                    'aggregationLevel': self.aggregation_level.__dict__() if self.aggregation_level is not None else {'source': [], 'value': []}}

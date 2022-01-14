@@ -44,7 +44,7 @@ class LifeCycle:
                         self.description_string=[atributes.get('description')[1]]
 
             def __dict__(self):
-                return {'Source': self.source, 'Role': self.value, 'Entity': self.entity, 'Datetime': self.datetime, 'Description': self.description_string}
+                return {'source': self.source, 'role': self.value, 'entity': self.entity, 'dateTime': self.datetime, 'description': self.description_string}
 
             def to_xml(self):
                 return f"""<contribute>
@@ -77,7 +77,7 @@ class LifeCycle:
                 </version>"""
 
             def __dict__(self):
-                return {'String': self.string}
+                return {'version': self.string}
 
         class Status:
             source = []
@@ -98,12 +98,12 @@ class LifeCycle:
                             </status>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
         
         def __dict__(self):
-            return {'Version': self.version.__dict__() if self.version is not None else [],
-                    'Status': self.status.__dict__() if self.status is not None else [],
-                    'Contribute': self.contribute.__dict__() if self.contribute is not None else []}
+            return {'version': self.version.__dict__() if self.version is not None else {'version': []},
+                    'status': self.status.__dict__() if self.status is not None else {'source': [], 'value': []},
+                    'contribute': self.contribute.__dict__() if self.contribute is not None else {'source': [], 'role': [], 'entity': [], 'dateTime': [], 'description': []}}
 
         def to_xml(self):
             return f"""<lifeCycle>

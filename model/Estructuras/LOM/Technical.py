@@ -32,7 +32,7 @@ class Technical:
             return f"""<format>{self.value}</format>"""
 
         def __dict__(self):
-            return {'Format': self.value}
+            return {'format': self.value}
 
     class Size:
         value = []
@@ -48,7 +48,7 @@ class Technical:
             return f"""<size>{self.value}</size>"""
 
         def __dict__(self):
-            return {'Size': self.value}
+            return {'size': self.value}
 
     class Location:
         value = []
@@ -65,7 +65,7 @@ class Technical:
             return f"""<location>{self.value}</location>"""
 
         def __dict__(self):
-            return {'Location': self.value}
+            return {'location': self.value}
 
     class Installationremarks:
         value = []
@@ -86,7 +86,7 @@ class Technical:
             </installationRemarks>"""
 
         def __dict__(self):
-            return {'InstallationRemarks': self.value}
+            return {'installationRemarks': self.value}
 
     class Otherplatformrequirements:
         string = []
@@ -104,7 +104,7 @@ class Technical:
             </otherPlatformRequirements>"""
 
         def __dict__(self):
-            return {'OtherPlatformRequirements': self.string}
+            return {'otherPlatformRequirements': self.string}
 
 
     class Duration:
@@ -128,8 +128,8 @@ class Technical:
                         </duration>"""
 
         def __dict__(self):
-            return {'Duration': self.duration,
-                    'Description': self.description}
+            return {'duration': self.duration,
+                    'description': self.description}
 
     class Requirement:
         
@@ -173,12 +173,12 @@ class Technical:
             </requirement>"""
         
         def __dict__(self):
-            return {'TypeValue': self.typeValue,
-                    'TypeSource': self.typeSource,
-                    'NameValue': self.nameValue,
-                    'NameSource': self.nameSource,
-                    'MinVersion': self.minVersion,
-                    'MaxVersion': self.maxVersion}
+            return {'typeValue': self.typeValue,
+                    'typeSource': self.typeSource,
+                    'nameValue': self.nameValue,
+                    'nameSource': self.nameSource,
+                    'minVersion': self.minVersion,
+                    'maxVersion': self.maxVersion}
 
     def to_xml(self):
         return f"""<technical>
@@ -192,10 +192,15 @@ class Technical:
         </technical>"""
 
     def __dict__(self):
-        return {'Format': self.format.__dict__() if self.format is not None else [],
-                'Size': self.size.__dict__() if self.size is not None else [],
-                'Location': self.location.__dict__() if self.location is not None else [],
-                'Installation Remarks': self.installationRemarks.__dict__() if self.installationRemarks is not None else [],
-                'OtherPlatformRequirements': self.otherPlatformRequirements.__dict__() if self.otherPlatformRequirements is not None else [],
-                'Requirement': self.requirement.__dict__() if self.requirement is not None else [],
-                'Duration': self.duration.__dict__() if self.duration is not None else []}
+        return {'format': self.format.__dict__() if self.format is not None else {'format': []},
+                'size': self.size.__dict__() if self.size is not None else {'size': []},
+                'location': self.location.__dict__() if self.location is not None else {'location': []},
+                'installationRemarks': self.installationRemarks.__dict__() if self.installationRemarks is not None else {'installationRemarks': []},
+                'otherPlatformRequirements': self.otherPlatformRequirements.__dict__() if self.otherPlatformRequirements is not None else {'otherPlatformRequirements': []},
+                'requirement': self.requirement.__dict__() if self.requirement is not None else {'typeValue': self.typeValue,
+                    'typeSource': [],
+                    'nameValue': [],
+                    'nameSource': [],
+                    'minVersion': [],
+                    'maxVersion': []},
+                'duration': self.duration.__dict__() if self.duration is not None else {'duration': [], 'description': []}}

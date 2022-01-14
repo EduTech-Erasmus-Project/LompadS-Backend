@@ -28,7 +28,7 @@ class Rights:
                                 <value >{self.value}</value>
                             </Cost>"""
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
 
         
         class Copyrightandotherrestrictions:
@@ -53,7 +53,7 @@ class Rights:
                                 <value >{self.value}</value>
                             </copyrightAndOtherRestrictions>"""
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
 
         class Description:
             string = []
@@ -72,7 +72,7 @@ class Rights:
                                 <string>{self.string}</string>
                             </description>"""
             def __dict__(self):
-                return {'Description': self.string}
+                return {'description': self.string}
 
 
         class Access:
@@ -109,7 +109,7 @@ class Rights:
                 </description>"""
             
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value, 'Description':self.description}
+                return {'source': self.source, 'value': self.value, 'description':self.description}
 
         def to_xml(self):
             return f"""<rights>
@@ -120,7 +120,7 @@ class Rights:
             </rights>"""
 
         def __dict__(self):
-            return {'Cost': self.cost.__dict__() if self.cost is not None else [],
-                    'CopyrightAndOtherRestrictions': self.copyrightAndOtherRestrictions.__dict__() if self.copyrightAndOtherRestrictions is not None else [],
-                    'Description': self.description.__dict__() if self.description is not None else [],
-                    'Access': self.access.__dict__() if self.access is not None else []}
+            return {'cost': self.cost.__dict__() if self.cost is not None else {'source': [], 'value': []},
+                    'copyrightAndOtherRestrictions': self.copyrightAndOtherRestrictions.__dict__() if self.copyrightAndOtherRestrictions is not None else {'source': [], 'value': []},
+                    'description': self.description.__dict__() if self.description is not None else {'description': []},
+                    'access': self.access.__dict__() if self.access is not None else {'source': [], 'value': [], 'description':[]}}

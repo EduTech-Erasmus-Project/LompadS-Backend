@@ -32,7 +32,7 @@ class Accessibility:
                             </description>"""
 
             def __dict__(self):
-                return {'Description': self.description}
+                return {'description': self.description}
 
         class Accessibilityfeatures:
             br=[]
@@ -51,7 +51,7 @@ class Accessibility:
                             </accessibilityfeatures>"""
 
             def __dict__(self):
-                return {'Accessibilityfeatures': self.br}
+                return {'resourceContent': self.br}
         
         class Accessibilityhazard:
             br=[]
@@ -70,7 +70,7 @@ class Accessibility:
                             </accessibilityhazard>"""
 
             def __dict__(self):
-                return {'Accessibilityhazard': self.br}
+                return {'properties': self.br}
 
         class Accessibilitycontrol:
             br=[]
@@ -89,7 +89,7 @@ class Accessibility:
                             </accessibilitycontrol>"""
 
             def __dict__(self):
-                return {'Accessibilitycontrol': self.br}
+                return {'methods': self.br}
         
         class Accessibilityapi:
             br=[]
@@ -98,7 +98,7 @@ class Accessibility:
                 self.br = br
             
             def addValues(self,atributes):
-                self.br=atributes.get("br")[0]
+                self.br=[atributes.get("br")[0]]
 
             def to_xml(self):
                 return f"""<accessibilityAPI>
@@ -108,7 +108,7 @@ class Accessibility:
                             </accessibilityAPI>"""
 
             def __dict__(self):
-                return {'Accessibilityapi': self.br}
+                return {'compatibleResource': self.br}
 
         def to_xml(self):
             return f"""<accesibility>
@@ -120,8 +120,8 @@ class Accessibility:
             </accesibility>"""
 
         def __dict__(self):
-            return {'Description': self.description.__dict__() if self.description is not None else [],
-                    'Accessibility Features': self.accessibilityfeatures.__dict__() if self.accessibilityfeatures is not None else [], 
-                    'Accessibility Hazard': self.accessibilityhazard.__dict__() if self.accessibilityhazard is not None else [], 
-                    'Accessibility Control': self.accessibilitycontrol.__dict__() if self.accessibilitycontrol is not None else [], 
-                    'Accessibility API': self.accessibilityAPI.__dict__() if self.accessibilityAPI is not None else []}
+            return {'description': self.description.__dict__() if self.description is not None else {'description': []},
+                    'accessibilityFeatures': self.accessibilityfeatures.__dict__() if self.accessibilityfeatures is not None else {'resourceContent': []}, 
+                    'accessibilityHazard': self.accessibilityhazard.__dict__() if self.accessibilityhazard is not None else {'properties': []}, 
+                    'accessibilityControl': self.accessibilitycontrol.__dict__() if self.accessibilitycontrol is not None else {'methods': []}, 
+                    'accessibilityApi': self.accessibilityAPI.__dict__() if self.accessibilityAPI is not None else {'compatibleResource': []}}

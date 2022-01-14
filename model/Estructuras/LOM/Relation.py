@@ -24,7 +24,7 @@ class Relation:
                                 <value>{self.value}</value>
                             </kind>"""
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
 
         class Resource:
             catalog = []
@@ -53,7 +53,7 @@ class Relation:
                             </resource>"""
 
             def __dict__(self):
-                return {'Catalog': self.catalog, 'Entry': self.entry, 'Description':self.string}
+                return {'catalog': self.catalog, 'entry': self.entry, 'description':self.string}
 
         def to_xml(self):
             return f"""<relation>
@@ -62,5 +62,5 @@ class Relation:
             </relation>"""
 
         def __dict__(self):
-            return {'Kind': self.kind.__dict__() if self.kind is not None else [],
-                    'Resource': self.resource.__dict__() if self.resource is not None else []}
+            return {'kind': self.kind.__dict__() if self.kind is not None else {'source': [], 'value': []},
+                    'resource': self.resource.__dict__() if self.resource is not None else {'catalog': [], 'entry': [], 'description':[]}}

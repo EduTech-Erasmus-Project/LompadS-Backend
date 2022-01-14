@@ -30,7 +30,7 @@ class Annotation:
                 return f"""<entity>{self.entity}</entity>"""
 
             def __dict__(self):
-                return {'Entity': self.entity}
+                return {'entity': self.entity}
 
         class Date:
 
@@ -55,7 +55,7 @@ class Annotation:
                             </date>"""
 
             def __dict__(self):
-                return {'DateTime': self.dateTime, 'Description': self.string}
+                return {'dateTime': self.dateTime, 'description': self.string}
         
         class Description:
             Description=[]
@@ -75,7 +75,7 @@ class Annotation:
                             </description>"""
 
             def __dict__(self):
-                return {'Description': self.description}
+                return {'description': self.description}
         
         class Modeaccess:
 
@@ -98,7 +98,7 @@ class Annotation:
                             </modeaccess>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
         
         class Modeaccesssufficient:
 
@@ -121,7 +121,7 @@ class Annotation:
                             </modeaccesssufficient>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
         
         class CRol:
 
@@ -144,7 +144,7 @@ class Annotation:
                             </Rol>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
 
         def to_xml(self):
             return f"""<annotation>
@@ -157,9 +157,9 @@ class Annotation:
             </annotation>"""
 
         def __dict__(self):
-            return {'Entity': self.entity.__dict__() if self.entity is not None else [], 
-                    'Date': self.date.__dict__() if self.date is not None else [], 
-                    'Description': self.description.__dict__() if self.description is not None else [],
-                    'Mode Access': self.modeaccess.__dict__() if self.modeaccess is not None else [],
-                    'Mode Access Sufficient': self.modeaccesssufficient.__dict__() if self.modeaccesssufficient is not None else [],
-                    'Rol': self.Rol.__dict__() if self.Rol is not None else []}
+            return {'entity': self.entity.__dict__() if self.entity is not None else {'entity': []}, 
+                    'date': self.date.__dict__() if self.date is not None else {'dateTime': [], 'description': []}, 
+                    'description': self.description.__dict__() if self.description is not None else {'description': []},
+                    'modeAccess': self.modeaccess.__dict__() if self.modeaccess is not None else {'source': [], 'value': []},
+                    'modeAccessSufficient': self.modeaccesssufficient.__dict__() if self.modeaccesssufficient is not None else {'source': [], 'value': []},
+                    'rol': self.Rol.__dict__() if self.Rol is not None else {'source': [], 'value': []}}

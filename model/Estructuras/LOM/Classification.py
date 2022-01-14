@@ -35,7 +35,7 @@ class Classification:
                             </purpose>"""
 
             def __dict__(self):
-                return {'Source': self.source, 'Value': self.value}
+                return {'source': self.source, 'value': self.value}
                 
         class Taxonpath:
             string = []
@@ -71,7 +71,7 @@ class Classification:
                             </taxonPath>"""
             
             def __dict__(self):
-                return {'Source': self.string, 'Id': self.id, 'Entry':self.entry}
+                return {'source': self.string, 'id': self.id, 'entry':self.entry}
         
         class Description:
             string = []
@@ -87,7 +87,7 @@ class Classification:
                                 <string>{self.string}</string>
                             </description>"""
             def __dict__(self):
-                return {'Description': self.string}
+                return {'description': self.string}
 
         class Keywordd:
 
@@ -110,7 +110,7 @@ class Classification:
                 return f"""<string  language="{self.language}">{self.keywordd}</string>"""
 
             def __dict__(self):
-                return {'Language': self.language, 'Keyword': self.keywordd}
+                return {'language': self.language, 'keyword': self.keywordd}
 
 
         def to_xml(self):
@@ -122,7 +122,7 @@ class Classification:
             </classification>"""
 
         def __dict__(self):
-            return {'Purpose': self.purpose.__dict__() if self.purpose is not None else [], 
-                    'Taxon Path': self.taxonPath.__dict__() if self.taxonPath is not None else [], 
-                    'Description': self.description.__dict__() if self.description is not None else [], 
-                    'Keyword': self.keywordd.__dict__() if self.keywordd is not None else []}
+            return {'purpose': self.purpose.__dict__() if self.purpose is not None else {'source': [], 'value': []}, 
+                    'taxonPath': self.taxonPath.__dict__() if self.taxonPath is not None else {'source': [], 'id': [], 'entry':[]}, 
+                    'description': self.description.__dict__() if self.description is not None else {'description': []}, 
+                    'keyword': self.keywordd.__dict__() if self.keywordd is not None else {'language': [], 'keyword': []}}
