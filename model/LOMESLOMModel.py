@@ -5,16 +5,6 @@ from collections import OrderedDict
 from pprint import pprint
 from typing import Container
 from fuzzywuzzy import fuzz, process
-from .Estructuras.LOM.General import General
-from .Estructuras.LOM.LifeCycle import LifeCycle
-from .Estructuras.LOM.MetaMEtadata import MetaMetadata
-from .Estructuras.LOM.Technical import Technical
-from .Estructuras.LOM.Educational import Educational
-from .Estructuras.LOM.Rights import Rights
-from .Estructuras.LOM.Relation import Relation
-from .Estructuras.LOM.Anotation import Annotation
-from .Estructuras.LOM.Classification import Classification
-from .Estructuras.LOM.Accessibility import Accessibility
 
 class LOM:
 
@@ -31,27 +21,7 @@ class LOM:
         self.relation = relation
         self.annotation = annotation
         self.classification = classification
-        self.accesibility = accessibility
-
-    General = General()
-
-    LifeCycle = LifeCycle()
-    
-    MetaMetadata = MetaMetadata()
-
-    Technical = Technical()
-
-    Educational = Educational()
-
-    Rights = Rights()
-
-    Relation = Relation()    
-
-    Annotation = Annotation()
-
-    Classification = Classification()
-
-    Accessibility = Accessibility()    
+        self.accesibility = accessibility  
 
     def to_xml(self):
         return f"""
@@ -307,7 +277,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                 values_labels_dict={}
                 if key_mapping == "aggregationLevel":
                     key_mapping="aggregation_level"
-                print(object_instance,": ",key_mapping," : ", children_label)
+                # print(object_instance,": ",key_mapping," : ", children_label)
                 object_instance.__setattr__(key_mapping, children_label)
         except Exception as e:
             print(e)
@@ -322,7 +292,14 @@ def general_leaf(data: dict, is_lom):
     :param data: data from manifest.
     :return: a General class instance. 
     """             
-    general_object = map_attributes(data, LOM.General, is_lom)
+
+    # print(data)
+
+    from .Estructuras.LOM.General import General
+
+    cGeneral= General()
+    general_object = map_attributes(data, cGeneral, is_lom)
+    del cGeneral
     return general_object.__dict__(), general_object
 
 
@@ -333,8 +310,11 @@ def life_cycle_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a LifeCycle class instance.
         """
-    general_object = map_attributes(data, LOM.LifeCycle, is_lom)
+    from .Estructuras.LOM.LifeCycle import LifeCycle
 
+    cLifeCycle=LifeCycle()
+    general_object = map_attributes(data, cLifeCycle, is_lom)
+    del cLifeCycle
     return general_object.__dict__(), general_object
 
 
@@ -345,8 +325,11 @@ def meta_metadata_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a MetaMetaData class instance.
         """
-    general_object = map_attributes(data, LOM.MetaMetadata, is_lom)
+    from .Estructuras.LOM.MetaMEtadata import MetaMetadata
 
+    cMetaMetadata= MetaMetadata()
+    general_object = map_attributes(data, cMetaMetadata, is_lom)
+    del cMetaMetadata
     return general_object.__dict__(), general_object
 
 
@@ -357,8 +340,11 @@ def technical_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a Technical class instance.
         """
-    technical_object = map_attributes(data, LOM.Technical, is_lom)
-
+    from .Estructuras.LOM.Technical import Technical
+    
+    cTechnical = Technical()  
+    technical_object = map_attributes(data, cTechnical, is_lom)
+    del cTechnical
     return technical_object.__dict__(), technical_object
 
 
@@ -369,8 +355,11 @@ def educational_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a Educational class instance.
         """
-    educational_object = map_attributes(data, LOM.Educational, is_lom)
+    from .Estructuras.LOM.Educational import Educational
 
+    cEducational=Educational()
+    educational_object = map_attributes(data, cEducational, is_lom)
+    del cEducational
     return educational_object.__dict__(), educational_object
 
 
@@ -381,8 +370,11 @@ def rights_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a Rights class instance.
         """
-    rights_object = map_attributes(data, LOM.Rights, is_lom)
+    from .Estructuras.LOM.Rights import Rights
 
+    cRights = Rights()
+    rights_object = map_attributes(data, cRights, is_lom)
+    del cRights
     return rights_object.__dict__(), rights_object
 
 
@@ -393,8 +385,11 @@ def relation_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a Relation class instance.
         """
-    relation_object = map_attributes(data, LOM.Relation, is_lom)
+    from .Estructuras.LOM.Relation import Relation
 
+    cRelation=Relation()
+    relation_object = map_attributes(data, cRelation, is_lom)
+    del cRelation
     return relation_object.__dict__(), relation_object
 
 
@@ -405,8 +400,11 @@ def annotation_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a Annotation class instance.
         """
-    annotation_object = map_attributes(data, LOM.Annotation, is_lom)
+    from .Estructuras.LOM.Anotation import Annotation
 
+    cAnnotation=Annotation()
+    annotation_object = map_attributes(data, cAnnotation, is_lom)
+    del cAnnotation
     return annotation_object.__dict__(), annotation_object
 
 
@@ -417,12 +415,20 @@ def classification_leaf(data: dict, is_lom):
         :param data: data from manifest.
         :return: a Classification class instance.
         """
-    classification_object = map_attributes(data, LOM.Classification, is_lom)
+    from .Estructuras.LOM.Classification import Classification
+
+    cClassification=Classification()
+    classification_object = map_attributes(data, cClassification, is_lom)
+    del cClassification
     return classification_object.__dict__(), classification_object
 
 
 def accessibility_leaf(data: dict, is_lom):
-    accessibility_object = map_attributes(data, LOM.Accessibility, is_lom)
+    from .Estructuras.LOM.Accessibility import Accessibility
+
+    cAccessibility=Accessibility()
+    accessibility_object = map_attributes(data, cAccessibility, is_lom)
+    del cAccessibility
     return accessibility_object.__dict__(), accessibility_object
 
 

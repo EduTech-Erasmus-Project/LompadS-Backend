@@ -19,6 +19,10 @@ class Controller:
     _mapped_data = dict()
     _object_dict = dict()
 
+    def __init__(self,_mapped_data = dict(), _object_dict=dict()):
+        self._mapped_data = _mapped_data
+        self._object_dict = _object_dict
+
     def parse_str_to_dict(self, data: str) -> OrderedDict:
         """
         Parse a valid xml (string) to Python OrderedDict class (Subclass of Dict class).
@@ -28,7 +32,7 @@ class Controller:
 
         :return: An instance of OrderedDict
         """
-        print(data)
+        # print(data)
         return xmltodict.parse(data)
 
     def map_recursively(self, dictionary: dict, booleanLomLomes,is_lompad_exported=False):
@@ -53,7 +57,7 @@ class Controller:
             for key, value in dictionary.items():
                 if isinstance(dictionary[key], dict):
                     if any(key in leaf for leaf in self._leafsLomes) and key != 'lomes:lom':
-
+                        print(key)
                         self._mapped_data[key], self._object_dict[key] = LOMESLOMModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
                                                                                 is_lompad_exported, booleanLomLomes)
                     
