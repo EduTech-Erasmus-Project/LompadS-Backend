@@ -163,6 +163,8 @@ class General:
                 self.keywordd=atributes.get('string')
                 if self.keywordd is None:
                     self.keywordd=atributes.get('#text')
+                if isinstance(self.keywordd[0], list):
+                    self.keywordd=self.keywordd[0]
 
             def getValues(self):
                 print("Languaje: ", self.languageKeyword)
