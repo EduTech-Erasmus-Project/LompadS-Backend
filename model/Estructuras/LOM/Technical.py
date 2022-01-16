@@ -117,7 +117,18 @@ class Technical:
         
         def addValues(self,atributes):
             self.duration=atributes.get('duration')
+            try:
+                if isinstance(self.duration[0], list):
+                    self.duration=self.duration[0]
+            except Exception as e: 
+                print(e)
+
             self.description=atributes.get('string')
+            try:
+                if isinstance(self.description[0], list):
+                    self.description=self.description[0]
+            except Exception as e: 
+                print(e)
 
         def to_xml(self):
             return f"""<duration>
@@ -150,11 +161,46 @@ class Technical:
         
         def addValues(self,atributes):
             self.typeValue = [atributes.get("type")[0]]
+            try:
+                if isinstance(self.typeValue[0], list):
+                    self.typeValue=self.typeValue[0]
+            except Exception as e: 
+                print(e)
+
             self.typeSource = [atributes.get("type")[1]]
+            try:
+                if isinstance(self.typeSource[0], list):
+                    self.typeSource=self.typeSource[0]
+            except Exception as e: 
+                print(e)
+
             self.nameValue = [atributes.get("name")[0]]
+            try:
+                if isinstance(self.nameValue[0], list):
+                    self.nameValue=self.nameValue[0]
+            except Exception as e: 
+                print(e)
+
             self.nameSource = [atributes.get("name")[1]]
+            try:
+                if isinstance(self.nameSource[0], list):
+                    self.nameSource=self.nameSource[0]
+            except Exception as e: 
+                print(e)
+
             self.minVersion = atributes.get("minimumVersion")
+            try:
+                if isinstance(self.minVersion[0], list):
+                    self.minVersion=self.minVersion[0]
+            except Exception as e: 
+                print(e)
+
             self.maxVersion = atributes.get("maximumVersion")
+            try:
+                if isinstance(self.maxVersion[0], list):
+                    self.maxVersion=self.maxVersion[0]
+            except Exception as e: 
+                print(e)
 
         def to_xml(self):
             return f"""<requirement>

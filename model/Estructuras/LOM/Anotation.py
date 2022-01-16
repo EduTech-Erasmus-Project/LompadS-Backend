@@ -22,6 +22,11 @@ class Annotation:
             
             def addValues(self,atributes):
                 self.entity=atributes.get("entity")
+                try:
+                    if isinstance(self.entity[0], list):
+                        self.entity=self.entity[0]
+                except Exception as e: 
+                    print(e)
                     
             def getValues(self):
                 print("Entity: ", self.entity)
@@ -43,7 +48,18 @@ class Annotation:
             
             def addValues(self,atributes):
                 self.dateTime=atributes.get("dateTime")
+                try:
+                    if isinstance(self.dateTime[0], list):
+                        self.dateTime=self.dateTime[0]
+                except Exception as e: 
+                    print(e)
+
                 self.string=atributes.get("string")
+                try:
+                    if isinstance(self.string[0], list):
+                        self.string=self.string[0]
+                except Exception as e: 
+                    print(e)
                     
 
             def to_xml(self):
@@ -62,9 +78,15 @@ class Annotation:
 
             def __init__(self, description=[]):
                 self.description = description
+                
             
             def addValues(self,atributes):
                 self.description=atributes.get("string")
+                try:
+                    if isinstance(self.description[0], list):
+                        self.description=self.description[0]
+                except Exception as e: 
+                    print(e)
                     
             def getValues(self):
                 print("Description: ", self.description)
@@ -88,7 +110,18 @@ class Annotation:
             
             def addValues(self,atributes):
                 self.source=atributes.get("source")
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
+
                 self.value=atributes.get("value")
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
                     
 
             def to_xml(self):
@@ -111,7 +144,18 @@ class Annotation:
             
             def addValues(self,atributes):
                 self.source=atributes.get("source")
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
+
                 self.value=atributes.get("value")
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
                     
 
             def to_xml(self):
@@ -134,7 +178,18 @@ class Annotation:
             
             def addValues(self,atributes):
                 self.source=atributes.get("source")
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
+
                 self.value=atributes.get("value")
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
                     
 
             def to_xml(self):

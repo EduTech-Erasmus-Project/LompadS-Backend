@@ -8,7 +8,7 @@ import json
 from libraries import xmltodict
 
 # Temporal file storage path
-from model import LOMModel, LOMESModel
+from model import LOMModel, LOMESModel, LOMESLOMModel
 from controller import LOMController
 
 import pprint
@@ -174,10 +174,11 @@ def parse_manifest(ims_manifest_data):
         return None
 
 
-def load_recursive_as_class(manifest):
+def load_recursive_as_class(manifest,booleanLomLomes):
+    # print(manifest)
     lom_controller = LOMController.Controller()
     parsed_dict = lom_controller.parse_str_to_dict(manifest)
-    lom_controller.map_recursively(parsed_dict, is_lompad_exported=True)
+    lom_controller.map_recursively(parsed_dict, booleanLomLomes,is_lompad_exported=True)
     lom = lom_controller.get_mapped_class()
     return lom
 
@@ -217,10 +218,8 @@ def load_recursive_model(manifest, booleanLomLomes,hashed_code, is_lompad_export
 
 
 def update_model(hashed_code, leaf, model, data, booleanLomLomes):
-    if booleanLomLomes == True:
-        model = LOMModel.update_leaf(leaf, model, data)
-    else:
-        model = LOMESModel.update_leaf(leaf, model, data)
+
+    model = LOMESLOMModel.update_leaf(leaf, model, data)
 
     with open('temp_files/' + hashed_code + '_exported.xml', 'w') as file:
         file.write(model.to_xml().strip())

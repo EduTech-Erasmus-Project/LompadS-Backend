@@ -16,7 +16,18 @@ class Relation:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
+
                 self.value=atributes.get('value')
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<kind>
@@ -38,8 +49,25 @@ class Relation:
 
             def addValues(self,atributes):
                 self.catalog=atributes.get('catalog')
+                try:
+                    if isinstance(self.catalog[0], list):
+                        self.catalog=self.catalog[0]
+                except Exception as e: 
+                    print(e)
+
                 self.entry=atributes.get('entry')
+                try:
+                    if isinstance(self.entry[0], list):
+                        self.entry=self.entry[0]
+                except Exception as e: 
+                    print(e)
+
                 self.string=atributes.get('string')
+                try:
+                    if isinstance(self.string[0], list):
+                        self.string=self.string[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<resource>

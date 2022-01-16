@@ -73,7 +73,7 @@ class LifeCycle:
 
             def to_xml(self):
                 return f"""<version>
-                <string"{self.string}"></string>
+                <string>{self.string}</string>
                 </version>"""
 
             def __dict__(self):

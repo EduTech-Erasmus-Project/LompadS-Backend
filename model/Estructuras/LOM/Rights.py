@@ -20,7 +20,18 @@ class Rights:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
+
                 self.value=atributes.get('value')
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<Cost>
@@ -43,9 +54,20 @@ class Rights:
                 self.source=atributes.get('source')
                 if self.source is None:
                     self.source=atributes.get('lomes:source')
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
+
                 self.value=atributes.get('value')
                 if self.value is None:
                     self.value=atributes.get('lomes:value')
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<copyrightAndOtherRestrictions>
@@ -67,6 +89,12 @@ class Rights:
                     self.string=atributes.get('description')
                     if len(self.source) > 1:
                         self.string=[atributes.get('description')[1]]
+                try:
+                    if isinstance(self.string[0], list):
+                        self.string=self.string[0]
+                except Exception as e: 
+                    print(e)
+
             def to_xml(self):
                 return f"""<description>
                                 <string>{self.string}</string>
@@ -88,9 +116,21 @@ class Rights:
                 self.source=atributes.get('source')
                 if self.source is None:
                     self.source=atributes.get('lomes:source')
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
+
                 self.value=atributes.get('value')
                 if self.value is None:
                     self.value=atributes.get('lomes:value')
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
+
                 self.description=atributes.get('es')
                 if self.description is None:
                     self.description=atributes.get('string')
@@ -98,6 +138,11 @@ class Rights:
                         self.description=atributes.get('lomes:string')
                     if len(self.description) > 1:
                         self.description=[atributes.get('string')[1]]
+                try:
+                    if isinstance(self.description[0], list):
+                        self.description=self.description[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<accessType >

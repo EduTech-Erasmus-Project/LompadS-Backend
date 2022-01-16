@@ -224,9 +224,20 @@ async def read_file(hashed_code: str, profile: str):
 async def update_file(hashed_code: str, hoja, data):
     global booleanLomLomes
 
+    redundant_elements = [' uniqueElementName="general"', ' uniqueElementName="catalog"',' uniqueElementName="entry"',
+                          ' uniqueElementName="aggregationLevel"', ' uniqueElementName="role"', ' uniqueElementName="dateTime"',
+                          ' uniqueElementName="source"',' uniqueElementName="value"', ' uniqueElementName="metaMetadata"', 
+                          ' uniqueElementName="rights"', ' uniqueElementName="access"', ' uniqueElementName="accessType"', 
+                          ' uniqueElementName="source"', ' uniqueElementName="value"']
+
     manifest = FileController.read_manifest(f'./temp_files/{hashed_code}_exported.xml')
+
+    for redundant in redundant_elements:
+                manifest = manifest.replace(redundant, '')
+    manifest = manifest.replace('lom:', '')
+
     print('PASO 1')
-    lom = FileController.load_recursive_as_class(manifest)
+    lom = FileController.load_recursive_as_class(manifest, booleanLomLomes)
     print('PASO 2')
     response = FileController.update_model(hashed_code, hoja, lom, data,booleanLomLomes)
     return {'data': response}

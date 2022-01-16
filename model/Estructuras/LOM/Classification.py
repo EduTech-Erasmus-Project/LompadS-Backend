@@ -23,9 +23,20 @@ class Classification:
                 self.source=atributes.get('source')
                 if self.source is None:
                     self.source=atributes.get('lomes:source')
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
+
                 self.value=atributes.get('value')
                 if self.value is None:
                     self.value=atributes.get('lomes:value')
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
                     
 
             def to_xml(self):
@@ -50,12 +61,29 @@ class Classification:
                 self.string=atributes.get('string')
                 if self.string is None:
                     self.string=[atributes.get('#text')[0]]
+                try:
+                    if isinstance(self.string[0], list):
+                        self.string=self.string[0]
+                except Exception as e: 
+                    print(e)
+
                 self.id=atributes.get('id')
                 if self.id is None:
                     self.id=atributes.get('lomes:id')
+                try:
+                    if isinstance(self.id[0], list):
+                        self.id=self.id[0]
+                except Exception as e: 
+                    print(e)
+
                 self.entry=atributes.get('entry')
                 if self.entry is None:
                     self.entry=atributes.get('#text')[1:]
+                try:
+                    if isinstance(self.entry[0], list):
+                        self.entry=self.entry[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<taxonPath>
@@ -81,6 +109,11 @@ class Classification:
             
             def addValues(self,atributes):
                 self.string=atributes.get('string')
+                try:
+                    if isinstance(self.string[0], list):
+                        self.string=self.string[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<description>
@@ -100,7 +133,18 @@ class Classification:
             
             def addValues(self,atributes):
                 self.language=atributes.get('@language')
+                try:
+                    if isinstance(self.language[0], list):
+                        self.language=self.language[0]
+                except Exception as e: 
+                    print(e)
+
                 self.keywordd=atributes.get('string')
+                try:
+                    if isinstance(self.keywordd[0], list):
+                        self.keywordd=self.keywordd[0]
+                except Exception as e: 
+                    print(e)
 
             def getValues(self):
                 print("Languaje: ", self.language)

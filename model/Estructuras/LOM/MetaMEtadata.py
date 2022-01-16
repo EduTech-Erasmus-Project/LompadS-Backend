@@ -23,11 +23,20 @@ class MetaMetadata:
                 self.catalog=atributes.get('catalog')
                 if self.catalog is None:
                     self.catalog=atributes.get('lomes:catalog')
+                try:
+                    if isinstance(self.catalog[0], list):
+                        self.catalog=self.catalog[0]
+                except Exception as e: 
+                    print(e)
 
                 self.entry=atributes.get('entry')
                 if self.entry is None:
                     self.entry=atributes.get('lomes:entry')
-
+                try:
+                    if isinstance(self.entry[0], list):
+                        self.entry=self.entry[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<identifier>
@@ -49,6 +58,11 @@ class MetaMetadata:
                 self.value=atributes.get('metadataSchema')
                 if self.value is None:
                     self.value=atributes.get('lomes:metadataSchema')
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<metadataSchema>{self.value}</metadataSchema>"""
@@ -66,6 +80,11 @@ class MetaMetadata:
                 self.value=atributes.get('language')
                 if self.value is None:
                     self.value=atributes.get('lomes:language')
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<language>{self.value}</language>"""
@@ -90,10 +109,39 @@ class MetaMetadata:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
+
                 self.value=atributes.get('value')
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
+
                 self.entity=atributes.get('entity')
+                try:
+                    if isinstance(self.entity[0], list):
+                        self.entity=self.entity[0]
+                except Exception as e: 
+                    print(e)
+
                 self.dateTime=atributes.get('dateTime')
+                try:
+                    if isinstance(self.dateTime[0], list):
+                        self.dateTime=self.dateTime[0]
+                except Exception as e: 
+                    print(e)
+
                 self.description=atributes.get('description')
+                try:
+                    if isinstance(self.description[0], list):
+                        self.description=self.description[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
                 return f"""<contribute>

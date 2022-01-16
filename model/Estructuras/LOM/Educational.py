@@ -201,7 +201,7 @@ class Educational:
                     self.description=atributes.get("@language")
             def to_xml(self):
                 return f"""<description>
-                <string>{self.description}</description>
+                <string>{self.description}</string>
                 </description>"""
 
             def __dict__(self):

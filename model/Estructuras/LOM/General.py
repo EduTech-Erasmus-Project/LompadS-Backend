@@ -33,10 +33,20 @@ class General:
                 self.catalog=atributes.get('catalog')
                 if self.catalog is None:
                     self.catalog=atributes.get('lomes:catalog')
+                try:
+                    if isinstance(self.catalog[0], list):
+                        self.catalog=self.catalog[0]
+                except Exception as e: 
+                    print(e)
 
                 self.entry=atributes.get('entry')
                 if self.entry is None:
                     self.entry=atributes.get('lomes:entry')
+                try:
+                    if isinstance(self.entry[0], list):
+                        self.entry=self.entry[0]
+                except Exception as e: 
+                    print(e)
                     
             def getValues(self):
                 print("Catalog: ", self.catalog)
@@ -66,7 +76,18 @@ class General:
                 self.title=atributes.get("#text")
                 if self.title is None:
                     self.title=atributes.get("string")
+                try:
+                    if isinstance(self.title[0], list):
+                        self.title=self.title[0]
+                except Exception as e: 
+                    print(e)
+
                 self.language=atributes.get("@language")
+                try:
+                    if isinstance(self.language[0], list):
+                        self.language=self.language[0]
+                except Exception as e: 
+                    print(e)
                     
             def getValues(self):
                 print("Languaje: ", self.language)
@@ -83,12 +104,16 @@ class General:
         class Catalogentry:
             catalog=[]
 
-            def __init__(self, catalog=[], title=[]):
+            def __init__(self, catalog=[]):
                 self.catalog = catalog
-                self.title = title
             
             def addValues(self,atributes):
                 self.catalog=atributes.get("catalog")
+                try:
+                    if isinstance(self.catalog[0], list):
+                        self.catalog=self.catalog[0]
+                except Exception as e: 
+                    print(e)
                     
             def getValues(self):
                 print("Catalog: ", self.catalog)
@@ -110,7 +135,12 @@ class General:
             def addValues(self,atributes):
                 self.language=atributes.get('language')
                 if self.language is None:
-                    self.language=atributes.get('lomes:language')        
+                    self.language=atributes.get('lomes:language')
+                try:
+                    if isinstance(self.language[0], list):
+                        self.language=self.language[0]
+                except Exception as e: 
+                    print(e)        
                     
             def getValues(self):
                 print("Language: ", self.language)
@@ -135,7 +165,18 @@ class General:
                 self.description=atributes.get("#text")
                 if self.description is None:
                     self.description=atributes.get("string")
+                try:
+                    if isinstance(self.description[0], list):
+                        self.description=self.description[0]
+                except Exception as e: 
+                    print(e) 
+
                 self.languageDescription=atributes.get("@language")
+                try:
+                    if isinstance(self.languageDescription[0], list):
+                        self.languageDescription=self.languageDescription[0]
+                except Exception as e: 
+                    print(e) 
                     
             def getValues(self):
                 print("Languaje: ", self.languageDescription)
@@ -160,11 +201,20 @@ class General:
             
             def addValues(self,atributes):
                 self.languageKeyword=atributes.get('@language')
+                try:
+                    if isinstance(self.languageKeyword[0], list):
+                        self.languageKeyword=self.languageKeyword[0]
+                except Exception as e: 
+                    print(e) 
+
                 self.keywordd=atributes.get('string')
                 if self.keywordd is None:
                     self.keywordd=atributes.get('#text')
-                if isinstance(self.keywordd[0], list):
-                    self.keywordd=self.keywordd[0]
+                try:
+                    if isinstance(self.keywordd[0], list):
+                        self.keywordd=self.keywordd[0]
+                except Exception as e: 
+                    print(e) 
 
             def getValues(self):
                 print("Languaje: ", self.languageKeyword)
@@ -188,6 +238,11 @@ class General:
             
             def addValues(self,atributes):
                 self.coverage=atributes.get("string")
+                try:
+                    if isinstance(self.coverage[0], list):
+                        self.coverage=self.coverage[0]
+                except Exception as e: 
+                    print(e) 
                     
             def getValues(self):
                 print("Language: ", self.language)
@@ -211,7 +266,18 @@ class General:
             
             def addValues(self,atributes):
                 self.source=atributes.get("source")
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e) 
+
                 self.value=atributes.get("value")
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
                     
             def getValues(self):
                 print("Source: ", self.language)
@@ -239,10 +305,20 @@ class General:
                 self.source=atributes.get('source')
                 if self.source is None:
                     self.source=atributes.get('lomes:source')
+                try:
+                    if isinstance(self.source[0], list):
+                        self.source=self.source[0]
+                except Exception as e: 
+                    print(e)
                 
                 self.value=atributes.get('value')
                 if self.value is None:
                     self.value=atributes.get('lomes:value')
+                try:
+                    if isinstance(self.value[0], list):
+                        self.value=self.value[0]
+                except Exception as e: 
+                    print(e)
                     
             def getValues(self):
                 print("Source: ", self.source)
