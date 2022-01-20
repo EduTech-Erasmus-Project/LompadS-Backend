@@ -76,6 +76,8 @@ class General:
                 self.title=atributes.get("#text")
                 if self.title is None:
                     self.title=atributes.get("string")
+                if self.title is None:
+                    self.title=atributes.get("title")
                 try:
                     if isinstance(self.title[0], list):
                         self.title=self.title[0]
@@ -83,6 +85,8 @@ class General:
                     print(e)
 
                 self.language=atributes.get("@language")
+                if self.language is None:
+                    self.language=atributes.get("language")
                 try:
                     if isinstance(self.language[0], list):
                         self.language=self.language[0]
@@ -165,6 +169,8 @@ class General:
                 self.description=atributes.get("#text")
                 if self.description is None:
                     self.description=atributes.get("string")
+                if self.description is None:
+                    self.description=atributes.get("description")
                 try:
                     if isinstance(self.description[0], list):
                         self.description=self.description[0]
@@ -172,6 +178,8 @@ class General:
                     print(e) 
 
                 self.languageDescription=atributes.get("@language")
+                if self.languageDescription is None:
+                    self.languageDescription=atributes.get("language")
                 try:
                     if isinstance(self.languageDescription[0], list):
                         self.languageDescription=self.languageDescription[0]
@@ -201,6 +209,8 @@ class General:
             
             def addValues(self,atributes):
                 self.languageKeyword=atributes.get('@language')
+                if self.languageKeyword is None:
+                    self.languageKeyword=atributes.get('language')
                 try:
                     if isinstance(self.languageKeyword[0], list):
                         self.languageKeyword=self.languageKeyword[0]
@@ -210,6 +220,8 @@ class General:
                 self.keywordd=atributes.get('string')
                 if self.keywordd is None:
                     self.keywordd=atributes.get('#text')
+                if self.keywordd is None:
+                    self.keywordd=atributes.get('keyword')
                 try:
                     if isinstance(self.keywordd[0], list):
                         self.keywordd=self.keywordd[0]
@@ -221,7 +233,9 @@ class General:
                 print("Keyword: ", self.keywordd)
 
             def to_xml(self):
-                return f"""<string  language="{self.languageKeyword}">{self.keywordd}</string>"""
+                return f"""<keyword>
+                                <string  language="{self.languageKeyword}">{self.keywordd}</string>
+                            </keyword>"""
 
             def __dict__(self):
                 return {'language': self.languageKeyword, 'keyword': self.keywordd}
@@ -238,6 +252,8 @@ class General:
             
             def addValues(self,atributes):
                 self.coverage=atributes.get("string")
+                if self.coverage is None:
+                    self.coverage=atributes.get('coverage')
                 try:
                     if isinstance(self.coverage[0], list):
                         self.coverage=self.coverage[0]
@@ -293,7 +309,7 @@ class General:
                 return {'source': self.source, 'value': self.value}
         
         class Aggregationlevel:
-
+                 
             source=[]
             value=[]
 

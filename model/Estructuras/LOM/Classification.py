@@ -20,7 +20,10 @@ class Classification:
                 self.value = value
             
             def addValues(self,atributes):
-                self.source=atributes.get('source')
+                try:
+                    self.source=atributes.get('source')
+                except Exception as e:
+                    print(e)
                 if self.source is None:
                     self.source=atributes.get('lomes:source')
                 try:
@@ -29,7 +32,10 @@ class Classification:
                 except Exception as e: 
                     print(e)
 
-                self.value=atributes.get('value')
+                try:
+                    self.value=atributes.get('value')
+                except Exception as e:
+                    print(e)
                 if self.value is None:
                     self.value=atributes.get('lomes:value')
                 try:
@@ -58,7 +64,10 @@ class Classification:
                 self.entry = entry
             
             def addValues(self,atributes):
-                self.string=atributes.get('string')
+
+                self.string=atributes.get('source')
+                if self.string is None:
+                    self.string=atributes.get('string')
                 if self.string is None:
                     self.string=[atributes.get('#text')[0]]
                 try:
@@ -108,7 +117,10 @@ class Classification:
                 self.string = string
             
             def addValues(self,atributes):
-                self.string=atributes.get('string')
+
+                self.string=atributes.get('description')
+                if self.string is None:
+                    self.string=atributes.get('string')
                 try:
                     if isinstance(self.string[0], list):
                         self.string=self.string[0]
@@ -132,14 +144,19 @@ class Classification:
                 self.keywordd = keywordd
             
             def addValues(self,atributes):
-                self.language=atributes.get('@language')
+
+                self.language=atributes.get('language')
+                if self.language is None:
+                    self.language=atributes.get('@language')
                 try:
                     if isinstance(self.language[0], list):
                         self.language=self.language[0]
                 except Exception as e: 
                     print(e)
-
-                self.keywordd=atributes.get('string')
+                
+                self.keywordd=atributes.get('keyword')
+                if self.keywordd is None:
+                    self.keywordd=atributes.get('string')
                 try:
                     if isinstance(self.keywordd[0], list):
                         self.keywordd=self.keywordd[0]

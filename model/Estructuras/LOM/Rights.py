@@ -87,8 +87,11 @@ class Rights:
                 self.string=atributes.get('string')
                 if self.string is None:
                     self.string=atributes.get('description')
-                    if len(self.source) > 1:
-                        self.string=[atributes.get('description')[1]]
+                    try:
+                        if len(self.source) > 1:
+                            self.string=[atributes.get('description')[1]]
+                    except Exception as e:
+                        print(e)
                 try:
                     if isinstance(self.string[0], list):
                         self.string=self.string[0]
@@ -122,7 +125,9 @@ class Rights:
                 except Exception as e: 
                     print(e)
 
-                self.value=atributes.get('value')
+                self.value=atributes.get('description')
+                if self.value is None:
+                    self.value=atributes.get('value')
                 if self.value is None:
                     self.value=atributes.get('lomes:value')
                 try:
@@ -136,8 +141,11 @@ class Rights:
                     self.description=atributes.get('string')
                     if self.description is None:
                         self.description=atributes.get('lomes:string')
-                    if len(self.description) > 1:
-                        self.description=[atributes.get('string')[1]]
+                    try:
+                        if len(self.description) > 1:
+                            self.description=[atributes.get('string')[1]]
+                    except Exception as e:
+                        print(e)
                 try:
                     if isinstance(self.description[0], list):
                         self.description=self.description[0]

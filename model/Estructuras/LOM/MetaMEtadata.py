@@ -109,6 +109,8 @@ class MetaMetadata:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                if self.source is None:
+                    self.source=atributes.get('contribute')
                 try:
                     if isinstance(self.source[0], list):
                         self.source=self.source[0]
@@ -130,6 +132,8 @@ class MetaMetadata:
                     print(e)
 
                 self.dateTime=atributes.get('dateTime')
+                if self.dateTime is None:
+                    self.dateTime=atributes.get('date')
                 try:
                     if isinstance(self.dateTime[0], list):
                         self.dateTime=self.dateTime[0]

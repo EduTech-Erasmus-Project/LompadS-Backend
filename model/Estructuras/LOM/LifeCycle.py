@@ -26,15 +26,21 @@ class LifeCycle:
                 self.source=atributes.get('source')
                 if self.source is None:
                     self.source=atributes.get('lomes:source')
+                
                 self.value=atributes.get('value')
                 if self.value is None:
                     self.value=atributes.get('lomes:value')
+                if self.value is None:
+                    self.value=atributes.get('role')
+                
                 self.entity=atributes.get('entity')
                 if self.entity is None:
                     self.entity=atributes.get('lomes:entity')
+
                 self.datetime=atributes.get('dateTime')
                 if self.datetime is None:
                     self.datetime=atributes.get('lomes:dateTime')
+                    
                 self.description_string=atributes.get('es')
                 if self.description_string is None:
                     self.description_string=atributes.get('description')
@@ -69,7 +75,8 @@ class LifeCycle:
             
             def addValues(self,atributes):
                 self.string=atributes.get('string')
-
+                if self.string is None:
+                    self.string=atributes.get('version')
 
             def to_xml(self):
                 return f"""<version>

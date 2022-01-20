@@ -26,7 +26,8 @@ class Technical:
         
         def addValues(self,atributes):
             self.value=atributes.get('format')
-
+            if self.value is None:
+                    self.value=atributes.get('format')
 
         def to_xml(self):
             return f"""<format>{self.value}</format>"""
@@ -77,8 +78,13 @@ class Technical:
             self.value=atributes.get('@language')
             if self.value is None:
                     self.value=atributes.get('string')
-                    if len(self.value) > 1:
-                        self.value=[atributes.get('string')[1]]
+                    try:
+                        if len(self.value) > 1:
+                            self.value=[atributes.get('string')[1]]
+                    except Exception as e:
+                        print(e)
+            if self.value is None:
+                    self.value=atributes.get('installationRemarks')
 
         def to_xml(self):
             return f"""<installationRemarks>
@@ -96,6 +102,8 @@ class Technical:
         
         def addValues(self,atributes):
             self.string=atributes.get('string')
+            if self.string is None:
+                    self.string=atributes.get('otherPlatformRequirements')
 
 
         def to_xml(self):
@@ -124,6 +132,8 @@ class Technical:
                 print(e)
 
             self.description=atributes.get('string')
+            if self.description is None:
+                    self.description=atributes.get('description')
             try:
                 if isinstance(self.description[0], list):
                     self.description=self.description[0]
@@ -160,42 +170,73 @@ class Technical:
             self.maxVersion =  maxVersion
         
         def addValues(self,atributes):
-            self.typeValue = [atributes.get("type")[0]]
+            
+            self.typeValue=atributes.get('typeValue')
+            try:
+                if self.typeValue is None:
+                    self.typeValue = [atributes.get("type")[0]]
+            except Exception as e:
+                print(e)
             try:
                 if isinstance(self.typeValue[0], list):
                     self.typeValue=self.typeValue[0]
             except Exception as e: 
                 print(e)
-
-            self.typeSource = [atributes.get("type")[1]]
+            
+            self.typeSource=atributes.get('typeSource')
+            try:
+                self.typeSource = [atributes.get("type")[1]]
+            except Exception as e:
+                print(e)
             try:
                 if isinstance(self.typeSource[0], list):
                     self.typeSource=self.typeSource[0]
             except Exception as e: 
                 print(e)
 
-            self.nameValue = [atributes.get("name")[0]]
+            self.nameValue=atributes.get('nameValue')
+            try:
+                if self.nameValue is None:
+                    self.nameValue = [atributes.get("name")[0]]
+            except Exception as e:
+                print(e)
             try:
                 if isinstance(self.nameValue[0], list):
                     self.nameValue=self.nameValue[0]
             except Exception as e: 
                 print(e)
-
-            self.nameSource = [atributes.get("name")[1]]
+            
+            
+            self.nameSource=atributes.get('nameSource')
+            try:
+                if self.nameSource is None:
+                    self.nameSource = [atributes.get("name")[1]]
+            except Exception as e:
+                print(e)
             try:
                 if isinstance(self.nameSource[0], list):
                     self.nameSource=self.nameSource[0]
             except Exception as e: 
                 print(e)
-
-            self.minVersion = atributes.get("minimumVersion")
+            
+            try:
+                self.minVersion = atributes.get("minimumVersion")
+            except Exception as e:
+                print(e)
+            if self.minVersion is None:
+                    self.minVersion=atributes.get('minVersion')
             try:
                 if isinstance(self.minVersion[0], list):
                     self.minVersion=self.minVersion[0]
             except Exception as e: 
                 print(e)
 
-            self.maxVersion = atributes.get("maximumVersion")
+            try:
+                self.maxVersion = atributes.get("maximumVersion")
+            except Exception as e:
+                print(e)
+            if self.maxVersion is None:
+                    self.maxVersion=atributes.get('maxVersion')
             try:
                 if isinstance(self.maxVersion[0], list):
                     self.maxVersion=self.maxVersion[0]

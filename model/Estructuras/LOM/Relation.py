@@ -62,7 +62,9 @@ class Relation:
                 except Exception as e: 
                     print(e)
 
-                self.string=atributes.get('string')
+                self.string=atributes.get('description')
+                if self.string is None:
+                    self.string=atributes.get('string')
                 try:
                     if isinstance(self.string[0], list):
                         self.string=self.string[0]

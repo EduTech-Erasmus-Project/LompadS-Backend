@@ -73,7 +73,7 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False, 
                     print(key1)
                     try:
                         metodo = dispatch[key1]
-                        ejemplo = metodo(dict(dictionary), is_lompad_exported)
+                        ejemplo = metodo(dict(dictionary), is_lompad_exported, True)
                         # print(ejemplo)
                         return ejemplo
                     except Exception as e:
@@ -84,7 +84,7 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False, 
                 if key in key1:
                     try:
                         metodo = dispatchLomes[key1]
-                        ejemplo = metodo(dict(dictionary), is_lompad_exported)
+                        ejemplo = metodo(dict(dictionary), is_lompad_exported, True)
                         # print(ejemplo)
                         return ejemplo
                     except Exception as e:
@@ -285,7 +285,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
     return object_instance
 
 
-def general_leaf(data: dict, is_lom):
+def general_leaf(data: dict, is_lom, is_read_or_upload):
     """
     Function to map General Leaf.
 
@@ -298,12 +298,24 @@ def general_leaf(data: dict, is_lom):
     from .Estructuras.LOM.General import General
 
     cGeneral= General()
-    general_object = map_attributes(data, cGeneral, is_lom)
-    del cGeneral
-    return general_object.__dict__(), general_object
+    if is_read_or_upload:
+        general_object = map_attributes(data, cGeneral, is_lom)
+        del cGeneral
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            if val2=="Keyword":
+                val2="Keywordd"
+            clase=cGeneral.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            if val == "aggregationLevel":
+                    val="aggregation_level"
+            cGeneral.__setattr__(val, clase)
+        return cGeneral
 
-
-def life_cycle_leaf(data: dict, is_lom):
+def life_cycle_leaf(data: dict, is_lom, is_read_or_upload):
     """
         Function to map Life Cycle Leaf.
 
@@ -313,12 +325,21 @@ def life_cycle_leaf(data: dict, is_lom):
     from .Estructuras.LOM.LifeCycle import LifeCycle
 
     cLifeCycle=LifeCycle()
-    general_object = map_attributes(data, cLifeCycle, is_lom)
-    del cLifeCycle
-    return general_object.__dict__(), general_object
 
+    if is_read_or_upload:
+        general_object = map_attributes(data, cLifeCycle, is_lom)
+        del cLifeCycle
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            clase=cLifeCycle.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            cLifeCycle.__setattr__(val, clase)
+        return cLifeCycle
 
-def meta_metadata_leaf(data: dict, is_lom):
+def meta_metadata_leaf(data: dict, is_lom, is_read_or_upload):
     """
         Function to map Meta MetaData Leaf.
 
@@ -328,12 +349,21 @@ def meta_metadata_leaf(data: dict, is_lom):
     from .Estructuras.LOM.MetaMEtadata import MetaMetadata
 
     cMetaMetadata= MetaMetadata()
-    general_object = map_attributes(data, cMetaMetadata, is_lom)
-    del cMetaMetadata
-    return general_object.__dict__(), general_object
+    if is_read_or_upload:
+        general_object = map_attributes(data, cMetaMetadata, is_lom)
+        del cMetaMetadata
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            clase=cMetaMetadata.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            cMetaMetadata.__setattr__(val, clase)
+        return cMetaMetadata
 
 
-def technical_leaf(data: dict, is_lom):
+def technical_leaf(data: dict, is_lom, is_read_or_upload):
     """
         Function to map Technical Leaf.
 
@@ -343,12 +373,23 @@ def technical_leaf(data: dict, is_lom):
     from .Estructuras.LOM.Technical import Technical
     
     cTechnical = Technical()  
-    technical_object = map_attributes(data, cTechnical, is_lom)
-    del cTechnical
-    return technical_object.__dict__(), technical_object
+    if is_read_or_upload:
+        general_object = map_attributes(data, cTechnical, is_lom)
+        del cTechnical
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            if val2=="Keyword":
+                val2="Keywordd"
+            clase=cTechnical.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            cTechnical.__setattr__(val, clase)
+        return cTechnical
 
 
-def educational_leaf(data: dict, is_lom):
+def educational_leaf(data: dict, is_lom, is_read_or_upload):
     """
         Function to map Educational Leaf.
 
@@ -358,12 +399,23 @@ def educational_leaf(data: dict, is_lom):
     from .Estructuras.LOM.Educational import Educational
 
     cEducational=Educational()
-    educational_object = map_attributes(data, cEducational, is_lom)
-    del cEducational
-    return educational_object.__dict__(), educational_object
+    if is_read_or_upload:
+        general_object = map_attributes(data, cEducational, is_lom)
+        del cEducational
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            if val2=="Keyword":
+                val2="Keywordd"
+            clase=cEducational.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            cEducational.__setattr__(val, clase)
+        return cEducational
 
 
-def rights_leaf(data: dict, is_lom):
+def rights_leaf(data: dict, is_lom, is_read_or_upload):
     """
         Function to map Rights Leaf.
 
@@ -373,12 +425,22 @@ def rights_leaf(data: dict, is_lom):
     from .Estructuras.LOM.Rights import Rights
 
     cRights = Rights()
-    rights_object = map_attributes(data, cRights, is_lom)
-    del cRights
-    return rights_object.__dict__(), rights_object
+    if is_read_or_upload:
+        general_object = map_attributes(data, cRights, is_lom)
+        del cRights
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            if val2=="Keyword":
+                val2="Keywordd"
+            clase=cRights.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            cRights.__setattr__(val, clase)
+        return cRights
 
-
-def relation_leaf(data: dict, is_lom):
+def relation_leaf(data: dict, is_lom, is_read_or_upload):
     """
         Function to map Relation Leaf.
 
@@ -388,12 +450,23 @@ def relation_leaf(data: dict, is_lom):
     from .Estructuras.LOM.Relation import Relation
 
     cRelation=Relation()
-    relation_object = map_attributes(data, cRelation, is_lom)
-    del cRelation
-    return relation_object.__dict__(), relation_object
+    if is_read_or_upload:
+        general_object = map_attributes(data, cRelation, is_lom)
+        del cRelation
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            if val2=="Keyword":
+                val2="Keywordd"
+            clase=cRelation.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            cRelation.__setattr__(val, clase)
+        return cRelation
 
 
-def annotation_leaf(data: dict, is_lom):
+def annotation_leaf(data: dict, is_lom, is_read_or_upload):
     """
         Function to map Annotation Leaf.
 
@@ -403,12 +476,23 @@ def annotation_leaf(data: dict, is_lom):
     from .Estructuras.LOM.Anotation import Annotation
 
     cAnnotation=Annotation()
-    annotation_object = map_attributes(data, cAnnotation, is_lom)
-    del cAnnotation
-    return annotation_object.__dict__(), annotation_object
+    if is_read_or_upload:
+        general_object = map_attributes(data, cAnnotation, is_lom)
+        del cAnnotation
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            if val2=="Keyword":
+                val2="Keywordd"
+            clase=cAnnotation.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            cAnnotation.__setattr__(val, clase)
+        return cAnnotation
 
 
-def classification_leaf(data: dict, is_lom):
+def classification_leaf(data: dict, is_lom, is_read_or_upload):
     """
         Function to map Classification Leaf.
 
@@ -418,19 +502,40 @@ def classification_leaf(data: dict, is_lom):
     from .Estructuras.LOM.Classification import Classification
 
     cClassification=Classification()
-    classification_object = map_attributes(data, cClassification, is_lom)
-    del cClassification
-    return classification_object.__dict__(), classification_object
+    if is_read_or_upload:
+        general_object = map_attributes(data, cClassification, is_lom)
+        del cClassification
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            if val2=="Keyword":
+                val2="Keywordd"
+            clase=cClassification.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            cClassification.__setattr__(val, clase)
+        return cClassification
 
 
-def accessibility_leaf(data: dict, is_lom):
+def accessibility_leaf(data: dict, is_lom, is_read_or_upload):
     from .Estructuras.LOM.Accessibility import Accessibility
 
     cAccessibility=Accessibility()
-    accessibility_object = map_attributes(data, cAccessibility, is_lom)
-    del cAccessibility
-    return accessibility_object.__dict__(), accessibility_object
-
+    if is_read_or_upload:
+        general_object = map_attributes(data, cAccessibility, is_lom)
+        del cAccessibility
+        return general_object.__dict__(), general_object
+    else:
+        for val in data.keys():
+            val2=val
+            val2=val2.capitalize()
+            if val2=="Keyword":
+                val2="Keywordd"
+            clase=cAccessibility.__getattribute__(val2)()
+            clase.addValues(data.get(val))
+            cAccessibility.__setattr__(val, clase)
+        return cAccessibility
 
 dispatch = {
     'general': general_leaf, 'lifeCycle': life_cycle_leaf, 'metaMetadata': meta_metadata_leaf,
@@ -463,16 +568,10 @@ dispatch_updateLomes = {
 
 def update_leaf(leaf, model, data):
     print('UPDATE')
+    data=data.replace('null','[]')
     import json
     data_as_dict = json.loads(data)
+    print(data_as_dict)
     metodo = dispatch_update.get(leaf)
-    data = data_as_dict.copy()
-
-    for key in data_as_dict.keys():
-        components = str(key).lower().split(' ')
-        components = components[0] + ''.join(x.title() for x in components[1:])
-        data[components] = data.pop(key)
-
-    model.__setattr__(leaf, metodo(data, True)[1])
-
+    model.__setattr__(leaf, metodo(data_as_dict, True, False))
     return model
