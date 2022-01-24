@@ -34,10 +34,10 @@ class Rights:
                     print(e)
 
             def to_xml(self):
-                return f"""<Cost>
+                return f"""<cost>
                                 <source >{self.source}</source>
                                 <value >{self.value}</value>
-                            </Cost>"""
+                            </cost>"""
             def __dict__(self):
                 return {'source': self.source, 'value': self.value}
 

@@ -251,8 +251,8 @@ class Technical:
                         <value>{self.typeValue}</value>
                     </type>
                     <name>
-                        <source>{self.typeSource}</source>
-                        <value>{self.typeValue}</value>
+                        <source>{self.nameSource}</source>
+                        <value>{self.nameValue}</value>
                     </name>
                     <minimumVersion>{self.minVersion}</minimumVersion>
                     <maximumVersion>{self.maxVersion}</maximumVersion>

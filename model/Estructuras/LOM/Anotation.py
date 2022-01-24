@@ -54,12 +54,14 @@ class Annotation:
                 except Exception as e: 
                     print(e)
 
-                self.string=atributes.get("string")
-                try:
-                    if isinstance(self.string[0], list):
-                        self.string=self.string[0]
-                except Exception as e: 
-                    print(e)
+                self.string=atributes.get("description")
+                if self.string is None:
+                    self.string=atributes.get("string")
+                    try:
+                        if isinstance(self.string[0], list):
+                            self.string=self.string[0]
+                    except Exception as e: 
+                        print(e)
                     
 
             def to_xml(self):
@@ -81,12 +83,14 @@ class Annotation:
                 
             
             def addValues(self,atributes):
-                self.description=atributes.get("string")
-                try:
-                    if isinstance(self.description[0], list):
-                        self.description=self.description[0]
-                except Exception as e: 
-                    print(e)
+                self.description=atributes.get("description")
+                if self.description is None:
+                    self.description=atributes.get("string")
+                    try:
+                        if isinstance(self.description[0], list):
+                            self.description=self.description[0]
+                    except Exception as e: 
+                        print(e)
                     
             def getValues(self):
                 print("Description: ", self.description)

@@ -312,6 +312,8 @@ def general_leaf(data: dict, is_lom, is_read_or_upload):
             clase.addValues(data.get(val))
             if val == "aggregationLevel":
                     val="aggregation_level"
+            if val=="keyword":
+                val="keywordd"
             cGeneral.__setattr__(val, clase)
         return cGeneral
 
@@ -433,10 +435,10 @@ def rights_leaf(data: dict, is_lom, is_read_or_upload):
         for val in data.keys():
             val2=val
             val2=val2.capitalize()
-            if val2=="Keyword":
-                val2="Keywordd"
             clase=cRights.__getattribute__(val2)()
             clase.addValues(data.get(val))
+            if val2=="Cost":
+                print(clase.__getattribute__("value"))
             cRights.__setattr__(val, clase)
         return cRights
 
@@ -484,10 +486,20 @@ def annotation_leaf(data: dict, is_lom, is_read_or_upload):
         for val in data.keys():
             val2=val
             val2=val2.capitalize()
-            if val2=="Keyword":
-                val2="Keywordd"
+            if val2=="Rol":
+                val2="CRol"
+            if val2=="ModeAccess":
+                val2="Modeaccess"
+            if val2=="ModeAccessSufficient":
+                val2="Modeaccesssufficient"
             clase=cAnnotation.__getattribute__(val2)()
             clase.addValues(data.get(val))
+            if val=="rol":
+                val="Rol"
+            if val=="modeAccess":
+                val="modeaccess"
+            if val=="modeAccessSufficient":
+                val="modeaccesssufficient"
             cAnnotation.__setattr__(val, clase)
         return cAnnotation
 
@@ -530,10 +542,24 @@ def accessibility_leaf(data: dict, is_lom, is_read_or_upload):
         for val in data.keys():
             val2=val
             val2=val2.capitalize()
-            if val2=="Keyword":
-                val2="Keywordd"
+            if val2=="AccessibilityFeatures":
+                val2="Accessibilityfeatures"
+            if val2=="AccessibilityHazard":
+                val2="Accessibilityhazard"
+            if val2=="AccessibilityControl":
+                val2="Accessibilitycontrol"
+            if val2=="AccessibilityApi":
+                val2="Accessibilityapi"
             clase=cAccessibility.__getattribute__(val2)()
             clase.addValues(data.get(val))
+            if val=="accessibilityFeatures":
+                val="accessibilityfeatures"
+            if val=="accessibilityHazard":
+                val="accessibilityhazard"
+            if val=="accessibilityControl":
+                val="accessibilitycontrol"
+            if val=="accessibilityApi":
+                val="accessibilityapi"
             cAccessibility.__setattr__(val, clase)
         return cAccessibility
 

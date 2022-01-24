@@ -215,9 +215,9 @@ async def read_file(hashed_code: str, profile: str):
 
 
     if not from_lompad:
-        return {'data': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
+        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
     else:
-        return {'data': FileController.load_recursive_model(xml_manifest, hashed_code, is_lompad_exported=True)}
+        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, hashed_code, is_lompad_exported=True)}
 
 
 @app.post("/private/update/")

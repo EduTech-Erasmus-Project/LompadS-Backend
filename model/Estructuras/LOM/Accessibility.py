@@ -21,12 +21,14 @@ class Accessibility:
                 self.description = description
             
             def addValues(self,atributes):
-                self.description=atributes.get("string")
-                try:
-                    if isinstance(self.description[0], list):
-                        self.description=self.description[0]
-                except Exception as e: 
-                    print(e)
+                self.description=atributes.get("description")
+                if self.description is None:
+                    self.description=atributes.get("string")
+                    try:
+                        if isinstance(self.description[0], list):
+                            self.description=self.description[0]
+                    except Exception as e: 
+                        print(e)
                     
             def getValues(self):
                 print("Description: ", self.description)
@@ -46,12 +48,14 @@ class Accessibility:
                 self.br = br
             
             def addValues(self,atributes):
-                self.br=atributes.get("br")[0]
-                try:
-                    if isinstance(self.br[0], list):
-                        self.br=self.br[0]
-                except Exception as e: 
-                    print(e)
+                self.br=atributes.get("resourceContent")
+                if self.br is None:
+                    self.br=atributes.get("br")[0]
+                    try:
+                        if isinstance(self.br[0], list):
+                            self.br=self.br[0]
+                    except Exception as e: 
+                        print(e)
 
             def to_xml(self):
                 return f"""<accessibilityfeatures>
@@ -70,12 +74,14 @@ class Accessibility:
                 self.br = br
             
             def addValues(self,atributes):
-                self.br=atributes.get("br")[0]
-                try:
-                    if isinstance(self.br[0], list):
-                        self.br=self.br[0]
-                except Exception as e: 
-                    print(e)
+                self.br=atributes.get("properties")
+                if self.br is None:
+                    self.br=atributes.get("br")[0]
+                    try:
+                        if isinstance(self.br[0], list):
+                            self.br=self.br[0]
+                    except Exception as e: 
+                        print(e)
 
             def to_xml(self):
                 return f"""<accessibilityhazard>
@@ -94,12 +100,14 @@ class Accessibility:
                 self.br = br
             
             def addValues(self,atributes):
-                self.br=atributes.get("br")[0]
-                try:
-                    if isinstance(self.br[0], list):
-                        self.br=self.br[0]
-                except Exception as e: 
-                    print(e)
+                self.br=atributes.get("methods")
+                if self.br is None:
+                    self.br=atributes.get("br")[0]
+                    try:
+                        if isinstance(self.br[0], list):
+                            self.br=self.br[0]
+                    except Exception as e: 
+                        print(e)
 
             def to_xml(self):
                 return f"""<accessibilitycontrol>
@@ -118,12 +126,14 @@ class Accessibility:
                 self.br = br
             
             def addValues(self,atributes):
-                self.br=[atributes.get("br")[0]]
-                try:
-                    if isinstance(self.br[0], list):
-                        self.br=self.br[0]
-                except Exception as e: 
-                    print(e)
+                self.br=atributes.get("compatibleResource")
+                if self.br is None:
+                    self.br=[atributes.get("br")[0]]
+                    try:
+                        if isinstance(self.br[0], list):
+                            self.br=self.br[0]
+                    except Exception as e: 
+                        print(e)
 
             def to_xml(self):
                 return f"""<accessibilityAPI>

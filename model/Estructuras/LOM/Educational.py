@@ -173,8 +173,12 @@ class Educational:
                 self.string = string
             
             def addValues(self,atributes):
-                self.source=atributes.get('duration')
-                self.value=atributes.get('string')
+                self.duration=atributes.get('duration')
+
+                self.string=atributes.get('description')
+                if self.string is None:
+                    self.string=atributes.get('string')
+                
 
             def to_xml(self):
                 return f"""<typicalLearningTime>
@@ -185,7 +189,7 @@ class Educational:
                             </typicalLearningTime>"""
 
             def __dict__(self):
-                return {'duration': self.source, 'description': self.value}
+                return {'duration': self.duration, 'description': self.string}
 
         class Description:
             description = []
@@ -194,7 +198,9 @@ class Educational:
                 self.description = description
             
             def addValues(self,atributes):
-                self.description=atributes.get('string')
+                self.description=atributes.get('description')
+                if self.description is None:
+                    self.description=atributes.get('string')
                 if self.description is None:
                     self.description=atributes.get('#text')
                 if self.description is None:
@@ -214,7 +220,9 @@ class Educational:
                 self.string = string
             
             def addValues(self,atributes):
-                self.string=atributes.get('string')
+                self.string=atributes.get('typicalAgeRange')
+                if self.string is None:
+                    self.string=atributes.get('string')
 
 
             def to_xml(self):
