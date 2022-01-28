@@ -3,6 +3,7 @@ from os.path import basename
 from pprint import pprint
 from zipfile import ZipFile
 from datetime import datetime
+import zipfile
 
 import json
 from libraries import xmltodict
@@ -227,22 +228,21 @@ def update_model(hashed_code, leaf, model, data, booleanLomLomes):
     return model.__dict__()
 
 
-def write_data(data, folder):
+def write_data(data, folder, hased_code,path_in_folder):
     from os import path
 
-    if path.exists(f'./temp_files/{folder}/imslrm.xml'):
-        with open(f'./temp_files/{folder}/imslrm.xml', 'w') as file:
+    if path.exists(f'{folder}'):
+        with open(f'{folder}', 'w') as file:
             file.write(data)
             file.close()
-    elif path.exists(f'./temp_files/{folder}/imsmanifest.xml'):
-        with open(f'./temp_files/{folder}/imsmanifest.xml', 'w') as file:
-            file.write(data)
-            file.close()
-    with ZipFile(f'./temp_files/{folder}.zip', 'w') as zipObj:
-        for folderName, subfolders, filenames in os.walk(f'./temp_files/{folder}/'):
-            for filename in filenames:
-                filePath = os.path.join(folderName, filename)
-                zipObj.write(filePath, basename(filePath))
+    with ZipFile(f'./temp_files/{hased_code}.zip', 'w') as zipObj:
+        if path_in_folder:
+            for folderName, subfolders, filenames in os.walk(f'./temp_files/{hased_code}'):
+                for filename in filenames:
+                    filePath = os.path.join(folderName, filename)
+                    zipObj.write(filePath, basename(filePath))
+        else:
+            zipObj.write(folder, compress_type=zipfile.ZIP_STORED)
 
 """
     TODO:

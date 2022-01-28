@@ -114,6 +114,16 @@ def get_keywords(object_data: list):
     return values
 
 
+def set_values_to_dict(data, key,values_labels_dict:dict):
+
+    if data[key] is None:
+        data[key]="None"
+    if key not in values_labels_dict.keys():
+        values_labels_dict[key]=[data[key]]
+    else:
+        values_labels_dict.get(key).append(data[key])
+
+
 def map_attributes(data_original: dict, object_instance, is_lom):
 
     data_original=collections.OrderedDict(data_original)
@@ -156,14 +166,8 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                 if key_mapping_Upper == "Rol":
                     key_mapping_Upper="CRol"
                 if isinstance(data[key], str):
-                    # print("hijo1: ", data[key])
-                    if data[key] is None:
-                        data[key]="None"
-                    if key not in values_labels_dict.keys():
-                        values_labels_dict[key]=[data[key]]
-                    else:
-                        values_labels_dict.get(key).append(data[key])
-                    values_labels.append(data[key])
+                    new_dict=set_values_to_dict(data, key,values_labels_dict)
+                    values_labels_dict.update(new_dict)
                 else:
                     for childrens in data[key]:
                         # print("hijo: ",childrens)
@@ -176,13 +180,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                     for val2 in containerOfChildren:
                                         # print("objeto de objeto: ", containerOfChildren[val2])
                                         if isinstance(containerOfChildren[val2], str) or isinstance(containerOfChildren[val2], list):
-                                            if containerOfChildren[val2] is None:
-                                                containerOfChildren[val2]="None"
-                                            elif val2 not in values_labels_dict.keys():
-                                                values_labels_dict[val2]=[containerOfChildren[val2]]
-                                            else:
-                                                values_labels_dict.get(val2).append(containerOfChildren[val2])
-                                                values_labels.append(containerOfChildren[val2])
+                                            set_values_to_dict(containerOfChildren, val2,values_labels_dict)
                                         else:
                                             auxContainerofChildren=containerOfChildren[val2]
                                             for valAuxContChildren in auxContainerofChildren:

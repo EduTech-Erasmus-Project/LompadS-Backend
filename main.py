@@ -248,17 +248,56 @@ async def update_file(hashed_code: str, hoja, data):
 
 
 @app.get("/private/download/", response_class=FileResponse)
-def get_file(hashed_code):
+def get_file(hashed_code, option):
     import glob
     import os
 
-    paths = glob.glob('./temp_files/*')
-    for path in paths:
-        if hashed_code in path and os.path.isdir(path):
-            FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
-                                      path.replace('./temp_files\\', ''))
-            return FileResponse(path=f'./temp_files/{hashed_code}.zip', filename=f'./temp_files/{hashed_code}.zip')
+    print("el hash es: ",hashed_code)
+    print("la opcion es: ",option)
 
-    import aiofiles
-    return FileResponse(path=f'./temp_files/{hashed_code}_exported.xml',
-                        filename=f'./temp_files/{hashed_code}_exported.xml')
+    paths = glob.glob('./temp_files/*')
+    if option == "zip":
+        for path in paths:
+            if hashed_code in path and os.path.isdir(path):
+                fileFound=''
+                targetPattern = './temp_files/'+hashed_code+'/**/*.xml'
+        
+                routes = glob.glob(targetPattern)
+                print("The routes found are")
+                print(routes)
+
+                if len(routes) == 0:
+                    targetPattern = './temp_files/'+hashed_code+'/*.xml'
+                    routes = glob.glob(targetPattern)
+                    print("The routes found in root are:")
+                    print(routes)
+                for filePath in routes:
+                    try:
+                        doc = minidom.parse(filePath)
+                        childTag = doc.firstChild.tagName
+                        if(childTag == "lom"):
+                            fileFound=filePath
+                            break
+                        elif(childTag == "lomes:lom"):
+                            fileFound=filePath
+                            break
+                    except:
+                        try:
+                            childTag = doc.getElementsByTagName("lom:lom")
+                            if(len(childTag)>=1):
+                                fileFound=filePath
+                            break
+                        except:
+                            print("something happened with the file in the path: "+filePath)
+                
+                FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
+                                        fileFound, hashed_code,True)
+                return FileResponse(path=f'./temp_files/{hashed_code}.zip', filename=f'./temp_files/{hashed_code}.zip')
+            if path == f"./temp_files\{hashed_code}.xml":
+                FileController.write_data(''.join(open(f'./temp_files/{hashed_code}_exported.xml')).strip(),
+                                        (f'./temp_files/{hashed_code}.xml'), hashed_code,False)
+                return FileResponse(path=f'./temp_files/{hashed_code}.zip', filename=f'./temp_files/{hashed_code}.zip')
+    else:
+        import aiofiles
+        return FileResponse(path=f'./temp_files/{hashed_code}_exported.xml',
+                            filename=f'./temp_files/{hashed_code}_exported.xml')
