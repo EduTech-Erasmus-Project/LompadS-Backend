@@ -22,11 +22,11 @@ class Annotation:
             
             def addValues(self,atributes):
                 self.entity=atributes.get("entity")
-                try:
-                    if isinstance(self.entity[0], list):
-                        self.entity=self.entity[0]
-                except Exception as e: 
-                    print(e)
+                # try:
+                #     if isinstance(self.entity[0], list):
+                #         self.entity=self.entity[0]
+                # except Exception as e: 
+                #     print(e)
                     
             def getValues(self):
                 print("Entity: ", self.entity)

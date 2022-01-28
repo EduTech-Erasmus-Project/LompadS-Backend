@@ -88,7 +88,7 @@ class Technical:
 
         def to_xml(self):
             return f"""<installationRemarks>
-            <string>{self.value}></string>
+            <string>{self.value}</string>
             </installationRemarks>"""
 
         def __dict__(self):
