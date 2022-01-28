@@ -216,12 +216,19 @@ class General:
                         self.languageKeyword=self.languageKeyword[0]
                 except Exception as e: 
                     print(e) 
-
+                
+                print(atributes.get('string'))
                 self.keywordd=atributes.get('string')
                 if self.keywordd is None:
                     self.keywordd=atributes.get('#text')
+                    if self.keywordd is not None:
+                        aux=self.keywordd[0]
+                        aux=aux.replace("'",'')
+                        self.keywordd=aux.split(', ')
+
                 if self.keywordd is None:
                     self.keywordd=atributes.get('keyword')
+                    print(atributes.get('keyword'))
                 try:
                     if isinstance(self.keywordd[0], list):
                         self.keywordd=self.keywordd[0]
