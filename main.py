@@ -216,11 +216,9 @@ async def read_file(hashed_code: str, profile: str):
 
 
     if not from_lompad:
-        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code), 'XML_FILE':FileResponse(path=f'./temp_files/{hashed_code}_exported.xml',
-                            filename=f'./temp_files/{hashed_code}_exported.xml')}
+        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code), 'XML_FILE':xml_manifest}
     else:
-        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, hashed_code, is_lompad_exported=True), 'XML_FILE':FileResponse(path=f'./temp_files/{hashed_code}_exported.xml',
-                            filename=f'./temp_files/{hashed_code}_exported.xml')}
+        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, hashed_code, is_lompad_exported=True), 'XML_FILE':xml_manifest}
 
 
 @app.post("/private/update/")
@@ -247,8 +245,7 @@ async def update_file(hashed_code: str, hoja, data):
     # print(lom.__getattribute__('lifeCycle').__dict__())
     print('PASO 2')
     response = FileController.update_model(hashed_code, hoja, lom, data,booleanLomLomes)
-    return {'data': response, 'XML_FILE':FileResponse(path=f'./temp_files/{hashed_code}_exported.xml',
-                            filename=f'./temp_files/{hashed_code}_exported.xml')}
+    return {'data': response, 'XML_FILE':manifest}
 
 
 @app.get("/private/download/", response_class=FileResponse)
