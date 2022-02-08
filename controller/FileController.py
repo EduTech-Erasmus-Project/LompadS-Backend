@@ -9,7 +9,7 @@ import json
 from libraries import xmltodict
 
 # Temporal file storage path
-from model import LOMModel, LOMESModel, LOMESLOMModel
+from model import LOMESLOMModel
 from controller import LOMController
 
 import pprint

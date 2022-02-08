@@ -80,7 +80,8 @@ async def upload_file(file: UploadFile = File(...)):
             return  HTTPException(status_code=500,
                           detail='Error, the uploaded file does not contain imslrm.xml nor imsmanifest.xml files.')     
 
-        return {'STATUS_CODE':200,'PERFIL': _profile, 'HASHED_VALUE': _hashed_filename.replace('.xml', '')} \
+        return {'STATUS_CODE':200,'PERFIL': _profile, 'HASHED_VALUE': _hashed_filename.replace('.xml', ''), 'XML_FILE':FileResponse(path=f'./temp_files/{_hashed_filename}_exported.xml',
+                            filename=f'./temp_files/{_hashed_filename}_exported.xml')} \
         if xml_manifest is not None else HTTPException(status_code=500,
                                                        detail='Error trying to parse the'
                                                               ' imsmanifest.xml')
@@ -158,7 +159,8 @@ async def upload_file(file: UploadFile = File(...)):
             return HTTPException(status_code=500,
                           detail='Error, the uploaded file does not contain imslrm.xml nor imsmanifest.xml files.')
 
-    return {'STATUS_CODE':200,'PERFIL': _profile, 'HASHED_VALUE': _hashed_filename.replace('.zip', '').replace('.xml', '')} \
+    return {'STATUS_CODE':200,'PERFIL': _profile, 'HASHED_VALUE': _hashed_filename.replace('.zip', '').replace('.xml', ''),'XML_FILE':FileResponse(path=f'./temp_files/{_hashed_filename}_exported.xml',
+                            filename=f'./temp_files/{_hashed_filename}_exported.xml')} \
         if xml_manifest is not None else HTTPException(status_code=500,
                                                        detail='Error trying to parse the'
                                                               ' imsmanifest.xml')

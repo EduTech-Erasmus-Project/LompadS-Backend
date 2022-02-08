@@ -2,7 +2,7 @@ from collections import OrderedDict
 from pprint import pprint
 import pickle
 import xmltodict
-from model import LOMModel, LOMESModel, LOMESLOMModel
+from model import LOMESLOMModel
 from lxml import etree
 
 
@@ -76,14 +76,14 @@ class Controller:
         return self._mapped_data
 
     def get_mapped_class(self):
-        lom_object = LOMESModel.LOM()
+        lom_object = LOMESLOMModel.LOM()
         for key, value in self._object_dict.items():
             lom_object.__setattr__(key, value)
         return lom_object
 
     def get_object(self, object_name, booleanLomLomes):
         if booleanLomLomes==True:
-            lom_object =LOMModel.LOM()
+            lom_object =LOMESLOMModel.LOM()
             for key, value in self._object_dict.items():
                 key = 'keywordd' if key == 'keyword' else key
                 key = 'CRol' if key == 'Rol' else key
@@ -93,7 +93,7 @@ class Controller:
                 file.write(lom_object.to_xml().strip())
                 
         else:
-            lom_object =LOMESModel.LOM()
+            lom_object =LOMESLOMModel.LOM()
             for key, value in self._object_dict.items():
                 if "lomes:" in key:
                     key = key.split(':')[1]

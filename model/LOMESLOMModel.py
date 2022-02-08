@@ -288,7 +288,7 @@ def general_leaf(data: dict, is_lom, is_read_or_upload):
 
     # print(data)
 
-    from .Estructuras.LOM.General import General
+    from .Estructuras.General import General
 
     cGeneral= General()
     if is_read_or_upload:
@@ -317,7 +317,7 @@ def life_cycle_leaf(data: dict, is_lom, is_read_or_upload):
         :param data: data from manifest.
         :return: a LifeCycle class instance.
         """
-    from .Estructuras.LOM.LifeCycle import LifeCycle
+    from .Estructuras.LifeCycle import LifeCycle
 
     cLifeCycle=LifeCycle()
 
@@ -341,7 +341,7 @@ def meta_metadata_leaf(data: dict, is_lom, is_read_or_upload):
         :param data: data from manifest.
         :return: a MetaMetaData class instance.
         """
-    from .Estructuras.LOM.MetaMEtadata import MetaMetadata
+    from .Estructuras.MetaMEtadata import MetaMetadata
 
     cMetaMetadata= MetaMetadata()
     if is_read_or_upload:
@@ -365,7 +365,7 @@ def technical_leaf(data: dict, is_lom, is_read_or_upload):
         :param data: data from manifest.
         :return: a Technical class instance.
         """
-    from .Estructuras.LOM.Technical import Technical
+    from .Estructuras.Technical import Technical
     
     cTechnical = Technical()  
     if is_read_or_upload:
@@ -391,7 +391,7 @@ def educational_leaf(data: dict, is_lom, is_read_or_upload):
         :param data: data from manifest.
         :return: a Educational class instance.
         """
-    from .Estructuras.LOM.Educational import Educational
+    from .Estructuras.Educational import Educational
 
     cEducational=Educational()
     if is_read_or_upload:
@@ -417,7 +417,7 @@ def rights_leaf(data: dict, is_lom, is_read_or_upload):
         :param data: data from manifest.
         :return: a Rights class instance.
         """
-    from .Estructuras.LOM.Rights import Rights
+    from .Estructuras.Rights import Rights
 
     cRights = Rights()
     if is_read_or_upload:
@@ -442,7 +442,7 @@ def relation_leaf(data: dict, is_lom, is_read_or_upload):
         :param data: data from manifest.
         :return: a Relation class instance.
         """
-    from .Estructuras.LOM.Relation import Relation
+    from .Estructuras.Relation import Relation
 
     cRelation=Relation()
     if is_read_or_upload:
@@ -468,7 +468,7 @@ def annotation_leaf(data: dict, is_lom, is_read_or_upload):
         :param data: data from manifest.
         :return: a Annotation class instance.
         """
-    from .Estructuras.LOM.Anotation import Annotation
+    from .Estructuras.Anotation import Annotation
 
     cAnnotation=Annotation()
     if is_read_or_upload:
@@ -504,7 +504,7 @@ def classification_leaf(data: dict, is_lom, is_read_or_upload):
         :param data: data from manifest.
         :return: a Classification class instance.
         """
-    from .Estructuras.LOM.Classification import Classification
+    from .Estructuras.Classification import Classification
 
     cClassification=Classification()
     if is_read_or_upload:
@@ -524,7 +524,7 @@ def classification_leaf(data: dict, is_lom, is_read_or_upload):
 
 
 def accessibility_leaf(data: dict, is_lom, is_read_or_upload):
-    from .Estructuras.LOM.Accessibility import Accessibility
+    from .Estructuras.Accessibility import Accessibility
 
     cAccessibility=Accessibility()
     if is_read_or_upload:
