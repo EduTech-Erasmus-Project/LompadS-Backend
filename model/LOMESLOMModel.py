@@ -587,7 +587,14 @@ dispatch_updateLomes = {
 
 def update_leaf(leaf, model, data):
     print('UPDATE')
-    data=data.replace('null','[]')
+    print(data)
+    data=data.replace('[null]','[]')
+    data=data.replace(';','')
+    data=data.replace("\n",'')
+    data=data.replace("\\n",'')
+    data=data.replace("\n ",'')
+    data=data.replace("\\n ",'')
+    data=data.replace("  ",' ')
     import json
     data_as_dict = json.loads(data)
     print(data_as_dict)
