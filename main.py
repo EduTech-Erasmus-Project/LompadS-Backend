@@ -159,8 +159,7 @@ async def upload_file(file: UploadFile = File(...)):
             return HTTPException(status_code=500,
                           detail='Error, the uploaded file does not contain imslrm.xml nor imsmanifest.xml files.')
 
-    return {'STATUS_CODE':200,'PERFIL': _profile, 'HASHED_VALUE': _hashed_filename.replace('.zip', '').replace('.xml', ''),'XML_FILE':FileResponse(path=f'./temp_files/{_hashed_filename}_exported.xml',
-                            filename=f'./temp_files/{_hashed_filename}_exported.xml')} \
+    return {'STATUS_CODE':200,'PERFIL': _profile, 'HASHED_VALUE': _hashed_filename.replace('.zip', '').replace('.xml', '')} \
         if xml_manifest is not None else HTTPException(status_code=500,
                                                        detail='Error trying to parse the'
                                                               ' imsmanifest.xml')
@@ -217,9 +216,11 @@ async def read_file(hashed_code: str, profile: str):
 
 
     if not from_lompad:
-        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code)}
+        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, booleanLomLomes,hashed_code), 'XML_FILE':FileResponse(path=f'./temp_files/{hashed_code}_exported.xml',
+                            filename=f'./temp_files/{hashed_code}_exported.xml')}
     else:
-        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, hashed_code, is_lompad_exported=True)}
+        return {'statusCode':200,'data': FileController.load_recursive_model(xml_manifest, hashed_code, is_lompad_exported=True), 'XML_FILE':FileResponse(path=f'./temp_files/{hashed_code}_exported.xml',
+                            filename=f'./temp_files/{hashed_code}_exported.xml')}
 
 
 @app.post("/private/update/")
@@ -246,7 +247,8 @@ async def update_file(hashed_code: str, hoja, data):
     # print(lom.__getattribute__('lifeCycle').__dict__())
     print('PASO 2')
     response = FileController.update_model(hashed_code, hoja, lom, data,booleanLomLomes)
-    return {'data': response}
+    return {'data': response, 'XML_FILE':FileResponse(path=f'./temp_files/{hashed_code}_exported.xml',
+                            filename=f'./temp_files/{hashed_code}_exported.xml')}
 
 
 @app.get("/private/download/", response_class=FileResponse)
