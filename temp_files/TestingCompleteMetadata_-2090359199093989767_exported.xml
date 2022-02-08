@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <lom xmlns="http://ltsc.ieee.org/xsd/LOM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ltsc.ieee.org/xsd/LOM http://ltsc.ieee.org/xsd/lomv1.0/lom.xsd">
+            <general>
+                <identifier>
+                <catalog>['General-Identifier-Catalog aweqw3eq']</catalog>
+                <entry>['General-Identifier-Entry']</entry>
+                </identifier>
+                <title>
+                <string language="[]">['General-Title']</string>
+                </title>
+                
+                <language>['es']</language>
+                <description>
+                <string language="[]">['General-Description']</string>
+                </description>
+                <keyword>
+                                <string  language="[]">['General-Keyword1', 'General-Keyword2', 'General-Keyword3']</string>
+                            </keyword>
+                <coverage>
+                <string language="[]">['General-Coverage']</string>
+                </coverage>
+                 <structure>
+                <source>['LOMv1.0']</source>
+                <value>['atomic']</value>
+                </structure>
+                <aggregationLevel>
+                <source>['LOMv1.0']</source>
+                <value>['2']</value>
+                </aggregationLevel>
+            </general>
+            <lifeCycle>
+                <contribute>
+                <role>
+                <source>['LOMv1.0']</source>
+                <value>['author']</value>
+                </role>
+                <entity>['BEGIN:VCARD VERSION:3.0 FN:Mgtr. Jackeline Morquecho EMAIL;TYPE=INTERNET: ORG: END:VCARD']</entity>
+                <date>
+                <dateTime>['2022-01-06T12:12:12']</dateTime>
+                <description>
+                <string>['LC-Description']</string>
+                </description>
+                </date>
+                </contribute>
+                <status>
+                                <source>['LOMv1.0']</source>
+                                <value>['revised']</value>
+                            </status>
+                <version>
+                <string>['LC-Version-1']</string>
+                </version>
+            </lifeCycle>
+            <metaMetadata>
+            <identifier>
+                <catalog>['MM-Identifier-Catalog']</catalog>
+                <entry>['MM-Identifier-Entry']</entry>
+                </identifier>
+            <metadataSchema>['MM-MetadataSchema']</metadataSchema>
+            <language>['es']</language>
+            <contribute>
+                <role>
+                <source>['LOMv1.0']</source>
+                <value>['creator']</value>
+                </role>
+                <entity>['BEGIN:VCARD VERSION:3.0 FN:Mgtr. Jackeline Morquecho EMAIL;TYPE=INTERNET: ORG: END:VCARD']
+                </entity>
+                <date>
+                <dateTime>['2022-01-06T12:12:12']</dateTime>
+                <description>
+                <string>['MM-Description']</string>
+                </description>
+                </date>
+                </contribute>
+            </metaMetadata>
+            <technical>
+        <format>['Tech-Format']</format>
+        <size>['78']</size>
+        <location>['Tech-Location']</location>
+        <installationRemarks>
+            <string>['Tech-InstallationRemarks']</string>
+            </installationRemarks>
+        <otherPlatformRequirements>
+            <string>['Tech-OtherPlatformRequirements']</string>
+            </otherPlatformRequirements>
+        <requirement>
+                <orComposite>
+                    <type>
+                        <source>['LOMv1.0']</source>
+                        <value>['operating system']</value>
+                    </type>
+                    <name>
+                        <source>['LOMv1.0']</source>
+                        <value>['ms-windows']</value>
+                    </name>
+                    <minimumVersion>['8']</minimumVersion>
+                    <maximumVersion>['11']</maximumVersion>
+                </orComposite>
+            </requirement>
+        <duration>
+                            <duration>['P1Y1M1DT1H1M1S']</duration>
+                            <description>
+                                <string>['Tech-Description']</string>
+                            </description>
+                        </duration>
+        </technical>
+            <educational>
+            <interactivityType >
+                                <source >['LOMv1.0']</source>
+                                <value >['active']</value>
+                            </interactivityType>
+            <learningResourceType >
+                                <source >['LOMv1.0']</source>
+                                <value >['simulation']</value>
+                            </learningResourceType>
+            <interactivityLevel>
+                                <source >['LOMv1.0']</source>
+                                <value >['very low']</value>
+                            </interactivityLevel>
+            <semanticDensity>
+                                <source >['LOMv1.0']</source>
+                                <value >['very low']</value>
+                            </semanticDensity>
+            <intendedEndUserRole >
+                                <source >['LOMv1.0']</source>
+                                <value >['author']</value>
+                            </intendedEndUserRole>
+            <context>
+                                <source >['LOMv1.0']</source>
+                                <value >['other']</value>
+                            </context>
+            <typicalAgeRange>
+                                <string>['18-20']</string>
+                            </typicalAgeRange>
+            
+            <typicalLearningTime>
+                                <duration>['P1Y1M1DT1H1M1S']</duration>
+                                <description>
+                                    <string>['Edu-TypicalLearningTime-Description']</string>
+                                </description>
+                            </typicalLearningTime>
+            <description>
+                <string>['Edu-Description']</string>
+                </description>
+            <language >['es']</language>
+            </educational>
+            <rights>
+            <cost>
+                                <source >['LOMv1.0']</source>
+                                <value >['no']</value>
+                            </cost>
+            <copyrightAndOtherRestrictions>
+                                <source >['LOMv1.0']</source>
+                                <value >['no']</value>
+                            </copyrightAndOtherRestrictions> 
+            <description>
+                                <string>['Rights-Desciption']</string>
+                            </description>
+            
+            </rights>
+            <relation>
+            <kind>
+                                <source>['LOMv1.0']</source>
+                                <value>['references']</value>
+                            </kind>
+            <resource>
+                                <identifier>
+                                    <catalog>['Relation-Resource-Identifier']</catalog>
+                                    <entry>['Relation-Resource-Entry']</entry>
+                                </identifier>
+                                <description>
+                                    <string>['Relation-Resource-Description']</string>
+                                </description>
+                            </resource>
+            </relation>
+            <annotation>
+            <entity>['BEGIN:VCARD VERSION:3.0 FN:Mgtr. Jackeline Morquecho EMAIL;TYPE=INTERNET: ORG: END:VCARD']</entity>
+            <date>
+                                <dateTime>['2022-01-06T12:12:12']</dateTime>
+                                <description>
+                                    <string>['Annotation-Date-Description']</string>
+                                </description>
+                            </date>
+            <description>
+                                <string>['Annotation-Description']</string>
+                            </description>
+            <modeaccess>
+                                <source>['LOMv1.0']</source>
+                                <value>['visual']</value>
+                            </modeaccess>
+            <modeaccesssufficient>
+                                <source>['LOMv1.0']</source>
+                                <value>['visual']</value>
+                            </modeaccesssufficient>
+            <Rol>
+                                <source>['LOMv1.0']</source>
+                                <value>['student']</value>
+                            </Rol>
+            </annotation>
+            <classification>
+            <purpose>
+                                <source>['LOMv1.0']</source>
+                                <value>['idea']</value>
+                            </purpose>
+            <taxonPath>
+                                <source>
+                                    <string>['TaxonSource']</string>
+                                </source>
+                                <taxon>
+                                    <id>['TaxonID']</id>
+                                    <entry>
+                                        <string>['TaxonEntry']</string>
+                                    </entry>
+                                </taxon>
+                            </taxonPath>
+            <description>
+                                <string>['Class-Description']</string>
+                            </description>
+            
+            </classification>
+            <accesibility>
+            <description>
+                                <string>['AccesibilitySummary']</string>
+                            </description>
+            <accessibilityfeatures>
+                                <resourcecontent>
+                                    <br>captions', 'signLanguage', 'bookmarks', 'latex', 'tableOfContents</br>
+                                </resourcecontent>
+                            </accessibilityfeatures>
+            <accessibilityhazard>
+                                <properties>
+                                    <br>noFlashingHazard', 'noMotionSimulationHazard', 'noSoundHazard</br>
+                                </properties>
+                            </accessibilityhazard>
+            <accessibilitycontrol>
+                                <methods>
+                                    <br>fullKeyboardControl', 'fullMouseControl</br>
+                                </methods>
+                            </accessibilitycontrol>
+            <accessibilityAPI>
+                                <compatibleresource>
+                                    <br>['javaAccessibility']</br>
+                                </compatibleresource>
+                            </accessibilityAPI>
+            </accesibility>
+        </lom>

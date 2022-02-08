@@ -245,6 +245,9 @@ async def update_file(hashed_code: str, hoja, data):
     # print(lom.__getattribute__('lifeCycle').__dict__())
     print('PASO 2')
     response = FileController.update_model(hashed_code, hoja, lom, data,booleanLomLomes)
+    manifest = FileController.read_manifest(f'./temp_files/{hashed_code}_exported.xml')
+    print("*********************************************************************")
+    print(manifest)
     return {'data': response, 'XML_FILE':manifest}
 
 
