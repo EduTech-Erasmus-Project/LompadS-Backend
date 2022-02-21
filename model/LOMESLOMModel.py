@@ -5,8 +5,20 @@ from collections import OrderedDict
 from pprint import pprint
 from typing import Container
 from fuzzywuzzy import fuzz, process
+from .Estructuras.General import General
+from .Estructuras.LifeCycle import LifeCycle
+from .Estructuras.MetaMEtadata import MetaMetadata
+from .Estructuras.Accessibility import Accessibility
+from .Estructuras.Technical import Technical
+from .Estructuras.Educational import Educational
+from .Estructuras.Rights import Rights
+from .Estructuras.Relation import Relation
+from .Estructuras.Anotation import Annotation
+from .Estructuras.Classification import Classification
+from .Estructuras.Accessibility import Accessibility
 
 class LOM:
+    
 
     def __init__(self, general=None, life_cycle=None, meta_metadata=None, technical=None, educational=None, rights=None,
                  relation=None, annotation=None, classification=None, accessibility=None):
@@ -41,16 +53,16 @@ class LOM:
         """
 
     def __dict__(self):
-        return {'General': self.general.__dict__() if self.general is not None else self.General().__dict__(),
-                'Life Cycle': self.lifeCycle.__dict__() if self.lifeCycle is not None else self.LifeCycle().__dict__(),
-                'Meta-Metadata': self.metaMetadata.__dict__() if self.metaMetadata is not None else self.MetaMetadata().__dict__(),
-                'Technical': self.technical.__dict__() if self.technical is not None else self.Technical().__dict__(),
-                'Educational': self.educational.__dict__() if self.educational is not None else self.Educational().__dict__(),
-                'Rights': self.rights.__dict__() if self.rights is not None else self.Rights().__dict__(),
-                'Relation': self.relation.__dict__() if self.relation is not None else self.Relation().__dict__(),
-                'Annotation': self.annotation.__dict__() if self.annotation is not None else self.Annotation().__dict__(),
-                'Classification': self.classification.__dict__() if self.classification is not None else self.Classification().__dict__(),
-                'Accessibility': self.accesibility.__dict__() if self.accesibility is not None else self.Accessibility().__dict__()}
+        return {'General': self.general.__dict__() if self.general is not None else General().__dict__(),
+                'Life Cycle': self.lifeCycle.__dict__() if self.lifeCycle is not None else LifeCycle().__dict__(),
+                'Meta-Metadata': self.metaMetadata.__dict__() if self.metaMetadata is not None else MetaMetadata().__dict__(),
+                'Technical': self.technical.__dict__() if self.technical is not None else Technical().__dict__(),
+                'Educational': self.educational.__dict__() if self.educational is not None else Educational().__dict__(),
+                'Rights': self.rights.__dict__() if self.rights is not None else Rights().__dict__(),
+                'Relation': self.relation.__dict__() if self.relation is not None else Relation().__dict__(),
+                'Annotation': self.annotation.__dict__() if self.annotation is not None else Annotation().__dict__(),
+                'Classification': self.classification.__dict__() if self.classification is not None else Classification().__dict__(),
+                'Accessibility': self.accesibility.__dict__() if self.accesibility is not None else Accessibility().__dict__()}
 
 
 def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False, booleanLomLomes=True):

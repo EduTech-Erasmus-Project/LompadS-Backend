@@ -6,7 +6,7 @@ class Accessibility:
         accessibilitycontrol = None
         accessibilityAPI = None
 
-        def __init__(self, description='', accessibilityfeatures=None, accessibilityhazard=None,
+        def __init__(self, description=None, accessibilityfeatures=None, accessibilityhazard=None,
                      accessibilitycontrol=None, accessibilityAPI=None):
             self.description = description
             self.accessibilityfeatures = accessibilityfeatures
