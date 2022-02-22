@@ -87,15 +87,10 @@ class Rights:
                 self.string=atributes.get('string')
                 if self.string is None:
                     self.string=atributes.get('description')
-                    try:
-                        if len(self.source) > 1:
-                            self.string=[atributes.get('description')[1]]
-                    except Exception as e:
-                        print(e)
                 try:
-                    if isinstance(self.string[0], list):
-                        self.string=self.string[0]
-                except Exception as e: 
+                    if len(self.string) > 0:
+                        self.string=[self.string[0]]
+                except Exception as e:
                     print(e)
 
             def to_xml(self):
