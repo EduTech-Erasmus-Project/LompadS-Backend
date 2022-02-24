@@ -259,8 +259,9 @@ class Educational:
                 self.value = value
             
             def addValues(self,atributes):
-                self.source=atributes.get('source')
-                self.value=atributes.get('value')
+                if isinstance(atributes, dict):
+                    self.source=atributes.get('source')
+                    self.value=atributes.get('value')
 
             def to_xml(self):
                 return f"""<interactivityType >

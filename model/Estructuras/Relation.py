@@ -2,7 +2,7 @@ class Relation:
         kind = None
         resource = None
 
-        def __init__(self, kind='', resource=None):
+        def __init__(self, kind=None, resource=None):
             self.kind = kind
             self.resource = resource
         

@@ -149,7 +149,7 @@ def read_manifest(ims_manifest_path):
         A string representing the whole file.
     """
     try:
-        with open(ims_manifest_path, encoding="utf8") as file:
+        with open(ims_manifest_path, encoding="latin-1") as file:
             read=file.readlines()
             file.close()
             return ''.join(read)

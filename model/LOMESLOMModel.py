@@ -304,12 +304,8 @@ def general_leaf(data: dict, is_lom, is_read_or_upload):
 
     cGeneral= General()
     if is_read_or_upload:
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
-        print(cGeneral.__dict__())
         general_object = map_attributes(data, cGeneral, is_lom)
         del cGeneral
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
-        print(general_object.__dict__())
         return general_object.__dict__(), general_object
     else:
         for val in data.keys():
