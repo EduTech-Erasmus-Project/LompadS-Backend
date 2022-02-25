@@ -163,10 +163,6 @@ class Classification:
                 except Exception as e: 
                     print(e)
 
-            def getValues(self):
-                print("Languaje: ", self.language)
-                print("Keyword: ", self.keywordd)
-
             def to_xml(self):
                 return f"""<string  language="{self.language}">{self.keywordd}</string>"""
 

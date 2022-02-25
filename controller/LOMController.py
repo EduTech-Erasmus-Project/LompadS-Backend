@@ -57,7 +57,7 @@ class Controller:
             for key, value in dictionary.items():
                 if isinstance(dictionary[key], dict):
                     if any(key in leaf for leaf in self._leafsLomes) and key != 'lomes:lom':
-                        print(key)
+                        # print(key)
                         self._mapped_data[key], self._object_dict[key] = LOMESLOMModel.determine_lompad_leaf(dict(dictionary[key]), str(key),
                                                                                 is_lompad_exported, booleanLomLomes)
                     
@@ -65,7 +65,7 @@ class Controller:
 
                 if isinstance(dictionary[key], list):
                     if any(key in leaf for leaf in self._leafsLomes) and key != 'lomes:lom':
-                        print(key)
+                        # print(key)
                         self._mapped_data[key], self._object_dict[key] = LOMESLOMModel.determine_lompad_leaf(dict(dictionary[key][0]), str(key),
                                                                                 is_lompad_exported, booleanLomLomes)
                     

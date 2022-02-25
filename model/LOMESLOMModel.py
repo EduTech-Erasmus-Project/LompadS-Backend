@@ -82,14 +82,14 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False, 
         if booleanLomLomes:
             for key1 in dispatch.keys():
                 if key in key1:
-                    print(key1)
+                    # print(key1)
                     try:
                         metodo = dispatch[key1]
                         ejemplo = metodo(dict(dictionary), is_lompad_exported, True)
                         # print(ejemplo)
                         return ejemplo
                     except Exception as e:
-                        print("======>")
+                        # print("======>")
                         print(e)
         else:
             for key1 in dispatchLomes.keys():
@@ -100,7 +100,7 @@ def determine_lompad_leaf(dictionary: dict, key: str, is_lompad_exported=False, 
                         # print(ejemplo)
                         return ejemplo
                     except Exception as e:
-                        print("======>")
+                        # print("======>")
                         print(e)
     except KeyError as ke:
         logging.error(f' Unexpected key {key}, ignoring key, error {ke}')
@@ -168,7 +168,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
     if data is not None and not isinstance(data, list):
         attributes = object_instance.__dir__()
         
-        print("===============================================================")
+        # print("===============================================================")
         # print(attributes)
         # print(object_instance)
         hijo=None
@@ -177,7 +177,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
         # print(data)
         try:
             for key in data:
-                print("padre: ", key)
+                # print("padre: ", key)
                 key_mapping=key.replace('lomes:', '')
                 # print(key_mapping)
                 if key_mapping == "keyword":
@@ -274,7 +274,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                                 values_labels.append(containerOfChildren[val2])
                                 
                 # print(values_labels)
-                print(values_labels_dict)
+                # print(values_labels_dict)
                 children_label=object_instance.__getattribute__(key_mapping_Upper)()
                 children_label.addValues(values_labels_dict)
                 # children_label.getValues()
@@ -598,8 +598,8 @@ dispatch_updateLomes = {
 
 
 def update_leaf(leaf, model, data):
-    print('UPDATE')
-    print(data)
+    # print('UPDATE')
+    # print(data)
     data=data.replace('[null]','[]')
     data=data.replace(';','')
     data=data.replace("\n",'')
@@ -609,7 +609,7 @@ def update_leaf(leaf, model, data):
     data=data.replace("  ",' ')
     import json
     data_as_dict = json.loads(data)
-    print(data_as_dict)
+    # print(data_as_dict)
     metodo = dispatch_update.get(leaf)
     model.__setattr__(leaf, metodo(data_as_dict, True, False))
     return model

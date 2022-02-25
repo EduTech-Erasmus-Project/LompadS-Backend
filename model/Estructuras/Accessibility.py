@@ -30,8 +30,6 @@ class Accessibility:
                     except Exception as e: 
                         print(e)
                     
-            def getValues(self):
-                print("Description: ", self.description)
 
             def to_xml(self):
                 return f"""<description>

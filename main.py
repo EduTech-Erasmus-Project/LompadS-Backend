@@ -93,19 +93,19 @@ async def upload_file(file: UploadFile = File(...)):
 
         hashed=_hashed_filename.replace('.zip', '')
         
-        print(" this is the hash: ",hashed)
+        # print(" this is the hash: ",hashed)
 
         targetPattern = './temp_files/'+hashed+'/**/*.xml'
         
         routes = glob.glob(targetPattern)
-        print("The routes found are")
-        print(routes)
+        # print("The routes found are")
+        # print(routes)
 
         if len(routes) == 0:
             targetPattern = './temp_files/'+hashed+'/*.xml'
             routes = glob.glob(targetPattern)
-            print("The routes found in root are:")
-            print(routes)
+            # print("The routes found in root are:")
+            # print(routes)
 
         containmetadata=False
 
@@ -232,7 +232,7 @@ async def update_file(hashed_code: str, hoja, data):
                           ' uniqueElementName="source"', ' uniqueElementName="value"']
 
     manifest = FileController.read_manifest(f'./temp_files/{hashed_code}_exported.xml')
-    print(manifest)
+    # print(manifest)
     for redundant in redundant_elements:
                 manifest = manifest.replace(redundant, '')
     manifest = manifest.replace('lom:', '')
@@ -241,15 +241,15 @@ async def update_file(hashed_code: str, hoja, data):
     manifest = manifest.replace('"]', '')
     manifest = manifest.replace('["', '')
     manifest = manifest.replace(", 'None']", "]")
-    print(manifest)
-    print('PASO 1')
+    # print(manifest)
+    # print('PASO 1')
     lom = FileController.load_recursive_as_class(manifest, booleanLomLomes)
     # print(lom.__getattribute__('lifeCycle').__dict__())
-    print('PASO 2')
+    # print('PASO 2')
     response = FileController.update_model(hashed_code, hoja, lom, data,booleanLomLomes)
     manifest = FileController.read_manifest(f'./temp_files/{hashed_code}_exported.xml')
-    print("*********************************************************************")
-    print(manifest)
+    # print("*********************************************************************")
+    # print(manifest)
 
     return {'data': response, 'XML_FILE':manifest}
 
@@ -259,8 +259,8 @@ def get_file(hashed_code, option):
     import glob
     import os
 
-    print("el hash es: ",hashed_code)
-    print("la opcion es: ",option)
+    # print("el hash es: ",hashed_code)
+    # print("la opcion es: ",option)
 
     paths = glob.glob('./temp_files/*')
     if option == "zip":
@@ -270,14 +270,14 @@ def get_file(hashed_code, option):
                 targetPattern = './temp_files/'+hashed_code+'/**/*.xml'
         
                 routes = glob.glob(targetPattern)
-                print("The routes found are")
-                print(routes)
+                # print("The routes found are")
+                # print(routes)
 
                 if len(routes) == 0:
                     targetPattern = './temp_files/'+hashed_code+'/*.xml'
                     routes = glob.glob(targetPattern)
-                    print("The routes found in root are:")
-                    print(routes)
+                    # print("The routes found in root are:")
+                    # print(routes)
                 for filePath in routes:
                     try:
                         doc = minidom.parse(filePath)

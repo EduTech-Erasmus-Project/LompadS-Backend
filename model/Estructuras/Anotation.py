@@ -28,8 +28,6 @@ class Annotation:
                 # except Exception as e: 
                 #     print(e)
                     
-            def getValues(self):
-                print("Entity: ", self.entity)
 
             def to_xml(self):
                 return f"""<entity>{self.entity}</entity>"""
@@ -91,9 +89,6 @@ class Annotation:
                             self.description=self.description[0]
                     except Exception as e: 
                         print(e)
-                    
-            def getValues(self):
-                print("Description: ", self.description)
 
             def to_xml(self):
                 return f"""<description>

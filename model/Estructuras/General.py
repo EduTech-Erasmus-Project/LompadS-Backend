@@ -48,9 +48,6 @@ class General:
                 except Exception as e: 
                     print(e)
                     
-            def getValues(self):
-                print("Catalog: ", self.catalog)
-                print("Entry: ", self.entry)
 
             def to_xml(self):
                 return f"""<identifier>
@@ -93,9 +90,6 @@ class General:
                 except Exception as e: 
                     print(e)
                     
-            def getValues(self):
-                print("Languaje: ", self.language)
-                print("Title: ", self.title)
 
             def to_xml(self):
                 return f"""<title>
@@ -119,8 +113,6 @@ class General:
                 except Exception as e: 
                     print(e)
                     
-            def getValues(self):
-                print("Catalog: ", self.catalog)
 
             def to_xml(self):
                 return f"""<catalogentry>
@@ -144,10 +136,7 @@ class General:
                     if isinstance(self.language[0], list):
                         self.language=self.language[0]
                 except Exception as e: 
-                    print(e)        
-                    
-            def getValues(self):
-                print("Language: ", self.language)
+                    print(e)      
             
 
             def to_xml(self):
@@ -185,10 +174,6 @@ class General:
                         self.languageDescription=self.languageDescription[0]
                 except Exception as e: 
                     print(e) 
-                    
-            def getValues(self):
-                print("Languaje: ", self.languageDescription)
-                print("Description: ", self.description)
 
             def to_xml(self):
                 return f"""<description>
@@ -217,7 +202,7 @@ class General:
                 except Exception as e: 
                     print(e) 
                 
-                print(atributes.get('string'))
+                # print(atributes.get('string'))
                 self.keywordd=atributes.get('string')
                 if self.keywordd is None:
                     self.keywordd=atributes.get('#text')
@@ -228,16 +213,12 @@ class General:
 
                 if self.keywordd is None:
                     self.keywordd=atributes.get('keyword')
-                    print(atributes.get('keyword'))
+                    # print(atributes.get('keyword'))
                 try:
                     if isinstance(self.keywordd[0], list):
                         self.keywordd=self.keywordd[0]
                 except Exception as e: 
                     print(e) 
-
-            def getValues(self):
-                print("Languaje: ", self.languageKeyword)
-                print("Keyword: ", self.keywordd)
 
             def to_xml(self):
                 return f"""<keyword>
@@ -266,10 +247,6 @@ class General:
                         self.coverage=self.coverage[0]
                 except Exception as e: 
                     print(e) 
-                    
-            def getValues(self):
-                print("Language: ", self.language)
-                print("Coverage: ", self.coverage)
 
             def to_xml(self):
                 return f"""<coverage>
@@ -302,9 +279,6 @@ class General:
                 except Exception as e: 
                     print(e)
                     
-            def getValues(self):
-                print("Source: ", self.language)
-                print("Value: ", self.coverage)
 
             def to_xml(self):
                 return f""" <structure>
@@ -343,9 +317,6 @@ class General:
                 except Exception as e: 
                     print(e)
                     
-            def getValues(self):
-                print("Source: ", self.source)
-                print("Value: ", self.value)
 
             def to_xml(self):
                 return f"""<aggregationLevel>
