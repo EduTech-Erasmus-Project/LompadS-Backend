@@ -1,3 +1,6 @@
+import string
+
+
 class Accessibility:
 
         description = None
@@ -21,9 +24,12 @@ class Accessibility:
                 self.description = description
             
             def addValues(self,atributes):
+                #print("*1*1*1 Accesi #24 ",atributes)
                 self.description=atributes.get("description")
                 if self.description is None:
                     self.description=atributes.get("string")
+                    if self.description is None:
+                        self.description=atributes.get("#text")
                     try:
                         if isinstance(self.description[0], list):
                             self.description=self.description[0]
@@ -46,24 +52,26 @@ class Accessibility:
                 self.br = br
             
             def addValues(self,atributes):
-                self.br=atributes.get("resourceContent")
-                if self.br is None:
-                    self.br=atributes.get("br")[0]
-                    try:
-                        if isinstance(self.br[0], list):
-                            self.br=self.br[0]
-                    except Exception as e: 
-                        print(e)
+                self.br=atributes.get("value")
+                try:
+                    if isinstance(self.br[0], list):
+                        self.br=self.br[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
-                return f"""<accessibilityfeatures>
-                                <resourcecontent>
-                                    <br>{self.br}</br>
-                                </resourcecontent>
-                            </accessibilityfeatures>"""
+
+                aux= f"""<accessibilityfeatures>"""
+                aux2=""
+                for val in self.br:
+                    aux2=aux2+f"""<value>{val}</value>"""
+                aux3=aux+aux2+f"""</accessibilityfeatures>"""
+                #print("+-+- Acc 72: ", aux3)   
+
+                return aux3
 
             def __dict__(self):
-                return {'resourceContent': self.br}
+                return {'value': self.br}
         
         class Accessibilityhazard:
             br=[]
@@ -72,24 +80,27 @@ class Accessibility:
                 self.br = br
             
             def addValues(self,atributes):
-                self.br=atributes.get("properties")
-                if self.br is None:
-                    self.br=atributes.get("br")[0]
-                    try:
-                        if isinstance(self.br[0], list):
-                            self.br=self.br[0]
-                    except Exception as e: 
-                        print(e)
+                #print("*** Accesi Hazard #79 ",atributes)
+                self.br=atributes.get("value")
+                try:
+                    if isinstance(self.br[0], list):
+                        self.br=self.br[0]
+                except Exception as e: 
+                    print(e)
 
             def to_xml(self):
-                return f"""<accessibilityhazard>
-                                <properties>
-                                    <br>{self.br}</br>
-                                </properties>
-                            </accessibilityhazard>"""
+                aux= f"""<accessibilityhazard>"""
+                aux2=f""""""
+                
+                for val in self.br:
+                    aux2=aux2+f"""<value>{val}</value>"""               
+                aux3=aux+aux2+f"""</accessibilityhazard>"""
+                #print("+-+- Acc 72: ", aux3)   
+
+                return aux3
 
             def __dict__(self):
-                return {'properties': self.br}
+                return {'value': self.br}
 
         class Accessibilitycontrol:
             br=[]
@@ -98,24 +109,27 @@ class Accessibility:
                 self.br = br
             
             def addValues(self,atributes):
-                self.br=atributes.get("methods")
-                if self.br is None:
-                    self.br=atributes.get("br")[0]
-                    try:
-                        if isinstance(self.br[0], list):
-                            self.br=self.br[0]
-                    except Exception as e: 
-                        print(e)
+                #print("*** Accesi control #106 ",atributes)
+                self.br=atributes.get("value")
+                try:
+                    if isinstance(self.br[0], list):
+                        self.br=self.br[0]
+                except Exception as e: 
+                    print(e)
 
-            def to_xml(self):
-                return f"""<accessibilitycontrol>
-                                <methods>
-                                    <br>{self.br}</br>
-                                </methods>
-                            </accessibilitycontrol>"""
+            def to_xml(self): 
+                aux= f"""<accessibilitycontrol>"""
+                aux2=""
+                for val in self.br:
+                    aux2=aux2+f"""<value>{val}</value>"""
+                
+                aux3=aux+aux2+f"""</accessibilitycontrol>"""
+                #print("+-+- Acc 72: ", aux3)   
+
+                return aux3
 
             def __dict__(self):
-                return {'methods': self.br}
+                return {'value': self.br}
         
         class Accessibilityapi:
             br=[]
@@ -124,24 +138,27 @@ class Accessibility:
                 self.br = br
             
             def addValues(self,atributes):
-                self.br=atributes.get("compatibleResource")
-                if self.br is None:
-                    self.br=[atributes.get("br")[0]]
-                    try:
-                        if isinstance(self.br[0], list):
-                            self.br=self.br[0]
-                    except Exception as e: 
-                        print(e)
-
+                #print("*** Accesi #133 Api ",atributes)
+                self.br=atributes.get("value")
+                try:
+                    if isinstance(self.br[0], list):
+                        self.br=self.br[0]
+                except Exception as e: 
+                    print(e)
+               
             def to_xml(self):
-                return f"""<accessibilityAPI>
-                                <compatibleresource>
-                                    <br>{self.br}</br>
-                                </compatibleresource>
-                            </accessibilityAPI>"""
+                aux= f"""<accessibilityAPI>"""
+                aux2=""
+                for val in self.br:
+                    aux2=aux2+f"""<value>{val}</value>"""
+                
+                aux3=aux+aux2+f"""</accessibilityAPI>"""
+                #print("+-+- Acc 72: ", aux3)   
+
+                return aux3
 
             def __dict__(self):
-                return {'compatibleResource': self.br}
+                return {'value': self.br}
 
         def to_xml(self):
             return f"""<accesibility>
@@ -154,7 +171,7 @@ class Accessibility:
 
         def __dict__(self):
             return {'description': self.description.__dict__() if self.description is not None else {'description': []},
-                    'accessibilityFeatures': self.accessibilityfeatures.__dict__() if self.accessibilityfeatures is not None else {'resourceContent': []}, 
-                    'accessibilityHazard': self.accessibilityhazard.__dict__() if self.accessibilityhazard is not None else {'properties': []}, 
-                    'accessibilityControl': self.accessibilitycontrol.__dict__() if self.accessibilitycontrol is not None else {'methods': []}, 
-                    'accessibilityApi': self.accessibilityAPI.__dict__() if self.accessibilityAPI is not None else {'compatibleResource': []}}
+                    'accessibilityFeatures': self.accessibilityfeatures.__dict__() if self.accessibilityfeatures is not None else {'value': []}, 
+                    'accessibilityHazard': self.accessibilityhazard.__dict__() if self.accessibilityhazard is not None else {'value': []}, 
+                    'accessibilityControl': self.accessibilitycontrol.__dict__() if self.accessibilitycontrol is not None else {'value': []}, 
+                    'accessibilityApi': self.accessibilityAPI.__dict__() if self.accessibilityAPI is not None else {'value': []}}

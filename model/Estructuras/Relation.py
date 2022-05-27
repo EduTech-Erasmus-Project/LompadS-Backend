@@ -1,3 +1,6 @@
+import string
+
+
 class Relation:
         kind = None
         resource = None
@@ -63,13 +66,23 @@ class Relation:
                     print(e)
 
                 self.string=atributes.get('description')
+                #print("Rela #69 - Resource - atribites: ",atributes)
+                #print("Rela #70 - Resource - atribites: ",self.string)
                 if self.string is None:
-                    self.string=atributes.get('string')
+                    self.string=atributes.get('#text')
+                    if self.string is None:
+                        self.string=atributes.get('string')
+                        #print("Rela #75 - Resource - atribites: ",self.string)
+                #print("Rela #76 - Resource - atribites: ",self.string)
                 try:
-                    if isinstance(self.string[0], list):
-                        self.string=self.string[0]
+                    if isinstance(self.string, list):
+                        if(self.string[0]=='es'):
+                            self.string.remove('es')
+                        #print("Rela #80 - Resource - atribites: ",self.string)
                 except Exception as e: 
                     print(e)
+                    #print("*-/-/ Error Rela #83")
+                #print("Rela #84 description ",self.string)
 
             def to_xml(self):
                 return f"""<resource>

@@ -196,39 +196,43 @@ class General:
                 self.languageKeyword=atributes.get('@language')
                 if self.languageKeyword is None:
                     self.languageKeyword=atributes.get('language')
+                #print("General #199", atributes.get('@language'))
                 try:
                     if isinstance(self.languageKeyword[0], list):
                         self.languageKeyword=self.languageKeyword[0]
                 except Exception as e: 
                     print(e) 
                 
-                # print(atributes.get('string'))
+                #print("General #205", atributes.get('#text'))
                 self.keywordd=atributes.get('string')
                 if self.keywordd is None:
                     self.keywordd=atributes.get('#text')
-                    if self.keywordd is not None:
-                        aux=self.keywordd[0]
-                        aux=aux.replace("'",'')
-                        self.keywordd=aux.split(', ')
+                    #print("General #210", self.keywordd)
+                    #if self.keywordd is not None:
+                     #   aux=self.keywordd[0]
+                      #  aux=aux.replace("'",'')
+                       # self.keywordd=aux.split(', ')
+                    #print("General #215", self.keywordd)
 
                 if self.keywordd is None:
                     self.keywordd=atributes.get('keyword')
-                    # print(atributes.get('keyword'))
                 try:
                     if isinstance(self.keywordd[0], list):
                         self.keywordd=self.keywordd[0]
                 except Exception as e: 
-                    print(e) 
+                    print(e)
+                
 
             def to_xml(self):
-                return f"""<keyword>
-                                <string  language="{self.languageKeyword}">{self.keywordd}</string>
-                            </keyword>"""
+                aux= ""
+                for lang, key in zip(self.languageKeyword, self.keywordd):
+                    aux=aux+f"""<keyword><string  language="{lang}">{key}</string></keyword>"""
+   
+                return aux
 
             def __dict__(self):
                 return {'language': self.languageKeyword, 'keyword': self.keywordd}
-        
-        
+               
         class Coverage:
 
             language=[]
@@ -239,14 +243,31 @@ class General:
                 self.coverage = coverage
             
             def addValues(self,atributes):
+                self.language=atributes.get('@language')
+                if self.language is None:
+                    self.language=atributes.get('language')
+                try:
+                    if isinstance(self.language[0], list):
+                        self.language=self.language[0]
+                except Exception as e: 
+                    print(e) 
+                
+                #print("General #253 Language: ", self.language)
+
+
                 self.coverage=atributes.get("string")
                 if self.coverage is None:
                     self.coverage=atributes.get('coverage')
+                    if self.coverage is None:
+                        self.coverage=atributes.get('#text')
                 try:
                     if isinstance(self.coverage[0], list):
                         self.coverage=self.coverage[0]
                 except Exception as e: 
-                    print(e) 
+                    print(e)
+                
+                #print("General: 267 coverange :",self.coverage)
+
 
             def to_xml(self):
                 return f"""<coverage>

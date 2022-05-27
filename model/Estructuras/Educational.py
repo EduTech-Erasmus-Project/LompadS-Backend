@@ -174,10 +174,15 @@ class Educational:
             
             def addValues(self,atributes):
                 self.duration=atributes.get('duration')
+                if self.duration is None:
+                        self.duration=atributes.get('#text')
 
+                #print("Edu 180 - duration: ",self.duration )
+                
                 self.string=atributes.get('description')
                 if self.string is None:
                     self.string=atributes.get('string')
+                #print("Edu 180 - description: ",self.string )
                 
 
             def to_xml(self):
@@ -215,14 +220,20 @@ class Educational:
         
         class Typicalagerange:
             string = []
-
+           
             def __init__(self, string=[]):
                 self.string = string
             
             def addValues(self,atributes):
+                #print("Educational #223 - Atributes", atributes)
                 self.string=atributes.get('typicalAgeRange')
                 if self.string is None:
                     self.string=atributes.get('string')
+                    if self.string is None:
+                        self.string=atributes.get('#text')
+                #print("Educational #227 - Age", self.string)
+
+                
 
 
             def to_xml(self):

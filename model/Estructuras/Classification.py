@@ -85,14 +85,22 @@ class Classification:
                 except Exception as e: 
                     print(e)
 
+
                 self.entry=atributes.get('entry')
+                #print(" ** Class # 90  Desc ",self.entry)
                 if self.entry is None:
-                    self.entry=atributes.get('#text')[1:]
+                    self.entry=atributes.get('#text')
+                    #print(" ** Class # 92  Desc ",self.entry)
+                
                 try:
-                    if isinstance(self.entry[0], list):
-                        self.entry=self.entry[0]
+                    #print(" ** Class # 96  Desc ",self.entry)
+                    if isinstance(self.entry, list):
+                        if(self.string[0]=='es'):
+                            self.entry.remove('es')
+                        #print(" ** Class # 100  Desc ",self.entry)
                 except Exception as e: 
                     print(e)
+                #print(" ** Class # 103  Desc ",self.entry)
 
             def to_xml(self):
                 return f"""<taxonPath>
@@ -120,7 +128,10 @@ class Classification:
 
                 self.string=atributes.get('description')
                 if self.string is None:
-                    self.string=atributes.get('string')
+                    self.string=atributes.get('#text')
+                    if self.string is None:
+                        self.string=atributes.get('string')
+                
                 try:
                     if isinstance(self.string[0], list):
                         self.string=self.string[0]

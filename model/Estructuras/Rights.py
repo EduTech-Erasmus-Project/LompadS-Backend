@@ -21,17 +21,18 @@ class Rights:
             def addValues(self,atributes):
                 self.source=atributes.get('source')
                 try:
-                    if isinstance(self.source[0], list):
+                    if isinstance(self.source, list):
                         self.source=self.source[0]
                 except Exception as e: 
                     print(e)
 
                 self.value=atributes.get('value')
                 try:
-                    if isinstance(self.value[0], list):
+                    if isinstance(self.value, list):
                         self.value=self.value[0]
                 except Exception as e: 
                     print(e)
+                #print("Rigth #35: "+ self.value)
 
             def to_xml(self):
                 return f"""<cost>
@@ -55,7 +56,7 @@ class Rights:
                 if self.source is None:
                     self.source=atributes.get('lomes:source')
                 try:
-                    if isinstance(self.source[0], list):
+                    if isinstance(self.source, list):
                         self.source=self.source[0]
                 except Exception as e: 
                     print(e)
@@ -64,7 +65,7 @@ class Rights:
                 if self.value is None:
                     self.value=atributes.get('lomes:value')
                 try:
-                    if isinstance(self.value[0], list):
+                    if isinstance(self.value, list):
                         self.value=self.value[0]
                 except Exception as e: 
                     print(e)
@@ -87,8 +88,12 @@ class Rights:
                 self.string=atributes.get('string')
                 if self.string is None:
                     self.string=atributes.get('description')
+                    if self.string is None:
+                        self.string=atributes.get('#text')
+                #print("Rights #93: ", self.string)
                 try:
-                    if len(self.string) > 0:
+                    if isinstance(self.string, list):
+                    #if len(self.string) > 0:
                         self.string=[self.string[0]]
                 except Exception as e:
                     print(e)

@@ -32,9 +32,8 @@ class Controller:
 
         :return: An instance of OrderedDict
         """
-        # print(data)
         return xmltodict.parse(data)
-
+        
     def map_recursively(self, dictionary: dict, booleanLomLomes,is_lompad_exported=False):
         """
         Based on an OrderedDict this method map recursively the Dictionary to Python Class.
@@ -89,7 +88,7 @@ class Controller:
                 key = 'CRol' if key == 'Rol' else key
                 lom_object.__setattr__(key, value)
 
-            with open('temp_files/'+object_name+'_exported.xml', 'w') as file:
+            with open('temp_files/'+object_name+'_exported.xml', 'w',encoding='UTF-8') as file:
                 file.write(lom_object.to_xml().strip())
                 
         else:
@@ -103,5 +102,5 @@ class Controller:
                 # print(key)
                 # print(value.__dir__())
                 # print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            with open('temp_files/'+object_name+'_exported.xml', 'w') as file:
+            with open('temp_files/'+object_name+'_exported.xml', 'w',encoding='UTF-8') as file:
                 file.write(lom_object.to_xml().strip())

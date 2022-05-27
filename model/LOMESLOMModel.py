@@ -148,7 +148,6 @@ def map_attributes(data_original: dict, object_instance, is_lom):
 
     data_original=collections.OrderedDict(data_original)
     data = data_original.copy()
-
     """
     What a nice function, isn't it? (Just kidding).
 
@@ -168,16 +167,17 @@ def map_attributes(data_original: dict, object_instance, is_lom):
     if data is not None and not isinstance(data, list):
         attributes = object_instance.__dir__()
         
-        # print("===============================================================")
+        #print("===============================================================")
         # print(attributes)
         # print(object_instance)
         hijo=None
         values_labels=[]
         values_labels_dict={}
         # print(data)
+        #print("Datos #177: ",data)
         try:
             for key in data:
-                # print("padre: ", key)
+                #print("padre: ", key)
                 key_mapping=key.replace('lomes:', '')
                 # print(key_mapping)
                 if key_mapping == "keyword":
@@ -187,6 +187,7 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                     key_mapping_Upper="CRol"
                 if isinstance(data[key], str):
                     set_values_to_dict(data, key,key,values_labels_dict,"str")
+                    #print("LOM Model #190: ",values_labels_dict)
                 else:
                     for childrens in data[key]:
                         # print("hijo: ",childrens)
@@ -209,8 +210,10 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                                     containterAux=auxContainerofChildren[valAuxContChildren]
                                                     for auxContainerAux in containterAux:
                                                         set_values_to_dict(containterAux, val2,auxContainerAux,values_labels_dict,"for")
+                                    #print("LOM Model #213: ",values_labels_dict)
                                 else:
                                     # print("data key con object: ", containerOfChildren)
+                                    #print("LOM Model #216: ",values_labels_dict)
                                     if containerOfChildren is None:
                                             containerOfChildren="None"
                                     elif val not in values_labels_dict.keys():
@@ -275,17 +278,21 @@ def map_attributes(data_original: dict, object_instance, is_lom):
                                 
                 # print(values_labels)
                 # print(values_labels_dict)
+                #print("LOM Model #278: ",values_labels_dict)
+                #print("LOM Model #279: ",key_mapping_Upper)
+                #print("LOM Model #280: ",key_mapping)
                 children_label=object_instance.__getattribute__(key_mapping_Upper)()
                 children_label.addValues(values_labels_dict)
-                # children_label.getValues()
+                #print("Datos: #283 ",values_labels_dict.get('value'))
                 values_labels=[]   
                 values_labels_dict={}
                 if key_mapping == "aggregationLevel":
                     key_mapping="aggregation_level"
-                # print(object_instance,": ",key_mapping," : ", children_label)
+                #print("Datos: #287",key_mapping," : ", children_label.get('version'))
                 object_instance.__setattr__(key_mapping, children_label)
+                #print("=================================")
         except Exception as e:
-            print(e)
+            print("Error:", e)
     
     return object_instance
 
@@ -335,10 +342,12 @@ def life_cycle_leaf(data: dict, is_lom, is_read_or_upload):
 
     if is_read_or_upload:
         general_object = map_attributes(data, cLifeCycle, is_lom)
+        #print("Data: #338", general_object.__dict__().get('version'))
         del cLifeCycle
         return general_object.__dict__(), general_object
     else:
         for val in data.keys():
+            #print("Val #342: ",val )
             val2=val
             val2=val2.capitalize()
             clase=cLifeCycle.__getattribute__(val2)()
@@ -442,8 +451,8 @@ def rights_leaf(data: dict, is_lom, is_read_or_upload):
             val2=val2.capitalize()
             clase=cRights.__getattribute__(val2)()
             clase.addValues(data.get(val))
-            if val2=="Cost":
-                print(clase.__getattribute__("value"))
+            #if val2=="Cost":
+                #print("Rights #446: ",clase.__getattribute__("value"))
             cRights.__setattr__(val, clase)
         return cRights
 
@@ -474,6 +483,7 @@ def relation_leaf(data: dict, is_lom, is_read_or_upload):
 
 
 def annotation_leaf(data: dict, is_lom, is_read_or_upload):
+
     """
         Function to map Annotation Leaf.
 
@@ -483,6 +493,7 @@ def annotation_leaf(data: dict, is_lom, is_read_or_upload):
     from .Estructuras.Anotation import Annotation
 
     cAnnotation=Annotation()
+    #print("LOM ES # 496: ", data)
     if is_read_or_upload:
         general_object = map_attributes(data, cAnnotation, is_lom)
         del cAnnotation
@@ -490,21 +501,23 @@ def annotation_leaf(data: dict, is_lom, is_read_or_upload):
     else:
         for val in data.keys():
             val2=val
+            #print("LOMEs #504 - Val2: ", val2)
             val2=val2.capitalize()
+            #print("LOMEs #504 - Val2: ", val2)
             if val2=="Rol":
                 val2="CRol"
-            if val2=="ModeAccess":
-                val2="Modeaccess"
-            if val2=="ModeAccessSufficient":
-                val2="Modeaccesssufficient"
+            if val2=="AccessMode":
+                val2="accessmode"
+            if val2=="AccessModeSufficient":
+                val2="accessmodesufficient"
             clase=cAnnotation.__getattribute__(val2)()
             clase.addValues(data.get(val))
             if val=="rol":
                 val="Rol"
-            if val=="modeAccess":
-                val="modeaccess"
-            if val=="modeAccessSufficient":
-                val="modeaccesssufficient"
+            if val=="accessmode":
+                val="accessMode"
+            if val=="accessModeSufficient":
+                val="accessmodesufficient"
             cAnnotation.__setattr__(val, clase)
         return cAnnotation
 

@@ -27,7 +27,7 @@ class Technical:
         def addValues(self,atributes):
             self.value=atributes.get('format')
             if self.value is None:
-                    self.value=atributes.get('format')
+                    self.value=atributes.get('#text')
 
         def to_xml(self):
             return f"""<format>{self.value}</format>"""
@@ -42,7 +42,11 @@ class Technical:
             self.value = value
         
         def addValues(self,atributes):
+            #print("Tec 45 size atri: ", atributes)
             self.value=atributes.get('size')
+            if self.value is None:
+                self.value=atributes.get('#text')
+            #print("Tec 45 size atri: ", self.value)
 
 
         def to_xml(self):
@@ -60,7 +64,7 @@ class Technical:
         def addValues(self,atributes):
             self.value=atributes.get('location')
             if self.value is None:
-                self.value=atributes.get('lomes:location')
+                self.value=atributes.get('#text')
 
         def to_xml(self):
             return f"""<location>{self.value}</location>"""
@@ -75,16 +79,17 @@ class Technical:
             self.value = value
         
         def addValues(self,atributes):
-            self.value=atributes.get('@language')
+            self.value=atributes.get('#text')
             if self.value is None:
-                    self.value=atributes.get('string')
-                    try:
-                        if len(self.value) > 1:
-                            self.value=[atributes.get('string')[1]]
-                    except Exception as e:
+                self.value=atributes.get('string')
+                try:
+                    if len(self.value) > 1:
+                        self.value=[atributes.get('string')[1]]
+                except Exception as e:
                         print(e)
             if self.value is None:
                     self.value=atributes.get('installationRemarks')
+            #print("Tec #92 ",self.value )
 
         def to_xml(self):
             return f"""<installationRemarks>
@@ -103,7 +108,11 @@ class Technical:
         def addValues(self,atributes):
             self.string=atributes.get('string')
             if self.string is None:
+                self.string=atributes.get('#text')
+                if self.string is None:
                     self.string=atributes.get('otherPlatformRequirements')
+            
+            #print("Tec #115 ",self.string )
 
 
         def to_xml(self):
@@ -114,7 +123,6 @@ class Technical:
         def __dict__(self):
             return {'otherPlatformRequirements': self.string}
 
-
     class Duration:
         duration = []
         description = []
@@ -124,12 +132,18 @@ class Technical:
             self.description = description
         
         def addValues(self,atributes):
+            #print("Tec # 136 - Duration: ", atributes)
             self.duration=atributes.get('duration')
-            try:
+            if self.duration is None:
+                self.duration=atributes.get('#text')
+            try:                
                 if isinstance(self.duration[0], list):
                     self.duration=self.duration[0]
             except Exception as e: 
                 print(e)
+
+            #print("Tec # 147 - duration: ", self.duration)
+
 
             self.description=atributes.get('string')
             if self.description is None:
@@ -171,12 +185,19 @@ class Technical:
         
         def addValues(self,atributes):
             
-            self.typeValue=atributes.get('typeValue')
+            #print("Tec #178 - Reque - atributos  : ",atributes)
+            self.typeValue=atributes.get('type')
             try:
                 if self.typeValue is None:
-                    self.typeValue = [atributes.get("type")[0]]
+                        self.typeValue = [atributes.get("type")[0]]
+                else:
+                    if len(self.typeValue)>2:
+                        self.typeValue = [atributes.get("type")[2]]
             except Exception as e:
                 print(e)
+
+            #print("Tec #186 - type  : ",self.typeValue)
+
             try:
                 if isinstance(self.typeValue[0], list):
                     self.typeValue=self.typeValue[0]
@@ -188,25 +209,35 @@ class Technical:
                 self.typeSource = [atributes.get("type")[1]]
             except Exception as e:
                 print(e)
+            
             try:
                 if isinstance(self.typeSource[0], list):
                     self.typeSource=self.typeSource[0]
             except Exception as e: 
                 print(e)
 
-            self.nameValue=atributes.get('nameValue')
+            self.nameValue=atributes.get('name')
+            #print("Tec #210 - name  : ",self.nameValue)
             try:
                 if self.nameValue is None:
                     self.nameValue = [atributes.get("name")[0]]
+                    if len(self.nameValue)>2:
+                        self.nameValue = [atributes.get("name")[2]]
+                else:
+                    if len(self.nameValue)>2:
+                        self.nameValue = [atributes.get("name")[2]]
             except Exception as e:
                 print(e)
+            #print("Tec #217 - name  : ",self.nameValue)
+
             try:
                 if isinstance(self.nameValue[0], list):
                     self.nameValue=self.nameValue[0]
             except Exception as e: 
                 print(e)
             
-            
+            #-----------------
+
             self.nameSource=atributes.get('nameSource')
             try:
                 if self.nameSource is None:
@@ -219,29 +250,37 @@ class Technical:
             except Exception as e: 
                 print(e)
             
-            try:
-                self.minVersion = atributes.get("minimumVersion")
-            except Exception as e:
-                print(e)
-            if self.minVersion is None:
-                    self.minVersion=atributes.get('minVersion')
-            try:
-                if isinstance(self.minVersion[0], list):
-                    self.minVersion=self.minVersion[0]
-            except Exception as e: 
-                print(e)
+
 
             try:
+                self.minVersion = atributes.get("minimumVersion")
+                #print("Tec #257 - name  : ",self.minVersion)
+                if isinstance(self.minVersion, list):
+                    self.minVersion.remove('minimumVersion')
+            except Exception as e:
+                print(e)
+
+            if self.minVersion is None:
+                self.minVersion=atributes.get('minVersion')
+                if isinstance(self.minVersion, list):
+                    self.minVersion.remove('minimumVersion')
+            #print("Tec #268 - name  : ",self.minVersion)
+
+            #print("Tec #270 - name  : ",self.minVersion)
+ 
+            try:
                 self.maxVersion = atributes.get("maximumVersion")
+                #print("Tec #274 - name  : ",self.minVersion)
+                if isinstance(self.maxVersion, list):
+                    self.maxVersion.remove('maximumVersion')
             except Exception as e:
                 print(e)
             if self.maxVersion is None:
-                    self.maxVersion=atributes.get('maxVersion')
-            try:
-                if isinstance(self.maxVersion[0], list):
-                    self.maxVersion=self.maxVersion[0]
-            except Exception as e: 
-                print(e)
+                self.maxVersion=atributes.get('maxVersion')
+                if isinstance(self.axVersion, list):
+                    self.maxVersion.remove('maximumVersion')
+
+                
 
         def to_xml(self):
             return f"""<requirement>

@@ -77,10 +77,14 @@ def save_xml(file):
                       + str(hash(file.filename + datetime.today().strftime('%Y-%m-%d-%H:%M:%S'))) \
                       + '.xml'
     path = _temporal + hashed_filename
+    #print("****",path)
     with open(path, 'wb+') as f:
+        #f=etree.parse(f)
         f.write(file.file.read())
         f.close()
     return path, hashed_filename
+
+ 
 
 
 def save_zip(file):
@@ -92,6 +96,7 @@ def save_zip(file):
 
     :return: The path of the file created and it's hashed value.
     """
+    #print("entra")
     _temporal = get_temp_folder()
     hashed_filename = str(file.filename).split('.zip')[0] + "_" \
                       + str(hash(file.filename + datetime.today().strftime('%Y-%m-%d-%H:%M:%S'))) \
@@ -148,11 +153,14 @@ def read_manifest(ims_manifest_path):
     :return:
         A string representing the whole file.
     """
+    #print("Entra 1: ",ims_manifest_path)
     try:
-        with open(ims_manifest_path, encoding="latin-1") as file:
+        with open(ims_manifest_path,'r',encoding='UTF-8') as file:
+            #file=etree.parse(file)
             read=file.readlines()
             file.close()
             return ''.join(read)
+
     except Exception as e:
         print(e)
         return -1
@@ -176,10 +184,12 @@ def parse_manifest(ims_manifest_data):
 
 
 def load_recursive_as_class(manifest,booleanLomLomes):
-    # print(manifest)
+    #print("File Con# 188 - Manifest",manifest)
     lom_controller = LOMController.Controller()
     parsed_dict = lom_controller.parse_str_to_dict(manifest)
+    #print("File Con# 191 - parset",manifest)
     lom_controller.map_recursively(parsed_dict, booleanLomLomes,is_lompad_exported=True)
+    #print("File Con# 193 - mapet",manifest)
     lom = lom_controller.get_mapped_class()
     return lom
 
@@ -196,7 +206,7 @@ def load_recursive_model(manifest, booleanLomLomes,hashed_code, is_lompad_export
     lom_controller = LOMController.Controller()
     parsed_dictionary: dict = lom_controller.parse_str_to_dict(manifest)
 
-    # print(parsed_dictionary)
+    #print("Diccionario 208:",parsed_dictionary)
 
     # print("=============================================================")
     # print(parsed_dictionary.get('lomes:lom').keys())
@@ -222,10 +232,19 @@ def load_recursive_model(manifest, booleanLomLomes,hashed_code, is_lompad_export
 def update_model(hashed_code, leaf, model, data, booleanLomLomes):
 
     model = LOMESLOMModel.update_leaf(leaf, model, data)
+    
+    ##
+    #mydata = etree.tostring(model.to_xml().strip())
+    #myfile = open('temp_files/' + hashed_code + '_exported.xml', 'w')
+    #myfile.write(mydata)
+    ##
 
-    with open('temp_files/' + hashed_code + '_exported.xml', 'w') as file:
+
+    with open('temp_files/' + hashed_code + '_exported.xml', 'w',encoding='UTF-8') as file:
+        #file=etree.parse(file)
         file.write(model.to_xml().strip())
         file.close()
+
     return model.__dict__()
 
 
@@ -233,8 +252,8 @@ def write_data(data, folder, hased_code,path_in_folder):
     from os import path
 
     if path.exists(f'{folder}'):
-        with open(f'{folder}', 'w') as file:
-            file.write(data)
+        with open(f'{folder}', 'w', encoding="UTF-8") as file:
+            file.write(data, encoding="UTF-8")
             file.close()
     with ZipFile(f'./temp_files/{hased_code}.zip', 'w') as zipObj:
         if path_in_folder:

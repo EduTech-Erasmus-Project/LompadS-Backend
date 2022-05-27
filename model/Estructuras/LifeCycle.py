@@ -74,9 +74,13 @@ class LifeCycle:
                 self.string = string
             
             def addValues(self,atributes):
-                self.string=atributes.get('string')
+                #print("life: #77",atributes )
+                self.string=atributes.get('#text')
+                #print("Life #78 ",atributes.get('#text'))
                 if self.string is None:
                     self.string=atributes.get('version')
+                elif self.string is None:
+                    self.string=atributes.get('string')
 
             def to_xml(self):
                 return f"""<version>
@@ -96,6 +100,7 @@ class LifeCycle:
             
             def addValues(self,atributes):
                 self.source=atributes.get('source')
+                ##print("Life #100 ",atributes.get('value'))
                 self.value=atributes.get('value')
 
             def to_xml(self):
@@ -114,7 +119,7 @@ class LifeCycle:
 
         def to_xml(self):
             return f"""<lifeCycle>
-                {'' if isinstance(self.contribute, str) else self.contribute.to_xml() if self.contribute is not None else ''}
+                {'' if isinstance(self.version, str) else self.version.to_xml() if self.version is not None else ''}               
                 {'' if isinstance(self.status, str) else self.status.to_xml() if self.status is not None else ''}
-                {'' if isinstance(self.version, str) else self.version.to_xml() if self.version is not None else ''}
+                {'' if isinstance(self.contribute, str) else self.contribute.to_xml() if self.contribute is not None else ''}
             </lifeCycle>"""
